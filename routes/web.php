@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/hello', function () {
     return 'Hello Word';
 });
+
+Route::get('test', function () {
+    return 'test';
+});
