@@ -22,5 +22,5 @@ Route::get('/hello', function () {
 });
 
 Route::get('test', function () {
-    return 'testt';
+    return 'Test Route';
 });
