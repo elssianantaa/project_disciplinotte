@@ -10,4 +10,6 @@ class dasboardController extends Controller
     public function showDasboard(){
         return view('admin.index');
     }
+
+    
 }

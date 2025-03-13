@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.index');
 });
 
-Route::get('/hello', function () {
-    return 'Hello Olaf';
-});
+// Route::get('/hello', function () {
+//     return 'Hello Olaf';
+// });
 
-Route::get('test', function () {
-    return 'testt yak';
-});
+// Route::get('test', function () {
+//     return 'testt yak';
+// });
+
+

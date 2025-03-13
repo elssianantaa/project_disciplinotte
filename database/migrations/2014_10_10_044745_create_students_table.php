@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('nisn', 20)->unique();
+            $table->string('nisn', 16)->unique();
             $table->string('nama', 255);
-            $table->string('kelas', 50);
+            $table->unsignedBigInteger('kelas_id');
+            $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnUpdate();
+            // $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade'); 
             $table->string('password');
             $table->enum('status', ['aktif', 'skorsing', 'dikeluarkan'])->default('aktif');
-            $table->integer('total_skor')->default(0);
+            $table->unsignedInteger('point')->default(0);
+            $table->rememberToken();
             $table->timestamps();
         });
+        
     }
 
     /**
