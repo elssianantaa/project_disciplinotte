@@ -14,34 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-<<<<<<< HEAD
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-=======
-Route::get('/', function () {
-    return view('admin.index');
-});
->>>>>>> 2fbbc38d63307a4e7e6294058f9b8a657744e337
 
 // Route::get('/hello', function () {
 //     return 'Hello Olaf';
 // });
-<<<<<<< HEAD
 
 // Route::get('test', function () {
 //     return 'testt yak';
 // });
 
-Route::get('/dasboard', [dasboardController::class, 'showDasboard']);
+// Route::get('/dasboard', [dasboardController::class, 'showDasboard']);
 Route::get('/', [dasboardController::class, 'login']);
 Route::post('/auth', [dasboardController::class, 'authentication']);
 Route::get('/dashboard', [dasboardController::class, 'showDb']);
-=======
-
-// Route::get('test', function () {
-//     return 'testt yak';
-// });
-
-
->>>>>>> 2fbbc38d63307a4e7e6294058f9b8a657744e337
