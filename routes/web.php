@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\dasboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/hello', function () {
-    return 'Hello Olaf';
-});
+// Route::get('/hello', function () {
+//     return 'Hello Olaf';
+// });
 
-Route::get('test', function () {
-    return 'testt yak';
-});
+// Route::get('test', function () {
+//     return 'testt yak';
+// });
+
+Route::get('/dasboard', [dasboardController::class, 'showDasboard']);
+Route::get('/', [dasboardController::class, 'login']);
+Route::post('/auth', [dasboardController::class, 'authentication']);
+Route::get('/dashboard', [dasboardController::class, 'showDb']);
