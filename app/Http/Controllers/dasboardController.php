@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Auth;
 class dasboardController extends Controller
 {
     //
-    public function showDasboard(){
-        return view('admin.index');
-    }
-
+    // public function showDasboard(){
+    //     return view('admin.index');
+        
+    // }
     public function login(){
         return view('admin.login');
     }
@@ -26,9 +26,9 @@ class dasboardController extends Controller
             if (Auth::user()->role === 'admin') {
                 return redirect('/dashboard');
             } elseif (Auth::user()->role === 'staff') {
-                return redirect('/dashboardStaff');
-            } elseif (Auth::user()->role === 'student') {  // Role tambahan
-                return redirect('/home');
+                return redirect()->route('dashboardStaff');
+            } elseif (Auth::user()->role === 'student') {  
+                return redirect()->route('home');
             }
         }
         
@@ -37,4 +37,5 @@ class dasboardController extends Controller
     public function showDb(){
         return view('admin.dashboard');
     }
+
 }

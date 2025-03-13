@@ -27,16 +27,11 @@
                         </p>
 
                         <form  class="pt-2" action="/auth" method="post">
-                            <!-- @csrf
-                            @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif -->
+                            @csrf
 
 
                             <div class="form-group py-3">
-                                <input type="number" name="email" class="form-control" placeholder="Enter your NISN" style="height:50px;background-color: #F5F7FF;">
+                                <input type="email" name="email" class="form-control" placeholder="Enter your NISN" style="height:50px;background-color: #F5F7FF;">
                             </div>
                             <div class="form-group position-relative">
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Enter your Password" style="height:50px;background-color: #F5F7FF;">
@@ -60,7 +55,7 @@
 
                 <!-- Kolom Gambar -->
                 <div class="col-md-6 d-none d-md-block">
-                    <img src="/img/create-new-password-abstract-concept-vector-illustration_107173-35678.avif" alt="">
+                    <img src="gambar/imglogin.avif" alt="">
                 </div>
             </div>
         </div>
