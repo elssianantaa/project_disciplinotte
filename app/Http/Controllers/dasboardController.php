@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class dasboardController extends Controller
 {
@@ -11,6 +12,5 @@ class dasboardController extends Controller
         return view('admin.index');
         
     }
-
 
 }
