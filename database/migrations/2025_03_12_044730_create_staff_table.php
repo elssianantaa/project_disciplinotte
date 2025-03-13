@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('staff', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nama', 255);
             $table->string('email', 255)->unique();
             $table->string('password');
-            $table->string('alamat', 255);
-            $table->string('nohp', 255);
+            $table->text('alamat'); 
+            $table->string('nohp', 15); 
+            $table->enum('role', ['satpam', 'guru', 'bk'])->default('guru'); 
+            $table->rememberToken(); 
             $table->timestamps();
-
         });
     }
 

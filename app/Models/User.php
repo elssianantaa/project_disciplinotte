@@ -17,11 +17,21 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    use HasFactory;
+
+    
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'nohp',
+        'avatar',
     ];
+    protected $guarded = ['id'];
+  
 
     /**
      * The attributes that should be hidden for serialization.

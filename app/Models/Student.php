@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+    protected $quarded = [];
+
+    public function kelas(){
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
 }
