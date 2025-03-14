@@ -63,12 +63,10 @@
                             <div class="pt-4 text-center">
                                 <a href="#">Forgot your password?</a>
                                 <p>Don't have an account? <a href="/register">Register here</a></p>
-                            </div>
+                            </div>
                         </form>
                     </div>
                 </div>
-
-                <!-- Kolom Gambar -->
                 <div class="col-md-6 d-none d-md-block">
                     <img src="gambar/imglogin.avif" alt="">
                 </div>
