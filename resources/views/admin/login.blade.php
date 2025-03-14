@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href=" {{ asset ('assets/bootstrap-5.3.2-dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="bootsrtap-5.3.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
@@ -21,33 +21,55 @@
                         <h1 style="text-align: center; font-size: 32px; font-weight: bold; color: #7DA0FA; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">  Disiplin Notes
                             <h1 class="" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: #D5E7FF; text-align: center;">Sign Into Your Account</h1>
                         </h1>
-
+                        
                         <p class="pt-3" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
                             Silakan masuk untuk memantau, memperbarui, dan mengelola laporan kegiatan Anda.
                         </p>
 
                         <form  class="pt-2" action="/auth" method="post">
                             @csrf
+                            {{-- @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif --> --}}
 
 
                             <div class="form-group py-3">
-                                <input type="email" name="email" class="form-control" placeholder="Enter your NISN" style="height:50px;background-color: #F5F7FF;">
+                                <input type="email" name="email" class="form-control" placeholder="Enter your mail" style="height:50px;background-color: #F5F7FF;">
                             </div>
                             <div class="form-group position-relative">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your Password" style="height:50px;background-color: #F5F7FF;">
+                                <input id="password" name="password" class="form-control" placeholder="Enter your Password" style="height:50px;background-color: #F5F7FF;">
                                 <span onclick="togglePassword()" class="position-absolute" style="top:50%; right:10px; transform:translateY(-50%); cursor:pointer;">
                                     <i id="toggleIcon" class="fas fa-eye"></i>
                                 </span>
                             </div>
+                            
+                            <script>
+                                function togglePassword() {
+                                    var passwordInput = document.getElementById("password");
+                                    var toggleIcon = document.getElementById("toggleIcon");
+                            
+                                    if (passwordInput.type === "password") {
+                                        passwordInput.type = "text";
+                                        toggleIcon.classList.remove("fa-eye");
+                                        toggleIcon.classList.add("fa-eye-slash");
+                                    } else {
+                                        passwordInput.type = "password";
+                                        toggleIcon.classList.remove("fa-eye-slash");
+                                        toggleIcon.classList.add("fa-eye");
+                                    }
+                                }
+                            </script>
+                            
                             <div class="form-group pt-4">
                                 <button type="submit" class="w-100" style="height:50px; font-size: 20px; border-radius: 15px;background-color:#7DA0FA;color: white;border: none;">
                                     Login
                                 </button>
                             </div>
-                            <div class="pt-4 text-left">
-                                <a href="#" style="font-size: 17px;color: #7DA0FA">Forgot your password?</a>
-                                <p class="pt-2" style="color: #000000;">Don't have an account? <a href="/register"
-                                    style="color: #7DA0FA;text-decoration: none;">Register here</a></p>
+                            <div class="pt-4 text-center">
+                                <a href="#">Forgot your password?</a>
+                                <p>Don't have an account? <a href="/register">Register here</a></p>
                             </div>
                         </form>
                     </div>
@@ -55,7 +77,7 @@
 
                 <!-- Kolom Gambar -->
                 <div class="col-md-6 d-none d-md-block">
-                    <img src="gambar/imglogin.avif" alt="">
+                    <img src="/gambar/imglogin.avif" alt="">
                 </div>
             </div>
         </div>
