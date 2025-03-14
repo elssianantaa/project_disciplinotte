@@ -18,4 +18,8 @@ class Student extends Model
         return $this->hasMany(Pelanggaran::class, 'kelas_id', 'id');
     }
 
+    public function catatanPelanggarans(){
+        return $this->hasMany(CatatanPelanggaran::class, 'student_id', 'id');
+    }
+
 }

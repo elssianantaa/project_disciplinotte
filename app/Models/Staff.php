@@ -19,8 +19,18 @@ class Staff extends Model
         'role',
     ];
 
+    //pelanggaran sama staff
     public function pelanggarans(){
         return $this->hasMany(Pelanggaran::class, 'staff_id', 'id');
+    }
+
+    // public function staffs(){
+    //     return $this->hasMany(Staff::class, 'staff_id', 'id');
+    // }
+
+    //catatan pelanggaran sama staff
+    public function catatanPelanggarans(){
+        return $this->hasMany(CatatanPelanggaran::class, 'pelanggaran_id', 'id');
     }
 
 }

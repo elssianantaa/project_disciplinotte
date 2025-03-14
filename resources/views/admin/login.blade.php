@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href=" {{ asset ('assets/bootstrap-5.3.2-dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="bootsrtap-5.3.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
@@ -28,11 +28,18 @@
 
                         <form  class="pt-2" action="/auth" method="post">
                             @csrf
+                            {{-- @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif --> --}}
+
+
                             <div class="form-group py-3">
-                                <input type="email" name="email" class="form-control" placeholder="Enter your Email" style="height:50px;background-color: #F5F7FF;">
+                                <input type="email" name="email" class="form-control" placeholder="Enter your mail" style="height:50px;background-color: #F5F7FF;">
                             </div>
                             <div class="form-group position-relative">
-                                <input type="" id="password" name="password" class="form-control" placeholder="Enter your Password" style="height:50px;background-color: #F5F7FF;">
+                                <input id="password" name="password" class="form-control" placeholder="Enter your Password" style="height:50px;background-color: #F5F7FF;">
                                 <span onclick="togglePassword()" class="position-absolute" style="top:50%; right:10px; transform:translateY(-50%); cursor:pointer;">
                                     <i id="toggleIcon" class="fas fa-eye"></i>
                                 </span>
@@ -41,7 +48,7 @@
                                 function togglePassword() {
                                     var passwordInput = document.getElementById("password");
                                     var toggleIcon = document.getElementById("toggleIcon");
-                            
+
                                     if (passwordInput.type === "password") {
                                         passwordInput.type = "text";
                                         toggleIcon.classList.remove("fa-eye");
@@ -53,11 +60,11 @@
                                     }
                                 }
                             </script>
+<<<<<<< HEAD
+
+=======
 
                             <div class="form-group pt-4">
-                                <button type="submit" class="w-100" style="height:50px; font-size: 20px; border-radius: 15px;background-color:#7DA0FA;color: white;border: none;">
-                                    Login
-                                </button>
                             </div>
                             <div class="pt-4 text-center">
                                 <a href="#">Forgot your password?</a>
@@ -67,7 +74,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 d-none d-md-block">
-                    <img src="gambar/imglogin.avif" alt="">
+                    <img src="/gambar/imglogin.avif" alt="">
                 </div>
             </div>
         </div>
