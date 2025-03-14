@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
+
 </head>
 <body>
     <div style="background-color: white;">
@@ -18,10 +19,10 @@
 
                 <div class="col-md-6">
                     <div class="card p-5 shadow" style="border-radius: 10px; background-color: white;">
-                        <h1 style="text-align: center; font-size: 32px; font-weight: bold; color: #7DA0FA; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">  Disiplin Notes
+                        <h1 style="text-align: center; font-size: 32px; font-weight: bold; color: #7DA0FA; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">  DiscipliNotes
                             <h1 class="" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: #D5E7FF; text-align: center;">Sign Into Your Account</h1>
                         </h1>
-                        
+
                         <p class="pt-3" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
                             Silakan masuk untuk memantau, memperbarui, dan mengelola laporan kegiatan Anda.
                         </p>
@@ -44,12 +45,11 @@
                                     <i id="toggleIcon" class="fas fa-eye"></i>
                                 </span>
                             </div>
-                            
                             <script>
                                 function togglePassword() {
                                     var passwordInput = document.getElementById("password");
                                     var toggleIcon = document.getElementById("toggleIcon");
-                            
+
                                     if (passwordInput.type === "password") {
                                         passwordInput.type = "text";
                                         toggleIcon.classList.remove("fa-eye");
@@ -61,11 +61,11 @@
                                     }
                                 }
                             </script>
-                            
+<<<<<<< HEAD
+
+=======
+
                             <div class="form-group pt-4">
-                                <button type="submit" class="w-100" style="height:50px; font-size: 20px; border-radius: 15px;background-color:#7DA0FA;color: white;border: none;">
-                                    Login
-                                </button>
                             </div>
                             <div class="pt-4 text-center">
                                 <a href="#">Forgot your password?</a>

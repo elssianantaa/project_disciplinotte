@@ -11,6 +11,11 @@ class Kelas extends Model
     protected $guarded = [];
     
     public function students(){
-        return $this->hasMany(Student::class, 'kelas_id', 'id');
+        return $this->hasMany(Student::class, 'student_id', 'id');
     }
+
+    public function pelanggarans(){
+        return $this->hasMany(Pelanggaran::class, 'kelas_id', 'id');
+    }
+
 }
