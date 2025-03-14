@@ -19,4 +19,8 @@ class Staff extends Model
         'role',
     ];
 
+    public function pelanggarans(){
+        return $this->hasMany(Pelanggaran::class, 'staff_id', 'id');
+    }
+
 }
