@@ -22,4 +22,8 @@ class Student extends Model
         return $this->hasMany(CatatanPelanggaran::class, 'student_id', 'id');
     }
 
+    public function evaluasiSiswas(){
+        return $this->hasMany(EvaluasiSiswa::class, 'student_id', 'id');
+    }
+
 }
