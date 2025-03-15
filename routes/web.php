@@ -30,3 +30,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [dasboardController::class, 'login']);
 Route::post('/auth', [dasboardController::class, 'authentication']);
 Route::get('/dashboard', [dasboardController::class, 'showDb']);
+// Route::get('/dashboardd', [dasboardController::class, 'showDbb']);
+
