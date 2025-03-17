@@ -100,7 +100,7 @@
                     <td>{{$item->status}}</td>
                     <td>{{$item->point}}</td>
                     <td>
-                        <a href="'/pelanggaran/create'/{{$item->id}}" class="btn btn-danger btn-sm">
+                        <a href="/pelanggaran/{{$item->id}}" class="btn btn-danger btn-sm">
                             Tambah Pelanggaran
                         </a>                        
                     </td>
