@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('nisn', 16)->unique();
-            $table->string('nama', 255);
+            $table->string('name', 255);
             $table->unsignedBigInteger('kelas_id');
             $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnUpdate();
             // $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade'); 
