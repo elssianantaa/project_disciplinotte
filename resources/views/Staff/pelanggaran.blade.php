@@ -90,19 +90,19 @@
             <div class="col-md-8">
                 <div class="mb-3">
                     <label for="nisn" class="form-label">NISN</label>
-                    <input type="text" class="form-control" id="nisn">
+                    <input type="text" class="form-control" id="nisn" value="{{ $student->nisn }}">
                 </div>
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama Siswa</label>
-                    <input type="text" class="form-control" id="nama">
+                    <input type="text" class="form-control" id="nama" value="{{ $student->name }}">
                 </div>
                 <div class="mb-3">
                     <label for="kelas" class="form-label">Kelas</label>
-                    <input type="text" class="form-control" id="kelas">
+                    <input type="text" class="form-control" id="kelas" {{ $student->kelas->nama_kelas }}>
                 </div>
                 <div class="mb-3">
                     <label for="wali" class="form-label">Wali Kelas</label>
-                    <input type="text" class="form-control" id="wali">
+                    <input type="text" class="form-control" id="wali" value="{{ $student->kelas->wali_kelas }}">
                 </div>
                 <div class="mb-3">
                     <label for="pelanggaran" class="form-label">Nama Pelanggaran</label>
