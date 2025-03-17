@@ -13,7 +13,7 @@ class dasboardController extends Controller
 
     // }
     public function login(){
-        return view('admin.login');
+        return view('Admin.login');
     }
 
     public function authentication(Request $request){
@@ -25,8 +25,8 @@ class dasboardController extends Controller
         if (Auth::attempt($validateData)) {
             if (Auth::user()->role === 'admin') {
                 return redirect('/dashboard');
-            } elseif (Auth::user()->role === 'staff') {
-                return redirect()->route('dashboardStaff');
+            } elseif (Auth::user()->role === 'guru') {
+                return redirect('/dashboardStaff');
             } elseif (Auth::user()->role === 'student') {
                 return redirect()->route('home');
             }
@@ -35,11 +35,11 @@ class dasboardController extends Controller
     }
 
     public function showDb(){
-        return view('admin.dashboard');
+        return view('Admin.dashboard');
     }
 
-    public function showDbb(){
-        return view('admin.user');
+    public function showDbStaff(){
+        return view('Staff.dashboardStaff');
     }
 
 }
