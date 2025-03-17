@@ -62,7 +62,8 @@ class DatabaseSeeder extends Seeder
             'kelas_id' => 1,
             'password' => bcrypt('12345'),
             'status' => 'aktif',
-            'point' => 0
+            'point' => 0,
+            'foto' => '-'
         ]);
         // \App\Models\User::factory(10)->create();
 
