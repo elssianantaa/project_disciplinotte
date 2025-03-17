@@ -106,11 +106,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="pelanggaran" class="form-label">Nama Pelanggaran</label>
-                    <select class="form-select" id="pelanggaran">
-                        <option selected>Pilih Pelanggaran</option>
-                        <option value="1">Terlambat</option>
-                        <option value="2">Tidak pakai seragam</option>
-                    </select>
+                    <input type="text" class="form-control" id="wali">
                 </div>
                 <div class="mb-3">
                     <label for="kategori" class="form-label">Kategori</label>
