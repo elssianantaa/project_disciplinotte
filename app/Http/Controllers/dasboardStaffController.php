@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggaran;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class dasboardStaffController extends Controller
 {
     //
-    public function createPelanggaran(){
-        return view('Staff.pelanggaran');
+    public function createPelanggaran($id){
+        $student = Student::findOrFail($id); 
+        return view('Staff.pelanggaran', $student);
     }
 
     public function addPelanggaran(Request $request){
