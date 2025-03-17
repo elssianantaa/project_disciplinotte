@@ -32,3 +32,4 @@ Route::post('/auth', [dasboardController::class, 'authentication']);
 Route::get('/dashboard', [dasboardController::class, 'showDb']);
 // Route::get('/dashboardd', [dasboardController::class, 'showDbb']);
 
+

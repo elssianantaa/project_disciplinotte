@@ -39,7 +39,7 @@
                                 <input type="email" name="email" class="form-control" placeholder="Enter your mail" style="height:50px;background-color: #F5F7FF;">
                             </div>
                             <div class="form-group position-relative">
-                                <input id="password" name="password" class="form-control" placeholder="Enter your Password" style="height:50px;background-color: #F5F7FF;">
+                                <input id="password" name="password" cla    ss="form-control" placeholder="Enter your Password" style="height:50px;background-color: #F5F7FF;">
                                 <span onclick="togglePassword()" class="position-absolute" style="top:50%; right:10px; transform:translateY(-50%); cursor:pointer;">
                                     <i id="toggleIcon" class="fas fa-eye"></i>
                                 </span>
@@ -60,9 +60,6 @@
                                     }
                                 }
                             </script>
-<<<<<<< HEAD
-
-=======
 
                             <div class="form-group pt-4">
                             </div>
