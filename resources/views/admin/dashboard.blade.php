@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -78,7 +78,7 @@
     <nav class="sidebar">
         <div class="text-center mb-3">
             <img src="/img/Logo smk-2.gif" alt="Logo Sekolah">
-            <h5>ADMIN STAF</h5>
+            <h5>ADMIN</h5>
         </div>
         <ul class="nav flex-column" id="sidebar">
             <li class="nav-item">
@@ -116,7 +116,7 @@
 
     <main>
         <div class="alert alert-info">
-            <h2 class="fw-bold">Welcome Alya Cantik</h2>
+            <h2 class="fw-bold">Welcome To The Disciplinote</h2>
             <p>All systems are running in Admin <a href="#" class="text-danger">3 unread alerts!</a></p>
         </div>
 
@@ -179,4 +179,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-</html>
+</html> --}}
+@extends('layouts.admin')
+
+@section('title', 'Dashboard Admin')
+
+@section('content')
+<div class="alert alert-info">
+    <h2 class="fw-bold">Welcome To The Disciplinote</h2>
+    <p>All systems are running in Admin <a href="#" class="text-danger">3 unread alerts!</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Daftar Siswa</h5>
+                <p class="card-text">Lihat dan kelola data siswa yang terdaftar.</p>
+                <a href="{{ url('admin/siswa') }}" class="btn btn-primary">Lihat Data</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Pelanggaran</h5>
+                <p class="card-text">Catatan pelanggaran siswa.</p>
+                <a href="{{ url('admin/pelanggaran') }}" class="btn btn-warning">Lihat Pelanggaran</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Laporan Pelanggaran</h5>
+                <p class="card-text">Buat dan kelola laporan pelanggaran siswa.</p>
+                <a href="{{ url('admin/laporan') }}" class="btn btn-danger">Buat Laporan</a>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
