@@ -43,7 +43,7 @@ Route::get('/daftarSiswa', [studentController::class, 'show']);
 
 //CRUD PELANGGARAN
 Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
-Route::post('/pelanggaran/create/{id}', [dasboardController::class, 'addPelanggaran']);
+Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran']);
 
 
 

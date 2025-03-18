@@ -76,58 +76,69 @@
         </ul>
     </nav>
 
-    <div class="content">
-        <h4 class="mb-4">Monitoring Pelanggaran</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="foto" class="form-label">Foto</label>
-                <div class="border p-4 text-center" style="height: 150px;" id="preview-container">
-                    <img id="preview" src="" alt="Preview Foto" style="max-height: 100%; display: none;">
-                    <span id="upload-text">Upload Foto</span>
+    <form action="/pelanggaran/create/" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="content">
+            <h4 class="mb-4">Monitoring Pelanggaran</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="foto" class="form-label">Foto</label>
+                    <div class="border p-4 text-center" style="height: 150px;" id="preview-container">
+                        <img id="preview" src="" alt="Preview Foto" style="max-height: 100%; display: none;">
+                        <span id="upload-text">Upload Foto</span>
+                    </div>
+                    <input type="file" class="form-control mt-2" id="foto" name="foto" accept="image/*">
                 </div>
-                <input type="file" class="form-control mt-2" id="foto" accept="image/*">
-            </div>
-            <div class="col-md-8">
-                <div class="mb-3">
-                    <label for="nisn" class="form-label">NISN</label>
-                    <input type="text" class="form-control" id="nisn" value="{{ $student->nisn }}">
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label for="nisn" class="form-label">NISN</label>
+                        <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $student->nisn }}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama Siswa</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ $student->name }}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kelas" class="form-label">Kelas</label>
+                        <input type="text" class="form-control" id="kelas" name="kelas" value="{{ $student->kelas->nama_kelas ?? 'Tidak ada kelas' }}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="wali" class="form-label">Wali Kelas</label>
+                        <input type="text" class="form-control" id="wali" name="wali" value="{{ $student->kelas->wali_kelas ?? 'Tidak ada wali kelas' }}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pelanggaran" class="form-label">Nama Pelanggaran</label>
+                        <input type="text" class="form-control" id="pelanggaran" name="nama_pelanggaran" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label">Kategori</label>
+                        <select class="form-select" name="kategori" required>
+                            <option value="Ringan">Ringan</option>
+                            <option value="Sedang">Sedang</option>
+                            <option value="Berat">Berat</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="point" class="form-label">Point</label>
+                        <input type="number" class="form-control" name="point" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <input type="text" class="form-control" name="deskripsi" required>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Simpan</button>
                 </div>
-                <div class="mb-3">
-                    <label for="nama" class="form-label">Nama Siswa</label>
-                    <input type="text" class="form-control" id="nama" value="{{ $student->name }}">
-                </div>
-                <div class="mb-3">
-                    <label for="kelas" class="form-label">Kelas</label>
-                    <input type="text" class="form-control" id="kelas" {{ $student->kelas->nama_kelas }}>
-                </div>
-                <div class="mb-3">
-                    <label for="wali" class="form-label">Wali Kelas</label>
-                    <input type="text" class="form-control" id="wali" value="{{ $student->kelas->wali_kelas }}">
-                </div>
-                <div class="mb-3">
-                    <label for="pelanggaran" class="form-label">Nama Pelanggaran</label>
-                    <input type="text" class="form-control" id="wali">
-                </div>
-                <div class="mb-3">
-                    <label for="kategori" class="form-label">Kategori</label>
-                    <select class="form-select" id="kategori">
-                        <option selected>Pilih Kategori</option>
-                        <option value="1">Ringan</option>
-                        <option value="2">Sedang</option>
-                        <option value="3">Berat</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary">Simpan</button>
             </div>
         </div>
-    </div>
+    </form>
+
 
     <script>
         document.getElementById("foto").addEventListener("change", function(event) {
             let preview = document.getElementById("preview");
             let uploadText = document.getElementById("upload-text");
             let file = event.target.files[0];
-    
+
             if (file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
