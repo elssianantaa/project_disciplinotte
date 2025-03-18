@@ -25,4 +25,10 @@ class Pelanggaran extends Model
         return $this->belongsTo(Staff::class, 'staff_id');
     }
 
+    public function students(){
+        return $this->hasMany(Student::class, 'pelanggaran_id', 'id');
+    }
+
+    
+
 }

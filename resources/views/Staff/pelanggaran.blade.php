@@ -90,6 +90,10 @@
                     <input type="file" class="form-control mt-2" id="foto" name="foto" accept="image/*">
                 </div>
                 <div class="col-md-8">
+
+                    <input type="hidden" name="student_id" value="{{ $student->id }}">
+                    <input type="hidden" name="kelas_id" value="{{ $student->kelas->id ?? '' }}">
+
                     <div class="mb-3">
                         <label for="nisn" class="form-label">NISN</label>
                         <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $student->nisn }}" readonly>
@@ -100,11 +104,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="kelas" class="form-label">Kelas</label>
-                        <input type="text" class="form-control" id="kelas" name="kelas" value="{{ $student->kelas->nama_kelas ?? 'Tidak ada kelas' }}" readonly>
+                        <input type="text" class="form-control" id="kelas" name="nama_kelas" value="{{ $student->kelas->nama_kelas ?? 'Tidak ada kelas' }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="wali" class="form-label">Wali Kelas</label>
-                        <input type="text" class="form-control" id="wali" name="wali" value="{{ $student->kelas->wali_kelas ?? 'Tidak ada wali kelas' }}" readonly>
+                        <input type="text" class="form-control" id="wali" name="wali_kelas" value="{{ $student->kelas->wali_kelas ?? 'Tidak ada wali kelas' }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="pelanggaran" class="form-label">Nama Pelanggaran</label>
@@ -112,7 +116,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="kategori" class="form-label">Kategori</label>
-                        <select class="form-select" name="kategori" required>
+                        <select class="form-select" name="Kategori" required>
                             <option value="Ringan">Ringan</option>
                             <option value="Sedang">Sedang</option>
                             <option value="Berat">Berat</option>
@@ -122,9 +126,21 @@
                         <label for="point" class="form-label">Point</label>
                         <input type="number" class="form-control" name="point" required>
                     </div>
+                    
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <input type="text" class="form-control" name="deskripsi" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">Foto Bukti</label>
+                        <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="staff" class="form-label">Petugas (Staff)</label>
+                        <input type="text" class="form-control" name="staff" value="{{ auth()->user()->name ?? 'Tidak diketahui' }}" readonly>
+                        <input type="hidden" name="staff_id" value="{{ auth()->user()->id }}">
                     </div>
                     <button class="btn btn-primary" type="submit">Simpan</button>
                 </div>

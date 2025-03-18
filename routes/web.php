@@ -39,9 +39,10 @@ Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
 
 //CRUD STUDENTS
-Route::get('/daftarSiswa', [studentController::class, 'show']);
+Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
 //CRUD PELANGGARAN
+Route::get('/daftarPelanggaran', [dasboardStaffController::class, 'show']);
 Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
 Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran']);
 

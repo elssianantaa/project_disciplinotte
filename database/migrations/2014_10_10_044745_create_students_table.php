@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->enum('status', ['aktif', 'skorsing', 'dikeluarkan'])->default('aktif');
-            $table->unsignedInteger('point')->default(0);
+            $table->unsignedInteger('point');
             $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();

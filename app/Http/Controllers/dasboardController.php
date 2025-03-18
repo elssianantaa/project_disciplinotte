@@ -53,6 +53,12 @@ class dasboardController extends Controller
         return view('admin.siswa.index', compact('students'));
     }
 
+    //Buat nampilin di dasboard staff
+    public function show(){
+        $data['student'] = Student::all();
+        return view('Staff.daftarSiswa', $data);
+    }
+
     public function create()
     {
         $kelas = Kelas::all();
@@ -61,7 +67,7 @@ class dasboardController extends Controller
 
     public function store(Request $request)
 {
-    
+
 
     $request->validate([
         'nisn' => 'required|unique:students,nisn',

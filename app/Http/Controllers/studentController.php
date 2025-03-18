@@ -9,8 +9,4 @@ class studentController extends Controller
 {
     //
 
-    public function show(){
-        $data['student'] = Student::all();
-        return view('Staff.daftarSiswa', $data);
-    }
 }

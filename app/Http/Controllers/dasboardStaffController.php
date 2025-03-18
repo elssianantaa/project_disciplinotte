@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use App\Models\Pelanggaran;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -9,6 +10,11 @@ use Illuminate\Http\Request;
 class dasboardStaffController extends Controller
 {
     //
+
+    public function show(){
+        $data['pelanggaran'] = Pelanggaran::all();
+        return view('Staff.daftarPelanggaran');
+    }
     public function createPelanggaran($id){
         $student = Student::with('kelas')->findOrFail($id);
         return view('Staff.pelanggaran', compact('student'));
@@ -34,6 +40,12 @@ class dasboardStaffController extends Controller
             $file->storeAs('public/foto_pelanggaran', $fileName);
         }
 
+        // Ambil data siswa berdasarkan student_id
+                $student = Student::with('kelas')->findOrFail($request->student_id);
+
+    // Ambil data kelas berdasarkan kelas_id
+         $kelas = Kelas::findOrFail($request->kelas_id);
+
         $pelanggaran = Pelanggaran::create([
             'student_id' => $request->student_id,
             'kelas_id' => $request->kelas_id,
@@ -41,11 +53,11 @@ class dasboardStaffController extends Controller
             'Kategori' => $request->Kategori,
             'point' => $request->point,
             'deskripsi' => $request->deskripsi,
-            'foto' => $fileName,
-            'staff_id' => $request->staff_id,
+            // 'foto' => $fileName,
+            'staff_id' => auth()->user()->id,
         ]);
 
-        return redirect()->route('Staff.daftarSiswa')->with('success', 'Pelanggaran berhasil ditambahkan!');
+        return redirect('Staff.daftarSiswa');
     }
 
 }

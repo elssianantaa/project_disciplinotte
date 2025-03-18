@@ -17,10 +17,12 @@ class Student extends Model
         'password',
     ];
 
+    //!!!!!!!!!!!1
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
+   
     public function pelanggarans(){
         return $this->hasMany(Pelanggaran::class, 'kelas_id', 'id');
     }
@@ -33,4 +35,7 @@ class Student extends Model
         return $this->hasMany(EvaluasiSiswa::class, 'student_id', 'id');
     }
 
+    public function pelanggaran(){
+        return $this->belongsTo(Pelanggaran::class, 'pelanggaran_id');
+    }
 }

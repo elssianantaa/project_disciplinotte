@@ -61,6 +61,7 @@ class DatabaseSeeder extends Seeder
             'nisn' => '00737456',
             'name' => 'Elssi',
             'kelas_id' => 1,
+            'jenis_kelamin' => 'Perempuan',
             'password' => bcrypt('12345'),
             'status' => 'aktif',
             'point' => 0,
