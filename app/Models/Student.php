@@ -36,6 +36,7 @@ class Student extends Model
         return $this->hasMany(CatatanPelanggaran::class, 'student_id', 'id');
     }
 
+    // student sama evaluasisiswa
     public function evaluasiSiswas(){
         return $this->hasMany(EvaluasiSiswa::class, 'student_id', 'id');
     }

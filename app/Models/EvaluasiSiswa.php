@@ -11,6 +11,7 @@ class EvaluasiSiswa extends Model
 
     protected $guarded= [];
 
+    // sama siswa
     public function student(){
         return $this->belongsTo(Student::class, 'student_id');
     }
