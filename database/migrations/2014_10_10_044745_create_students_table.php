@@ -19,9 +19,10 @@ return new class extends Migration
             $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnUpdate();
             // $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
             $table->string('password');
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->enum('status', ['aktif', 'skorsing', 'dikeluarkan'])->default('aktif');
-            $table->unsignedInteger('pelanggaran_id');
-            $table->string('foto');
+            $table->unsignedInteger('point')->default(0);
+            $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

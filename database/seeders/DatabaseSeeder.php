@@ -9,6 +9,7 @@ use App\Models\Staff;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -64,6 +65,16 @@ class DatabaseSeeder extends Seeder
             'status' => 'aktif',
             'point' => 0,
             'foto' => '-'
+        ]);
+        Student::create([
+            'nisn' => '0076346790',
+            'name' => 'Siti Aisyah',
+            'kelas_id' => 2,
+            'jenis_kelamin' => 'Perempuan',
+            'password' => bcrypt('12345'),
+            'status' => 'aktif',
+            'point' => 0,
+            'foto'=> '-'
         ]);
         // \App\Models\User::factory(10)->create();
 

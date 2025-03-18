@@ -9,6 +9,13 @@ class Student extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $fillable = [
+        'nisn', 'name', 'kelas_id', 'jenis_kelamin', 'password', 'status', 'point', 'foto'
+    ];
+
+    protected $hidden = [
+        'password',
+    ];
 
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'kelas_id');
