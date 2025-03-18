@@ -100,7 +100,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama Siswa</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ $student->name }}" readonly>
+                        <input type="text" class="form-control" id="nama" name="name" value="{{ $student->name }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="kelas" class="form-label">Kelas</label>
@@ -122,11 +122,21 @@
                             <option value="Berat">Berat</option>
                         </select>
                     </div>
+
                     <div class="mb-3">
                         <label for="point" class="form-label">Point</label>
-                        <input type="number" class="form-control" name="point" required>
+                        <input type="number" class="form-control" id="point" name="point" readonly>
                     </div>
                     
+                    <script>
+                        document.querySelector('select[name="Kategori"]').addEventListener('change', function() {
+                            let pointField = document.querySelector('input[name="point"]');
+                            let kategori = this.value; // Ambil nilai kategori dengan K kapital
+                            let point = kategori === "Ringan" ? 10 : kategori === "Sedang" ? 15 : kategori === "Berat" ? 20 : 0;
+                            pointField.value = point;
+                        });
+                        </script>                        
+
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <input type="text" class="form-control" name="deskripsi" required>

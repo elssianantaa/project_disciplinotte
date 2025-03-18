@@ -20,9 +20,9 @@ class Staff extends Model
     ];
 
     //pelanggaran sama staff
-    public function pelanggarans(){
-        return $this->hasMany(Pelanggaran::class, 'staff_id', 'id');
-    }
+    // public function pelanggarans(){
+    //     return $this->hasMany(Pelanggaran::class, 'staff_id', 'id');
+    // }
 
     // public function staffs(){
     //     return $this->hasMany(Staff::class, 'staff_id', 'id');

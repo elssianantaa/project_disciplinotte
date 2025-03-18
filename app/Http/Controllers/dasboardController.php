@@ -47,16 +47,23 @@ class dasboardController extends Controller
         return view('Staff.dashboardStaff');
     }
 
+    // public function index()
+    // {
+    //     $students = Student::all();
+    //     return view('admin.siswa.index', compact('students'));
+    // }
+
     public function index()
-    {
-        $students = Student::all();
-        return view('admin.siswa.index', compact('students'));
-    }
+{
+    $students = Student::with(['kelas', 'pelanggarans'])->get(); // ✅ Tambah with()
+    return view('admin.siswa.index', compact('students'));
+}
+
 
     //Buat nampilin di dasboard staff
     public function show(){
-        $data['student'] = Student::all();
-        return view('Staff.daftarSiswa', $data);
+        $students = Student::with(['kelas', 'pelanggarans'])->get(); // ✅ Pastikan pakai with()
+        return view('Staff.daftarSiswa', compact('students'));
     }
 
     public function create()
@@ -85,6 +92,7 @@ class dasboardController extends Controller
         'jenis_kelamin' => $request->jenis_kelamin,
         'status' => $request->status,
         'password' => bcrypt($request->password),
+        'point' => 0
     ]);
 
     return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil ditambahkan!');

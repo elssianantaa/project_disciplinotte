@@ -51,7 +51,7 @@
         </div>
         <ul class="nav flex-column" id="sidebar">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/dashboardStaff">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
             </li>
@@ -70,14 +70,14 @@
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="laporan.html">
+            <li class="nav-item"><a class="nav-link" href="/daftarPelanggaran">
                 <i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li>
            <li class="nav-item"><a class="nav-link" href="pengaturan.html">
                <i class="fas fa-cog"></i> Pengaturan</a></li>
         </ul>
     </nav>
     <main class="flex-grow-1 p-4" style="margin-left: 260px;">
-        <h2>Daftar Pelanggaran Siswa</h2>
+        <h2>Detail Daftar Pelanggaran Siswa</h2>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -95,19 +95,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($student as $key => $item)
+                @foreach ($pelanggaran as $key => $item)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$item->nisn}}</td>
-                    <td>{{$item->name}}</td>
+                    <td>{{$item->student->nisn}}</td>
+                    <td>{{$item->student->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
-                    <td>{{$item->status}}</td>
+                    <td>{{$item->kelas->wali_kelas}}</td>
+                    <td>{{$item->nama_pelanggaran}}</td>
+                    <td>{{$item->Kategori}}</td>
                     <td>{{$item->point}}</td>
-                    <td>
-                        <a href="/pelanggaran/{{$item->id}}" class="btn btn-danger btn-sm">
-                            Tambah Pelanggaran
-                        </a>                        
-                    </td>
+                    <td>{{$item->deskripsi}}</td>
+                    <td><img src="{{ asset('storage/foto_pelanggaran/'.$item->foto) }}" alt="" style="width: 50px; height: 50px;"></td>
+                    <td>{{ auth()->user()->name }}</td>
                 </tr>   
                 @endforeach             
             </tbody>

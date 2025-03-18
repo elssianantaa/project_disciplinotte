@@ -70,7 +70,7 @@
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="laporan.html">
+            <li class="nav-item"><a class="nav-link" href="/daftarPelanggaran">
                 <i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li>
            <li class="nav-item"><a class="nav-link" href="pengaturan.html">
                <i class="fas fa-cog"></i> Pengaturan</a></li>
@@ -91,14 +91,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($student as $key => $item)
+                @foreach ($students as $key => $item)
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$item->nisn}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
                     <td>{{$item->status}}</td>
-                    <td>{{$item->point}}</td>
+                    <td>{{$item->pelanggarans->sum('point') }}</td>
                     <td>
                         <a href="/pelanggaran/{{$item->id}}" class="btn btn-danger btn-sm">
                             Tambah Pelanggaran

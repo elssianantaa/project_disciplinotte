@@ -102,7 +102,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="laporan.html">
+                <a class="nav-link" href="/daftarPelanggaran">
                     <i class="fas fa-file-alt"></i> Laporan Pelanggaran
                 </a>
             </li>

@@ -13,10 +13,10 @@ class dasboardStaffController extends Controller
 
     public function show(){
         $data['pelanggaran'] = Pelanggaran::all();
-        return view('Staff.daftarPelanggaran');
+        return view('Staff.daftarPelanggaran', $data);
     }
     public function createPelanggaran($id){
-        $student = Student::with('kelas')->findOrFail($id);
+        $student = Student::with('kelas', 'pelanggarans')->findOrFail($id);
         return view('Staff.pelanggaran', compact('student'));
     }
 
@@ -31,6 +31,17 @@ class dasboardStaffController extends Controller
         //     'foto' => ['nullable', 'image', 'mimes:jpg,jpeg,png'],
         //     'staff_id' => ['required', 'exists:staff,id'],
         // ]);
+
+
+        $kategori = $request->Kategori; 
+
+        // Tentukan poin berdasarkan kategori
+        $point = match ($kategori) {
+            'Ringan' => 10,
+            'Sedang' => 15,
+            'Berat' => 20,
+            default => 0, // Jika kategori tidak valid
+        };
 
         $fileName = null;
 
@@ -51,13 +62,16 @@ class dasboardStaffController extends Controller
             'kelas_id' => $request->kelas_id,
             'nama_pelanggaran' => $request->nama_pelanggaran,
             'Kategori' => $request->Kategori,
-            'point' => $request->point,
+            'point' => $point,
             'deskripsi' => $request->deskripsi,
-            // 'foto' => $fileName,
-            'staff_id' => auth()->user()->id,
+            'foto' => $fileName,
+            'staff' => auth()->user()->id,
         ]);
 
-        return redirect('Staff.daftarSiswa');
+        $student = Student::findOrFail($request->student_id);
+        $student->increment('point', $point); 
+
+        return redirect('/daftarSiswa');
     }
 
 }

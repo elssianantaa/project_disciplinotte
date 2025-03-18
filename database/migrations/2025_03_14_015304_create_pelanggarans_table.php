@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('point', 255);
             $table->string('deskripsi', 255);
             $table->string('foto', 255);
-            $table->unsignedBigInteger('staff_id');
-            $table->foreign('staff_id')->references('id')->on('staff')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('staff');
+            // $table->unsignedBigInteger('staff_id');
+            // $table->foreign('staff_id')->references('id')->on('staff')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

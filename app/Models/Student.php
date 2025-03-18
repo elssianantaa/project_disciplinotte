@@ -17,15 +17,20 @@ class Student extends Model
         'password',
     ];
 
-    //!!!!!!!!!!!1
+    //!!!!!!!!!!!1 ini teh student sama kelas
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
    
+    // >>pelanggaran sama siswa
     public function pelanggarans(){
-        return $this->hasMany(Pelanggaran::class, 'kelas_id', 'id');
+        return $this->hasMany(Pelanggaran::class, 'student_id', 'id');
     }
+
+    // public function pelanggarans(){
+    //     return $this->hasMany(Pelanggaran::class, 'kelas_id', 'id');
+    // }
 
     public function catatanPelanggarans(){
         return $this->hasMany(CatatanPelanggaran::class, 'student_id', 'id');
