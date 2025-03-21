@@ -23,26 +23,18 @@ class DatabaseSeeder extends Seeder
             'email'=> 'admin@gmail.com',
             'password' => bcrypt('12345'),
             'role' => 'admin',
-            'nohp' => '082122344',
-            'foto' => '-',
+            'nohp' => '08212234436x',
+            'address' => 'singaparna',
         ]);
 
-        // Staff::create([
-        //     'name' => 'Staff',
-        //     'email'=> 'Guru@gmail.com',
-        //     'password' => bcrypt('12345'),
-        //     'alamat' => 'Singaparna',
-        //     'nohp' => '082392392',
-        //     'role' => 'guru',
-        // ]);
 
         User::create([
             'name' => 'Staff',
             'email'=> 'guru@gmail.com',
             'password' => bcrypt('12345'),
-            'role' => 'guru',
+            'role' => 'staff',
             'nohp' => '08212288344',
-            'foto' => '-',
+            'address' => 'tawang',
         ]);
 
         Kelas::create([
@@ -77,6 +69,16 @@ class DatabaseSeeder extends Seeder
             'point' => 0,
             'foto'=> '-'
         ]);
+
+        Staff::create([
+            'nama' => 'Aiden',
+            'email' => 'aiden@gmail.com',
+            'password' => bcrypt('12345'),
+            'alamat' => 'Tawang',
+            'nohp' => '081234567892',
+            'role' => 'satpam',
+        ]);
+   
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
@@ -84,8 +86,5 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
     }
-
-
-
 
 }

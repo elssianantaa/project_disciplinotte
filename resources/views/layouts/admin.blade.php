@@ -81,7 +81,8 @@
         </div>
         <ul class="nav flex-column" id="sidebar">
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('admin/user') }}"><i class="fas fa-user"></i> Users</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="fas fa-user"></i> Users</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/kelolastaff') }}"><i class="fas fa-user"></i>Kelola Staff</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/siswa') }}"><i class="fas fa-list"></i> Daftar Siswa</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/pelanggaran') }}"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/laporan') }}"><i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li>
