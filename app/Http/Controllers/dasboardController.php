@@ -18,7 +18,7 @@ class dasboardController extends Controller
     public function authentication(Request $request)
     {
         $validateData = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email'],                    
             'password' => 'required'
         ]);
 
