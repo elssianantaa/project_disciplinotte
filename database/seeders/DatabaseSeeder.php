@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Kelas;
+use App\Models\Pelanggaran;
 use App\Models\Staff;
 use App\Models\Student;
 use App\Models\User;
@@ -76,6 +77,12 @@ class DatabaseSeeder extends Seeder
             'status' => 'aktif',
             'point' => 0,
             'foto'=> '-'
+        ]);
+
+        Pelanggaran::create([
+            'nama_pelanggaran' => 'Bolos',
+            // 'Kategori' => 'Ringan',
+            // 'point' => '10'
         ]);
         // \App\Models\User::factory(10)->create();
 

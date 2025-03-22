@@ -92,24 +92,28 @@
                     <th>Deskripsi</th>
                     <th>Foto Bukti</th>
                     <th>Petugas</th>
+                    <th>Tanggal</th>
+                    <th>Periode</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pelanggaran as $key => $item)
+                @foreach ($catatanpelanggaran as $key => $item)
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$item->student->nisn}}</td>
                     <td>{{$item->student->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
                     <td>{{$item->kelas->wali_kelas}}</td>
-                    <td>{{$item->nama_pelanggaran}}</td>
+                    <td>{{$item->pelanggaran->nama_pelanggaran}}</td>
                     <td>{{$item->Kategori}}</td>
                     <td>{{$item->point}}</td>
                     <td>{{$item->deskripsi}}</td>
                     <td><img src="{{ asset('storage/foto_pelanggaran/'.$item->foto) }}" alt="" style="width: 50px; height: 50px;"></td>
                     <td>{{ auth()->user()->name }}</td>
-                </tr>   
-                @endforeach             
+                    <td>{{$item->tanggal}}</td>
+                    <td>{{$item->periode}}</td>
+                </tr>
+                @endforeach
             </tbody>
         </table>
     </main>

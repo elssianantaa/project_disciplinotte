@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CatatanPelanggaran;
 use App\Models\Kelas;
 use App\Models\Pelanggaran;
 use App\Models\Student;
@@ -12,12 +13,14 @@ class dasboardStaffController extends Controller
     //
 
     public function show(){
-        $data['pelanggaran'] = Pelanggaran::all();
+        // $data['pelanggarans'] = Pelanggaran::all();
+        $data['catatanpelanggaran'] = CatatanPelanggaran::all();
         return view('Staff.daftarPelanggaran', $data);
     }
     public function createPelanggaran($id){
-        $student = Student::with('kelas', 'pelanggarans')->findOrFail($id);
-        return view('Staff.pelanggaran', compact('student'));
+        $pelanggarans = Pelanggaran::all();
+        $student = Student::with('kelas', 'catatanpelanggarans')->findOrFail($id);
+        return view('Staff.pelanggaran', compact('student', 'pelanggarans'));
     }
 
     public function addPelanggaran(Request $request){
@@ -33,7 +36,7 @@ class dasboardStaffController extends Controller
         // ]);
 
 
-        $kategori = $request->Kategori; 
+        $kategori = $request->Kategori;
 
         // Tentukan poin berdasarkan kategori
         $point = match ($kategori) {
@@ -51,25 +54,37 @@ class dasboardStaffController extends Controller
             $file->storeAs('public/foto_pelanggaran', $fileName);
         }
 
+        $tanggal = strtotime($request->tanggal);
+        $tahun = date('Y', $tanggal);
+        $bulan = date('m', $tanggal);
+
+        if ($bulan >= 1 && $bulan <= 6) {
+            $periode = "Semester 1 $tahun";
+        } else {
+            $periode = "Semester 2 $tahun";
+        }
+
         // Ambil data siswa berdasarkan student_id
                 $student = Student::with('kelas')->findOrFail($request->student_id);
 
-    // Ambil data kelas berdasarkan kelas_id
+        // Ambil data kelas berdasarkan kelas_id
          $kelas = Kelas::findOrFail($request->kelas_id);
 
-        $pelanggaran = Pelanggaran::create([
-            'student_id' => $request->student_id,
-            'kelas_id' => $request->kelas_id,
-            'nama_pelanggaran' => $request->nama_pelanggaran,
-            'Kategori' => $request->Kategori,
-            'point' => $point,
-            'deskripsi' => $request->deskripsi,
-            'foto' => $fileName,
-            'staff' => auth()->user()->id,
+         $pelanggaran = CatatanPelanggaran::create([
+            'student_id'      => $request->student_id,
+            'kelas_id'        => $request->kelas_id,
+            'pelanggaran_id'  => $request->pelanggaran_id, // Ambil ID pelanggaran, bukan nama atau kategori
+            'Kategori'        => $kategori,
+            'point'           => $point,
+            'deskripsi'       => $request->deskripsi,
+            'foto'            => $fileName,
+            'staff'           => auth()->user()->id, // Pastikan user adalah staff
+            'tanggal'         => $request->tanggal,
+            'periode'         => $periode, // Simpan periode sebagai "Semester X Tahun"
         ]);
 
         $student = Student::findOrFail($request->student_id);
-        $student->increment('point', $point); 
+        $student->increment('point', $point);
 
         return redirect('/daftarSiswa');
     }

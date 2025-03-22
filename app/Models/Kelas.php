@@ -11,15 +11,15 @@ class Kelas extends Model
     protected $guarded = [];
 
     protected $fillable = ['nama_kelas', 'wali_kelas', 'jurusan'];
-    
-    //1!!!!!!!!!!!!!!!!!!!!!1 student sama kelas
+
+    // student sama kelas
     public function students(){
         return $this->hasMany(Student::class, 'kelas_id', 'id');
     }
 
-    // >> pelanggaran sama kelas
-    public function pelanggarans(){
-        return $this->hasMany(Pelanggaran::class, 'kelas_id', 'id');
+    // catatan pelanggaran sama kelas
+    public function catatanpelanggarans(){
+        return $this->hasMany(CatatanPelanggaran::class, 'kelas_id', 'id');
     }
 
 }

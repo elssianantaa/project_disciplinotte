@@ -55,14 +55,14 @@ class dasboardController extends Controller
 
     public function index()
 {
-    $students = Student::with(['kelas', 'pelanggarans'])->get(); // ✅ Tambah with()
+    $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); // ✅ Tambah with()
     return view('admin.siswa.index', compact('students'));
 }
 
 
     //Buat nampilin di dasboard staff
     public function show(){
-        $students = Student::with(['kelas', 'pelanggarans'])->get(); // ✅ Pastikan pakai with()
+        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); // ✅ Pastikan pakai with()
         return view('Staff.daftarSiswa', compact('students'));
     }
 

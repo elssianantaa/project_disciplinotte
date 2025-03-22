@@ -98,14 +98,14 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
                     <td>{{$item->status}}</td>
-                    <td>{{$item->pelanggarans->sum('point') }}</td>
+                    <td>{{$item->catatanpelanggarans->sum('point') }}</td>
                     <td>
                         <a href="/pelanggaran/{{$item->id}}" class="btn btn-danger btn-sm">
                             Tambah Pelanggaran
-                        </a>                        
+                        </a>
                     </td>
-                </tr>   
-                @endforeach             
+                </tr>
+                @endforeach
             </tbody>
         </table>
     </main>

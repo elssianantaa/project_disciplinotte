@@ -97,12 +97,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pelanggaran.html">
+                <a class="nav-link" href="/daftarPelanggaran">
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/daftarPelanggaran">
+                <a class="nav-link" href="">
                     <i class="fas fa-file-alt"></i> Laporan Pelanggaran
                 </a>
             </li>
@@ -125,7 +125,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Daftar Siswa</h5>
-                        <p class="card-text">Lihat dan kelola data siswa yang terdaftar.</p>
+                        <p class="card-text">Lihat dan kelola pelanggaran siswa</p>
                         <a href="/daftarSiswa" class="btn btn-primary">Lihat Data</a>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Pelanggaran</h5>
                         <p class="card-text">Catatan pelanggaran siswa.</p>
-                        <a href="pelanggaran.html" class="btn btn-warning">Lihat Pelanggaran</a>
+                        <a href="/daftarPelanggaran" class="btn btn-warning">Lihat Pelanggaran</a>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Laporan Pelanggaran</h5>
                         <p class="card-text">Buat dan kelola laporan pelanggaran siswa.</p>
-                        <a href="laporan.html" class="btn btn-danger">Buat Laporan</a>
+                        <a href="laporan.html" class="btn btn-danger">Lihat Laporan</a>
                     </div>
                 </div>
             </div>

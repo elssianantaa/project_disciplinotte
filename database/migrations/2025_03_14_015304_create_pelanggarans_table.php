@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('pelanggarans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->unsignedBigInteger('kelas_id');
-            $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->unsignedBigInteger('student_id');
+            // $table->foreign('student_id')->references('id')->on('students')->cascadeOnUpdate()->cascadeOnDelete();
+            // $table->unsignedBigInteger('kelas_id');
+            // $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('nama_pelanggaran', 255);
-            $table->enum('Kategori', ['Ringan', 'Sedang', 'Berat'])->default('Ringan');
-            $table->string('point', 255);
-            $table->string('deskripsi', 255);
-            $table->string('foto', 255);
-            $table->string('staff');
+            // $table->enum('Kategori', ['Ringan', 'Sedang', 'Berat'])->default('Ringan');
+            // $table->string('point', 255);
+            // $table->string('deskripsi', 255);
+            // $table->string('foto', 255);
+            // $table->string('staff');
             // $table->unsignedBigInteger('staff_id');
             // $table->foreign('staff_id')->references('id')->on('staff')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

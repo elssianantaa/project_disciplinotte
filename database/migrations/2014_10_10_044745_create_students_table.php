@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name', 255);
             $table->unsignedBigInteger('kelas_id');
             $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnUpdate();
-            // $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
             $table->string('password');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->enum('status', ['aktif', 'skorsing', 'dikeluarkan'])->default('aktif');

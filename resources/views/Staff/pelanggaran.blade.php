@@ -112,8 +112,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="pelanggaran" class="form-label">Nama Pelanggaran</label>
-                        <input type="text" class="form-control" id="pelanggaran" name="nama_pelanggaran" required>
+                        <select class="form-control" id="pelanggaran" name="pelanggaran_id" required>
+                            <option value="" disabled selected>Pilih Pelanggaran</option>
+                            @foreach ($pelanggarans as $pelanggaran)
+                                <option value="{{ $pelanggaran->id }}">{{ $pelanggaran->nama_pelanggaran }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                     <div class="mb-3">
                         <label for="kategori" class="form-label">Kategori</label>
                         <select class="form-select" name="Kategori" required>
@@ -127,7 +133,7 @@
                         <label for="point" class="form-label">Point</label>
                         <input type="number" class="form-control" id="point" name="point" readonly>
                     </div>
-                    
+
                     <script>
                         document.querySelector('select[name="Kategori"]').addEventListener('change', function() {
                             let pointField = document.querySelector('input[name="point"]');
@@ -135,7 +141,7 @@
                             let point = kategori === "Ringan" ? 10 : kategori === "Sedang" ? 15 : kategori === "Berat" ? 20 : 0;
                             pointField.value = point;
                         });
-                        </script>                        
+                        </script>
 
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
@@ -146,7 +152,12 @@
                         <label for="foto" class="form-label">Foto Bukti</label>
                         <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
                     </div>
-                    
+
+                    <div class="mb-3">
+                        <label for="tanggal" class="form-label">Tanggal</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal">
+                    </div>
+
                     <div class="mb-3">
                         <label for="staff" class="form-label">Petugas (Staff)</label>
                         <input type="text" class="form-control" name="staff" value="{{ auth()->user()->name ?? 'Tidak diketahui' }}" readonly>
