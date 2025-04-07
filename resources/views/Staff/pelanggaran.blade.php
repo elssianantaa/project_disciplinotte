@@ -225,12 +225,19 @@
     }
   }
 
-    document.querySelector('select[name="Kategori"]').addEventListener('change', function () {
-      const pointField = document.querySelector('input[name="point"]');
-      const kategori = this.value;
-      const point = kategori === "Ringan" ? 10 : kategori === "Sedang" ? 15 : kategori === "Berat" ? 20 : 0;
-      pointField.value = point;
-    });
+  function setPointByKategori() {
+    const selectKategori = document.querySelector('select[name="Kategori"]');
+    const pointField = document.querySelector('input[name="point"]');
+    const kategori = selectKategori.value;
+    const point = kategori === "Ringan" ? 10 : kategori === "Sedang" ? 15 : kategori === "Berat" ? 20 : 0;
+    pointField.value = point;
+  }
+
+  // Set point saat kategori berubah
+  document.querySelector('select[name="Kategori"]').addEventListener('change', setPointByKategori);
+
+  // Set point saat halaman pertama kali dimuat
+  window.addEventListener('DOMContentLoaded', setPointByKategori);
   </script>
 
 </body>
