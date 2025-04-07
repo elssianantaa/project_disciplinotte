@@ -73,7 +73,7 @@ Route::put('/admin/users/{user}', [userController::class, 'update'])->name('admi
 Route::delete('/admin/users/{user}', [userController::class, 'destroy'])->name('admin.users.destroy');
 
 
-
+ 
 
 
 

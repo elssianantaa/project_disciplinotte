@@ -4,9 +4,12 @@
 <div class="container">
     <h2>Tambah Siswa</h2>
 
-    <form action="{{ route('admin.siswa.store') }}" method="POST">
+    <form action="{{ route('admin.siswa.store') }}" method="POST" enctype="multipart/form-data">>
         @csrf
-
+        <div class="mb-3">
+            <label class="form-label">Foto Siswa</label>
+            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
+        </div>
         <div class="mb-3">
             <label class="form-label">NISN</label>
             <input type="text" name="nisn" class="form-control" required>

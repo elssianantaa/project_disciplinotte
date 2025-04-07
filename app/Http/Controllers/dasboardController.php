@@ -7,6 +7,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class dasboardController extends Controller
 {
@@ -54,14 +55,15 @@ class dasboardController extends Controller
     // }
 
     public function index()
-{
-    $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); // ✅ Tambah with()
-    return view('admin.siswa.index', compact('students'));
-}
+    {
+        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); // ✅ Tambah with()
+        return view('admin.siswa.index', compact('students'));
+    }
 
 
     //Buat nampilin di dasboard staff
-    public function show(Request $request){
+    public function show(Request $request)
+    {
 
         $query = Student::with(['kelas', 'catatanpelanggarans']);
 
@@ -86,30 +88,42 @@ class dasboardController extends Controller
     }
 
     public function store(Request $request)
-{
+    {
 
+        $request->validate([
+            'nisn' => 'required|unique:students,nisn',
+            'name' => 'required',
+            'kelas_id' => 'required',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'status' => 'required',
+            'password' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        // $fotoPath = null;
+        // if ($request->hasFile('foto')) {
+        //     $fotoPath = $request->file('foto')->store('foto', 'public');
+        // }
+        $fileName = null;
 
-    $request->validate([
-        'nisn' => 'required|unique:students,nisn',
-        'name' => 'required',
-        'kelas_id' => 'required',
-        'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-        'status' => 'required',
-        'password' => 'required',
-    ]);
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/foto_siswa', $fileName);
+        }
 
-    Student::create([
-        'nisn' => $request->nisn,
-        'name' => $request->name,
-        'kelas_id' => $request->kelas_id,
-        'jenis_kelamin' => $request->jenis_kelamin,
-        'status' => $request->status,
-        'password' => bcrypt($request->password),
-        'point' => 0
-    ]);
+        Student::create([
+            'nisn' => $request->nisn,
+            'name' => $request->name,
+            'kelas_id' => $request->kelas_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'status' => $request->status,
+            'password' => bcrypt($request->password),
+            'point' => 0,
+            'foto' => $fileName,
+        ]);
 
-    return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil ditambahkan!');
-}
+        return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil ditambahkan!');
+    }
 
 
     public function edit(Student $siswa)
@@ -125,13 +139,28 @@ class dasboardController extends Controller
             'kelas_id' => 'required|exists:kelas,id',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'status' => 'nullable|in:aktif,skorsing,dikeluarkan',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama
+            if ($siswa->foto && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
+                Storage::disk('public')->delete('foto_siswa/' . $siswa->foto);
+            }
+        
+            $file = $request->file('foto');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/foto_siswa', $fileName);
+        } else {
+            $fileName = $siswa->foto; // Tetap pakai yang lama
+        }
+
 
         $siswa->update([
             'name' => $request->name,
             'kelas_id' => $request->kelas_id,
             'jenis_kelamin' => $request->jenis_kelamin,
             'status' => $request->status ?? $siswa->status,
+            'foto' => $siswa->foto,
         ]);
 
         return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil diperbarui');

@@ -4,10 +4,18 @@
 <div class="container">
     <h2>Edit Siswa</h2>
     
-    <form action="{{ route('admin.siswa.update', $siswa->id) }}" method="POST">
+    <form action="{{ route('admin.siswa.update', $siswa->id) }}" method="POST" enctype="multipart/form-data">>
         @csrf
         @method('PUT')
 
+        <div class="mb-3">
+            <label for="form-label">Foto Siswa</label>
+            <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+            @if($siswa->foto)
+                <p><img src="{{ asset('storage/foto_siswa/' . $siswa->foto) }}" alt="Foto" width="100"></p>
+            @endif
+            
+        </div>
         <div class="mb-3">
             <label class="form-label">Nama</label>
             <input type="text" name="name" class="form-control" value="{{ $siswa->name }}" required>
