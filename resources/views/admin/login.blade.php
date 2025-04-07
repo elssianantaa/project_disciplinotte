@@ -17,7 +17,7 @@
             <div class="row justify-content-center align-items-center" style="margin-top: -310px;">
                 <div class="col-md-6">
                     <div class="card p-5 shadow" style="border-radius: 10px; background-color: white;">
-                        <h1 class="text-center text-primary" style="font-family: 'Trebuchet MS', sans-serif;">Disiplin Notes</h1>
+                        <h1 class="text-center text-primary" style="font-family: 'Trebuchet MS', sans-serif;">DiscipliNotes</h1>
                         <h2 class="text-center text-secondary" style="font-family: 'Trebuchet MS', sans-serif;">Sign Into Your Account</h2>
 
                         <p class="pt-3" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">

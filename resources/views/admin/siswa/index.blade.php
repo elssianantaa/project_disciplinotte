@@ -27,6 +27,7 @@
             @foreach($students as $siswa)
             <tr>
                 <td>{{ $loop->iteration }}
+                <td><img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="" style="width: 50px; height: 50px;"></td>
                 <td>{{ $siswa->nisn }}</td>
                 <td>{{ $siswa->name }}</td>
                 <td>{{ $siswa->kelas->nama_kelas }}</td>

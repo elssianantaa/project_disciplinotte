@@ -4,12 +4,11 @@
 <div class="container">
     <h2>Tambah Siswa</h2>
 
-    <form action="{{ route('admin.siswa.store') }}" method="POST">
+    <form action="{{ route('admin.siswa.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
-        <div class="col-md-6 mb-3">
-            <label for="foto" class="form-label">Foto Siswa</label>
-            <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+        <div class="mb-3">
+            <label class="form-label">Foto Siswa</label>
+            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
         </div>
 
         <div class="mb-3">
@@ -53,8 +52,8 @@
             <input type="password" name="password" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn btn-success">Tambah</button>
-        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary">Batal</a>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection
