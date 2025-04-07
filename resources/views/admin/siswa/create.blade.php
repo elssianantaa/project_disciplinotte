@@ -10,6 +10,7 @@
             <label class="form-label">Foto Siswa</label>
             <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">NISN</label>
             <input type="text" name="nisn" class="form-control" required>
@@ -51,8 +52,8 @@
             <input type="password" name="password" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn btn-success" style="width: 100px;">Tambah</button>
-        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary" style="width: 100px;">Batal</a>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

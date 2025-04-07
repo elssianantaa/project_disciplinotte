@@ -119,7 +119,6 @@ class dasboardController extends Controller
         //     $fotoPath = $request->file('foto')->store('foto', 'public');
         // }
         $fileName = null;
-
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $fileName = time() . '.' . $file->getClientOriginalExtension();

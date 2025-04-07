@@ -63,8 +63,8 @@
         <h4 class="my-2">@yield('title', 'Dashboard')</h4>
         <div class="dropdown">
             <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
-                <img src="/gambar/" alt="Admin" class="rounded-circle me-2" width="40" height="40">
-                <span class="fw-bold">Alya Cantik</span>
+                <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+                <span class="fw-bold">{{ Auth::user()->name }}</span>
                 <i class="fas fa-caret-down ms-2"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -76,16 +76,17 @@
 
     <nav class="sidebar">
         <div class="text-center mb-3">
-            <img src="/img/Logo smk-2.gif" alt="Logo Sekolah">
+            <img src="/gambar/images.png" alt="Logo Sekolah">
             <h5>ADMIN</h5>
         </div>
         <ul class="nav flex-column" id="sidebar">
-            <li class="nav-item"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="fas fa-user"></i> Users</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('admin/kelolastaff') }}"><i class="fas fa-user"></i>Kelola Staff</a></li>
+            <li class="nav-item"><a class="nav-link" href="admin/users/dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+            {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="fas fa-user"></i> Users</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/kelolastaff') }}"><i class="fas fa-user"></i>Kelola Staff</a></li> --}}
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/siswa') }}"><i class="fas fa-list"></i> Daftar Siswa</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('admin/pelanggaran') }}"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('admin/laporan') }}"><i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="fas fa-list"></i> Daftar Pengguna</a></li>
+            {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/pelanggaran') }}"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/laporan') }}"><i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li> --}}
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/pengaturan') }}"><i class="fas fa-cog"></i> Pengaturan</a></li>
         </ul>
     </nav>

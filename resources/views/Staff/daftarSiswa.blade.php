@@ -131,6 +131,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Foto</th>
                     <th>NIS</th>
                     <th>Nama Siswa</th>
                     <th>Kelas</th>
@@ -143,6 +144,9 @@
                 @foreach ($students as $key => $item)
                 <tr>
                     <td>{{$loop->iteration}}</td>
+                    <td>
+                        <img src="{{ asset('storage/foto_siswa/'.$item->foto) }}" alt="bukti" width="40" height="40">
+                    </td>
                     <td>{{$item->nisn}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
