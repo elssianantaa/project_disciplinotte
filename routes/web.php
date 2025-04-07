@@ -46,7 +46,7 @@ Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 //CRUD PELANGGARAN
 Route::get('/daftarPelanggaran', [dasboardStaffController::class, 'show'])->name('staff.laporan');
 Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
-Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran']);
+Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran'])->name('pelanggaran.store');
 
 //CRUDE TAMBAH SISWA
 // Route::get('/admin/dashboard', [DasboardController::class, 'index'])->name('admin.siswa.index');

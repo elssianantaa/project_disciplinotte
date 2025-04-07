@@ -114,7 +114,7 @@
   <div class="content">
     <h4 class="mb-4">Monitoring Pelanggaran</h4>
 
-    <form action="/pelanggaran/create/" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
 
       <!-- Preview Foto -->
@@ -147,6 +147,9 @@
         </select>
       </div>
   
+      <input type="hidden" name="student_id" value="{{ $student->id }}">
+      <input type="hidden" name="kelas_id" value="{{ $student->kelas->id }}">
+
       <div class="mb-3">
         <label for="point" class="form-label">Point Pelanggaran</label>
         <input type="number" class="form-control" id="point" name="point" readonly>
@@ -181,21 +184,19 @@
           <input type="file" class="form-control" id="foto" name="foto" accept="image/*" onchange="previewFoto(event)" style="max-width: 300px;">
         </div>
       </div>
-      
-      
+        </div>
     </div>
-  </div>
   
-  <!-- Baris Khusus untuk Staff -->
-  <div class="row mt-2">
-    <div class="col-md-6">
-      <div class="mb-2">
-        <label for="staff" class="form-label">Petugas (Staff)</label>
-        <input type="text" class="form-control" name="staff" value="{{ auth()->user()->name ?? 'Tidak diketahui' }}" readonly>
-        <input type="hidden" name="staff_id" value="{{ auth()->user()->id }}">
-      </div>
+    <!-- Baris Khusus untuk Staff -->
+    <div class="row mt-2">
+        <div class="col-md-6">
+        <div class="mb-2">
+            <label for="staff" class="form-label">Petugas (Staff)</label>
+            <input type="text" class="form-control" name="staff" value="{{ auth()->user()->name ?? 'Tidak diketahui' }}" readonly>
+            <input type="hidden" name="staff_id" value="{{ auth()->user()->id }}">
+        </div>
+        </div>
     </div>
-  </div>
   
 
       <!-- Tombol Aksi -->

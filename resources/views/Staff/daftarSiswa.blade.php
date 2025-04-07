@@ -145,7 +145,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>
-                        <img src="{{ asset('storage/foto_siswa/'.$item->foto) }}" alt="bukti" width="40" height="40">
+                        <img src="{{ asset('storage/foto_siswa/'.$item->foto) }}" width="40" height="40">
                     </td>
                     <td>{{$item->nisn}}</td>
                     <td>{{$item->name}}</td>
