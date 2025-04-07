@@ -63,7 +63,7 @@
         <h4 class="my-2">@yield('title', 'Dashboard')</h4>
         <div class="dropdown">
             <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
-                <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+                <img src="/gambar/" alt="Admin" class="rounded-circle me-2" width="40" height="40">
                 <span class="fw-bold">Alya Cantik</span>
                 <i class="fas fa-caret-down ms-2"></i>
             </button>

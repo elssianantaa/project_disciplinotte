@@ -130,7 +130,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="point" class="form-label">Point</label>
+                        <label for="point" class="form-label">Point Pelanggaran</label>
                         <input type="number" class="form-control" id="point" name="point" readonly>
                     </div>
 
@@ -155,7 +155,7 @@
 
                     <div class="mb-3">
                         <label for="tanggal" class="form-label">Tanggal</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal">
+                        <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}">
                     </div>
 
                     <div class="mb-3">

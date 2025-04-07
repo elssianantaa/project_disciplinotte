@@ -6,7 +6,8 @@
     <title>Sidebar Admin Staf</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+     <!-- Tambahkan link animasi di bagian <head> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         body {
             display: flex;
@@ -64,7 +65,7 @@
     <div class="dropdown">
         <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
             <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40">
-            <span class="fw-bold">Alya Cantik</span>
+            <span class="fw-bold"> {{ Auth::user()->name }}</span>
             <i class="fas fa-caret-down ms-2"></i>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
@@ -77,7 +78,7 @@
 
     <nav class="sidebar">
         <div class="text-center mb-3">
-            <img src="/img/Logo smk-2.gif" alt="Logo Sekolah">
+            <img src="/gambar/images.png" alt="Logo Sekolah">
             <h5>ADMIN STAF</h5>
         </div>
         <ul class="nav flex-column" id="sidebar">
@@ -115,9 +116,11 @@
     </nav>
 
     <main>
-        <div class="alert alert-info">
-            <h2 class="fw-bold">Welcome Alya Cantik</h2>
-            <p>All systems are running smoothly! You have <a href="#" class="text-danger">3 unread alerts!</a></p>
+        <div class="alert alert-info" background-color: #e3f2fd;>
+            <h2 class="fw-bold animate__animated animate__fadeInDown">Selamat Datang, {{ Auth::user()->name }}!</h2>
+            <p class="text-muted animate__animated animate__fadeInUp animate__delay-1s">
+                Ini adalah pusat kendali semua data pelanggaran siswa. Semangat terus ya, Admin terbaik! 🚀
+            </p>
         </div>
 
         <div class="row">

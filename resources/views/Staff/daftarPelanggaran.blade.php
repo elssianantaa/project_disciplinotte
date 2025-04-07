@@ -78,6 +78,18 @@
     </nav>
     <main class="flex-grow-1 p-4" style="margin-left: 260px;">
         <h2>Detail Daftar Pelanggaran Siswa</h2>
+
+        <form method="GET" action="{{ route('staff.laporan') }}" class="mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="date" name="tanggal" class="form-control" value="{{ request('tanggal') }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Tampilkan</button>
+                </div>
+            </div>
+        </form>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -88,7 +100,7 @@
                     <th>Wali Kelas</th>
                     <th>Pelanggaran</th>
                     <th>Kategori</th>
-                    <th>Point</th>
+                    <th>Point Pelanggaran</th>
                     <th>Deskripsi</th>
                     <th>Foto Bukti</th>
                     <th>Petugas</th>

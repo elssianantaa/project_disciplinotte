@@ -21,7 +21,7 @@
                         <h2 class="text-center text-secondary" style="font-family: 'Trebuchet MS', sans-serif;">Sign Into Your Account</h2>
 
                         <p class="pt-3" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
-                            Silakan masuk untuk memantau, memperbarui, dan mengelola laporan kegiatan Anda.
+                            Silakan masuk untuk memantau, memperbarui, dan mengelola data pelanggaran siswa
                         </p>
 
                         <form action="/auth" method="post" class="pt-2">

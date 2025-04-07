@@ -44,7 +44,7 @@ Route::post('/register/create', [userController::class, 'addRe']);
 Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
 //CRUD PELANGGARAN
-Route::get('/daftarPelanggaran', [dasboardStaffController::class, 'show']);
+Route::get('/daftarPelanggaran', [dasboardStaffController::class, 'show'])->name('staff.laporan');
 Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
 Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran']);
 

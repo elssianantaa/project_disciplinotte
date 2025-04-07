@@ -7,6 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -37,16 +42,40 @@
             background: #007bff;
             color: white;
         }
-        .content {
-            margin-left: 270px;
+        main {
+            flex-grow: 1;
+            margin-left: 260px;
             padding: 20px;
+        }
+        footer {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-left: 260px;
         }
     </style>
 </head>
 <body>
+    <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
+        <h4 class="my-2">Tambah Pelanggaran Siswa</h4>
+        <div class="dropdown">
+            <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
+                {{-- <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
+                <span class="fw-bold">{{ Auth::user()->name }}</span>
+                <i class="fas fa-caret-down ms-2"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
+                <li><a class="dropdown-item text-danger" href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <nav class="sidebar">
         <div class="text-center mb-3">
-            <img src="/img/Logo smk-2.gif" alt="Logo Sekolah">
+            <img src="/gambar/images.png" alt="Logo Sekolah">
             <h5>ADMIN STAF</h5>
         </div>
         <ul class="nav flex-column" id="sidebar">
@@ -77,7 +106,27 @@
         </ul>
     </nav>
     <main class="flex-grow-1 p-4" style="margin-left: 260px;">
-        <h2>Daftar Pelanggaran Siswa</h2>
+        {{-- <h2>Daftar Pelanggaran Siswa</h2> --}}
+
+        <form method="GET" action="" class="row mb-3">
+            <div class="col-md-4">
+                <input id="search-nama" type="text" name="nama" class="form-control" placeholder="Cari Nama Siswa" value="{{ request('name') }}">
+            </div>
+            <div class="col-md-4">
+                <select name="kelas_id" class="form-select">
+                    <option value="">Pilih Kelas</option>
+                    @foreach ($kelasList as $kelas)
+                        <option value="{{ $kelas->id }}" {{ request('kelas_id') == $kelas->id ? 'selected' : '' }}>
+                            {{ $kelas->nama_kelas }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </form>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -86,7 +135,7 @@
                     <th>Nama Siswa</th>
                     <th>Kelas</th>
                     <th>Status</th>
-                    <th>Point</th>
+                    <th>Point Pelanggaran</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -109,6 +158,12 @@
             </tbody>
         </table>
     </main>
+
+    <footer>
+        <p>&copy; 2025. Admin Staf SMK - All Rights Reserved.</p>
+        <p>Hand-crafted & made with ❤</p>
+    </footer>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let sidebarLinks = document.querySelectorAll("#sidebar .nav-link");

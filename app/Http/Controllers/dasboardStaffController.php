@@ -12,16 +12,26 @@ class dasboardStaffController extends Controller
 {
     //
 
-    public function show(){
-        // $data['pelanggarans'] = Pelanggaran::all();
-        $data['catatanpelanggaran'] = CatatanPelanggaran::all();
-        return view('Staff.daftarPelanggaran', $data);
+    public function show(Request $request){
+        $tanggal = $request->tanggal;
+
+    $catatanpelanggaran = [];
+
+    if ($tanggal) {
+        $catatanpelanggaran = CatatanPelanggaran::with(['student', 'kelas', 'pelanggaran'])
+            ->whereDate('tanggal', $tanggal)
+            ->get();
     }
+
+    return view('Staff.daftarPelanggaran', compact('catatanpelanggaran'));
+    }
+
     public function createPelanggaran($id){
         $pelanggarans = Pelanggaran::all();
         $student = Student::with('kelas', 'catatanpelanggarans')->findOrFail($id);
         return view('Staff.pelanggaran', compact('student', 'pelanggarans'));
     }
+
 
     public function addPelanggaran(Request $request){
         // $validateData = $request->validate([

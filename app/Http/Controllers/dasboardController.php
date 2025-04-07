@@ -18,7 +18,7 @@ class dasboardController extends Controller
     public function authentication(Request $request)
     {
         $validateData = $request->validate([
-            'email' => ['required', 'email'],                    
+            'email' => ['required', 'email'],
             'password' => 'required'
         ]);
 
@@ -27,7 +27,7 @@ class dasboardController extends Controller
 
             if ($user->role === 'admin') {
                 return redirect('/dashboard');
-            } elseif ($user->role === 'guru') {
+            } elseif ($user->role === 'staff') {
                 return redirect('/dashboardStaff');
             } elseif ($user->role === 'student') {
                 return redirect()->route('home');
@@ -61,9 +61,22 @@ class dasboardController extends Controller
 
 
     //Buat nampilin di dasboard staff
-    public function show(){
-        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); // ✅ Pastikan pakai with()
-        return view('Staff.daftarSiswa', compact('students'));
+    public function show(Request $request){
+
+        $query = Student::with(['kelas', 'catatanpelanggarans']);
+
+        if ($request->nama) {
+            $query->where('name', 'like', '%' . $request->nama . '%');
+        }
+
+        if ($request->kelas_id) {
+            $query->where('kelas_id', $request->kelas_id);
+        }
+
+        $students = $query->get();
+        $kelasList = Kelas::all(); // buat dropdown kelas
+
+        return view('Staff.daftarSiswa', compact('students', 'kelasList'));
     }
 
     public function create()
