@@ -89,6 +89,7 @@ class dasboardController extends Controller
 {
 
 
+
     $request->validate([
         'nisn' => 'required|unique:students,nisn',
         'name' => 'required',
@@ -105,7 +106,7 @@ class dasboardController extends Controller
         'jenis_kelamin' => $request->jenis_kelamin,
         'status' => $request->status,
         'password' => bcrypt($request->password),
-        'point' => 0
+        'point' => 0,
     ]);
 
     return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil ditambahkan!');

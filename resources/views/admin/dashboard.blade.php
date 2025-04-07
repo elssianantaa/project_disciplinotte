@@ -185,9 +185,11 @@
 @section('title', 'Dashboard Admin')
 
 @section('content')
-<div class="alert alert-info">
-    <h2 class="fw-bold">Welcome To The Disciplinote</h2>
-    <p>All systems are running in Admin <a href="#" class="text-danger">3 unread alerts!</a></p>
+<div class="alert alert-info" background-color: #e3f2fd;>
+    <h2 class="fw-bold animate__animated animate__fadeInDown">Selamat Datang, {{ Auth::user()->name }}!</h2>
+    <p class="text-muted animate__animated animate__fadeInUp animate__delay-1s">
+        Silakan kelola data siswa, dan pengguna, dengan efisien dan akurat.
+    </p>
 </div>
 
 <div class="row">
@@ -203,13 +205,13 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body text-center">
-                <h5 class="card-title">Pelanggaran</h5>
-                <p class="card-text">Catatan pelanggaran siswa.</p>
-                <a href="{{ url('admin/pelanggaran') }}" class="btn btn-warning">Lihat Pelanggaran</a>
+                <h5 class="card-title">Daftar Pengguna</h5>
+                <p class="card-text">Lihat dan kelola data pengguna.</p>
+                <a href="{{ url('admin/users') }}" class="btn btn-warning">Lihat Data</a>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="card-title">Laporan Pelanggaran</h5>
@@ -217,6 +219,6 @@
                 <a href="{{ url('admin/laporan') }}" class="btn btn-danger">Buat Laporan</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

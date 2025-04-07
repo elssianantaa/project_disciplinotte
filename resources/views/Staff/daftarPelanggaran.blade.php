@@ -6,7 +6,39 @@
     <title>Admin Staf</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
+        .table-container {
+    max-width: 100%;         /* Biar nggak melebar banget */
+    overflow-x: auto;        /* Scroll ke samping kalau perlu */
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.table th,
+.table td {
+    white-space: nowrap;     /* Biar isi nggak pindah ke baris bawah */
+    font-size: 14px;         /* Perkecil font biar hemat tempat */
+    vertical-align: middle;
+}
+.table-container {
+    max-width: 100%;         /* Biar nggak melebar banget */
+    overflow-x: auto;        /* Scroll ke samping kalau perlu */
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.table th,
+.table td {
+    white-space: nowrap;     /* Biar isi nggak pindah ke baris bawah */
+    font-size: 14px;         /* Perkecil font biar hemat tempat */
+    vertical-align: middle;
+}
+
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -90,44 +122,51 @@
             </div>
         </form>
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>NIS</th>
-                    <th>Nama Siswa</th>
-                    <th>Kelas</th>
-                    <th>Wali Kelas</th>
-                    <th>Pelanggaran</th>
-                    <th>Kategori</th>
-                    <th>Point Pelanggaran</th>
-                    <th>Deskripsi</th>
-                    <th>Foto Bukti</th>
-                    <th>Petugas</th>
-                    <th>Tanggal</th>
-                    <th>Periode</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($catatanpelanggaran as $key => $item)
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$item->student->nisn}}</td>
-                    <td>{{$item->student->name}}</td>
-                    <td>{{$item->kelas->nama_kelas}}</td>
-                    <td>{{$item->kelas->wali_kelas}}</td>
-                    <td>{{$item->pelanggaran->nama_pelanggaran}}</td>
-                    <td>{{$item->Kategori}}</td>
-                    <td>{{$item->point}}</td>
-                    <td>{{$item->deskripsi}}</td>
-                    <td><img src="{{ asset('storage/foto_pelanggaran/'.$item->foto) }}" alt="" style="width: 50px; height: 50px;"></td>
-                    <td>{{ auth()->user()->name }}</td>
-                    <td>{{$item->tanggal}}</td>
-                    <td>{{$item->periode}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>No</th>
+                        <th>NIS</th>
+                        <th>Nama Siswa</th>
+                        <th>Kelas</th>
+                        <th>Wali Kelas</th>
+                        <th>Pelanggaran</th>
+                        <th>Kategori</th>
+                        <th>Point Pelanggaran</th>
+                        <th>Deskripsi</th>
+                        <th>Foto Bukti</th>
+                        <th>Petugas</th>
+                        <th>Tanggal</th>
+                        <th>Periode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($catatanpelanggaran as $key => $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->student->nisn }}</td>
+                        <td>{{ $item->student->name }}</td>
+                        <td>{{ $item->kelas->nama_kelas }}</td>
+                        <td>{{ $item->kelas->wali_kelas }}</td>
+                        <td>{{ $item->pelanggaran->nama_pelanggaran }}</td>
+                        <td>{{ $item->Kategori }}</td>
+                        <td>{{ $item->point }}</td>
+                        <td>{{ $item->deskripsi }}</td>
+                        <td>
+                            <img src="{{ asset('storage/foto_pelanggaran/'.$item->foto) }}" alt="bukti" width="40" height="40">
+                        </td>
+                        <td>{{ auth()->user()->name }}</td>
+                        <td>{{ $item->tanggal }}</td>
+                        <td>{{ $item->periode }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
+        
+        
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

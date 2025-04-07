@@ -7,6 +7,11 @@
     <form action="{{ route('admin.siswa.store') }}" method="POST">
         @csrf
 
+        <div class="col-md-6 mb-3">
+            <label for="foto" class="form-label">Foto Siswa</label>
+            <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+        </div>
+
         <div class="mb-3">
             <label class="form-label">NISN</label>
             <input type="text" name="nisn" class="form-control" required>

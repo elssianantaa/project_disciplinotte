@@ -87,11 +87,11 @@
                     <i class="fas fa-home"></i> Dashboard
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="user.html">
                     <i class="fas fa-user"></i> Users
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="daftarsiswa.html">
                     <i class="fas fa-list"></i> Daftar Siswa
@@ -102,11 +102,7 @@
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-file-alt"></i> Laporan Pelanggaran
-                </a>
-            </li>
+          
             <li class="nav-item">
                 <a class="nav-link" href="pengaturan.html">
                     <i class="fas fa-cog"></i> Pengaturan
@@ -142,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Laporan Pelanggaran</h5>
@@ -150,7 +146,7 @@
                         <a href="laporan.html" class="btn btn-danger">Lihat Laporan</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </main>
 

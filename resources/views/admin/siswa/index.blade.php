@@ -13,6 +13,7 @@
         <thead>
             <tr>
                 <th>NO</th>
+                <th>Foto</th>
                 <th>NISN</th>
                 <th>Nama</th>
                 <th>Kelas</th>
