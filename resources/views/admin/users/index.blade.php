@@ -1,13 +1,24 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mt-4">
-    <h5 style="margin-top: 5%">Manage Users</h5>
-    <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Tambah User</a>
+<h4 style="margin-top: 3%">Manage Users</h4>
+
+<div class="row mb-3 align-items-center">
+    <div class="col-md-4">
+        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Tambah User</a>
+    </div>
+    <div class="col-md-4"></div> 
+    <div class="col-md-4">
+        <div class="form-label">
+            Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
+        </div>
+    </div>
+</div>
+
 
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr style="text-align: center">
                 <th>No</th>
                 <th>Nama</th>
                 <th>Email</th>
@@ -20,18 +31,18 @@
         <tbody>
             @foreach ($users as $key => $user)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td style="text-align: center">{{ $key + 1 }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->nohp }}</td>
                 <td>{{ $user->address }}</td>
-                <td>
-                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <td style="text-align: center">
+                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm" style="width: 70px;" onclick="return confirm('Yakin ingin menghapus siswa ini?')">Hapus</button>
                     </form>
                 </td>
             </tr>

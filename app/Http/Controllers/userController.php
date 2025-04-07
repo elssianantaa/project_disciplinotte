@@ -17,7 +17,8 @@ class userController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.users.index', compact('users'));
+        $totalSiswa = $users->count();
+        return view('admin.users.index', compact('users', 'totalSiswa'));
     }
 
     public function create()
