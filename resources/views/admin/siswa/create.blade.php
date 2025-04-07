@@ -4,7 +4,7 @@
 <div class="container">
     <h2>Tambah Siswa</h2>
 
-    <form action="{{ route('admin.siswa.store') }}" method="POST" enctype="multipart/form-data">>
+    <form action="{{ route('admin.siswa.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label class="form-label">Foto Siswa</label>
@@ -51,8 +51,8 @@
             <input type="password" name="password" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn btn-success">Tambah</button>
-        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary">Batal</a>
+        <button type="submit" class="btn btn-success" style="width: 100px;">Tambah</button>
+        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary" style="width: 100px;">Batal</a>
     </form>
 </div>
 @endsection

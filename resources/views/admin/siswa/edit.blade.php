@@ -4,7 +4,7 @@
 <div class="container">
     <h2>Edit Siswa</h2>
     
-    <form action="{{ route('admin.siswa.update', $siswa->id) }}" method="POST" enctype="multipart/form-data">>
+    <form action="{{ route('admin.siswa.update', $siswa->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -47,8 +47,9 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success">Update</button>
-        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary">Batal</a>
+        <button type="submit" class="btn btn-success" style="width: 100px;">Update</button>
+        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary" style="width: 100px;">Batal</a>
+
     </form>
 </div>
 @endsection
