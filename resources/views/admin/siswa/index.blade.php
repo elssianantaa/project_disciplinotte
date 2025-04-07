@@ -3,15 +3,50 @@
 @section('content')
 <div class="container">
     <h2>Daftar Siswa</h2>
-    <a href="{{ route('admin.siswa.create') }}" class="btn btn-primary mb-3">Tambah Siswa</a>
+
+    {{-- Form Pencarian --}}
+    <form action="{{ route('admin.siswa.index') }}" method="GET" class="mb-4">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-4">
+                <label for="kelas_id" class="form-label">Pilih Kelas:</label>
+                <select name="kelas_id" id="kelas_id" class="form-select" onchange="this.form.submit()">
+                    <option value="">-- Semua Kelas --</option>
+                    @foreach($kelasList as $kelas)
+                        <option value="{{ $kelas->id }}" {{ request('kelas_id') == $kelas->id ? 'selected' : '' }}>
+                            {{ $kelas->nama_kelas }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
     
+            @if(request('kelas_id')) {{-- Munculkan hanya jika kelas dipilih --}}
+            <div class="col-md-4">
+                <label for="nama" class="form-label">Cari Nama Siswa:</label>
+                <input type="text" name="nama" id="nama" value="{{ request('nama') }}" class="form-control" placeholder="Masukkan nama">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+            @endif
+            <div class="col-md-2">
+                <div class="form-label d-block">
+                    Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+  
+
+    <a href="{{ route('admin.siswa.create') }}" class="btn btn-primary mb-3">Tambah Siswa</a>
+
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    
+
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr style="text-align: center">
                 <th>NO</th>
                 <th>Foto</th>
                 <th>NISN</th>
@@ -24,26 +59,31 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($students as $siswa)
+            @forelse($students as $siswa)
             <tr>
-                <td>{{ $loop->iteration }}
-                <td><img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="" style="width: 50px; height: 50px;"></td>
+                <td style="text-align: center">{{ $loop->iteration }}</td>
+                <td><img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="" style="width: 90px; height: 100px;"></td>
                 <td>{{ $siswa->nisn }}</td>
                 <td>{{ $siswa->name }}</td>
                 <td>{{ $siswa->kelas->nama_kelas }}</td>
-                <td>{{ $siswa->jenis_kelamin == 'Laki-laki' ? 'Laki-laki' : 'Perempuan' }}</td>
+                <td>{{ $siswa->jenis_kelamin }}</td>
                 <td>{{ ucfirst($siswa->status) }}</td>
                 <td>{{ $siswa->point ?? '0' }}</td>
-                <td>
-                    <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <td style="text-align: center">
+                    <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
                     <form action="{{ route('admin.siswa.destroy', $siswa->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus siswa ini?')">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm" style="width: 70px;" onclick="return confirm('Yakin ingin menghapus siswa ini?')">Hapus</button>
                     </form>
                 </td>
+                
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="9" class="text-center">Data tidak ditemukan.</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

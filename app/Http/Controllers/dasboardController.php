@@ -54,10 +54,25 @@ class dasboardController extends Controller
     //     return view('admin.siswa.index', compact('students'));
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); // ✅ Tambah with()
-        return view('admin.siswa.index', compact('students'));
+           
+        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); 
+        $kelasList = Kelas::all(); // untuk dropdown
+        $query = Student::with('kelas');
+    
+        if ($request->kelas_id) {
+            $query->where('kelas_id', $request->kelas_id);
+        }
+    
+        if ($request->nama) {
+            $query->where('name', 'like', '%' . $request->nama . '%');
+        }
+    
+        $students = $query->get();
+        $totalSiswa = $students->count();
+    
+        return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList'));
     }
 
 
@@ -159,7 +174,7 @@ class dasboardController extends Controller
             'kelas_id' => $request->kelas_id,
             'jenis_kelamin' => $request->jenis_kelamin,
             'status' => $request->status ?? $siswa->status,
-            'foto' => $siswa->foto,
+            'foto' => $fileName,
         ]);
 
         return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil diperbarui');

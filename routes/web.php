@@ -40,6 +40,7 @@ Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
 
+
 //CRUD STUDENTS
 Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
