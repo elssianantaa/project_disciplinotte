@@ -11,7 +11,7 @@
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f5f5f5;
-      overflow-x: hidden;
+      overflow-x: hidden;       
     }
 
     .navbar-top {
@@ -213,16 +213,12 @@
     <!-- Form Input -->
     <div class="row g-4">
       <div class="col-md-6">
-        <label class="form-label">Pilih Pelanggaran</label>
-        <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
-            <option disabled selected>Pilih Pelanggaran</option>
-            @foreach($pelanggarans as $p)
-                <option value="{{ $p['id'] }}"
-                        data-kategori="{{ $p['kategori'] }}"
-                        data-point="{{ $p['point'] }}">
-                    {{ $p['nama_pelanggaran'] }}
-                </option>
-            @endforeach
+        <label class="form-label">Nama Pelanggaran</label>
+        <select class="form-select" name="pelanggaran_id" required>
+          <option value="" disabled selected>Pilih Pelanggaran</option>
+          @foreach ($pelanggarans as $pelanggaran)
+            <option value="{{ $pelanggaran->id }}">{{ $pelanggaran->nama_pelanggaran }}</option>
+          @endforeach
         </select>
 
         <input type="hidden" name="student_id" value="{{ $student->id }}">
