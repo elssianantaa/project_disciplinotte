@@ -39,6 +39,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Kelas::create([
+            'nama_kelas' => 'X DKV 1',
+            'wali_kelas' => 'Ibu Vera',
+            'Jurusan' => 'DKV'
+        ]);
+
+        Kelas::create([
             'nama_kelas' => 'XI RPL 1',
             'wali_kelas' => 'Bapak Fahmi',
             'Jurusan' => 'RPL'
@@ -48,6 +54,18 @@ class DatabaseSeeder extends Seeder
             'nama_kelas' => 'XI RPL 2',
             'wali_kelas' => 'Ibu Feby',
             'Jurusan' => 'RPL'
+        ]);
+
+        Kelas::create([
+            'nama_kelas' => 'XII TO 1',
+            'wali_kelas' => 'Ibu Ajeng',
+            'Jurusan' => 'Teknik Otomotif'
+        ]);
+
+        Kelas::create([
+            'nama_kelas' => 'XII TO 2',
+            'wali_kelas' => 'Bapak Ridwan',
+            'Jurusan' => 'Teknik Otomotif'
         ]);
 
         Student::create([

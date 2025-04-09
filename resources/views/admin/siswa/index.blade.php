@@ -44,9 +44,10 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
+   <div class="table-responsive">
+    <table class="table table-bordered align-middle">
         <thead>
-            <tr style="text-align: center">
+            <tr class="text-center">
                 <th>NO</th>
                 <th>Foto</th>
                 <th>NISN</th>
@@ -61,15 +62,17 @@
         <tbody>
             @forelse($students as $siswa)
             <tr>
-                <td style="text-align: center">{{ $loop->iteration }}</td>
-                <td><img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="" style="width: 90px; height: 100px;"></td>
+                <td class="text-center">{{ $loop->iteration }}</td>
+                <td class="text-center">
+                    <img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="Foto Siswa" class="foto-siswa">
+                </td>
                 <td>{{ $siswa->nisn }}</td>
                 <td>{{ $siswa->name }}</td>
                 <td>{{ $siswa->kelas->nama_kelas }}</td>
                 <td>{{ $siswa->jenis_kelamin }}</td>
                 <td>{{ ucfirst($siswa->status) }}</td>
                 <td>{{ $siswa->point ?? '0' }}</td>
-                <td style="text-align: center">
+                <td class="text-center">
                     <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
                     <form action="{{ route('admin.siswa.destroy', $siswa->id) }}" method="POST" class="d-inline">
                         @csrf
@@ -77,7 +80,6 @@
                         <button type="submit" class="btn btn-danger btn-sm" style="width: 70px;" onclick="return confirm('Yakin ingin menghapus siswa ini?')">Hapus</button>
                     </form>
                 </td>
-                
             </tr>
             @empty
             <tr>
@@ -87,4 +89,5 @@
         </tbody>
     </table>
 </div>
+
 @endsection

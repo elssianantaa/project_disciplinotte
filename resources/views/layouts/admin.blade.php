@@ -56,6 +56,44 @@
             border-top: 1px solid #ddd;
             margin-left: 260px;
         }
+        .table-responsive {
+        max-height: 460px; /* Gedein tinggi scroll area */
+        overflow-y: auto;
+        position: relative;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f8f9fa;
+        z-index: 10;
+    }
+
+    table th, table td {
+        font-size: 16px; /* Lebihin ukuran font */
+        vertical-align: middle;
+    }
+
+    img.foto-siswa {
+        width: 90px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+     
+    /* .table-responsive {
+        max-height: 400px; 
+        overflow-y: auto;
+        position: relative;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f8f9fa; 
+        z-index: 10;
+    } */
+
     </style>
 </head>
 <body>
@@ -97,7 +135,6 @@
 
     <footer>
         <p>&copy; 2025. Admin Staf SMK - All Rights Reserved.</p>
-        <p>Hand-crafted & made with ❤</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
