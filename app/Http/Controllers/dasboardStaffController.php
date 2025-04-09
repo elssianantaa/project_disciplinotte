@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\Pelanggaran;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class dasboardStaffController extends Controller
 {
@@ -27,7 +28,8 @@ class dasboardStaffController extends Controller
     }
 
     public function createPelanggaran($id){
-        $pelanggarans = Pelanggaran::all();
+        $response = Http::get('http://localhost:8000/api/pelanggaran');
+        $pelanggarans = $response->json();
         $student = Student::with('kelas', 'catatanpelanggarans')->findOrFail($id);
         return view('Staff.pelanggaran', compact('student', 'pelanggarans'));
     }

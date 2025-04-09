@@ -183,7 +183,7 @@
         </select>
       </div> --}}
 
-      <div class="mb-3">
+      {{-- <div class="mb-3">
         <label for="pelanggaran_id" class="form-label">Nama Pelanggaran</label>
         <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
             <option disabled selected>Pilih Pelanggaran</option>
@@ -195,9 +195,19 @@
                 </option>
             @endforeach
         </select>
-    </div>
-      
-  
+    </div> --}}
+
+    <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
+        <option disabled selected>Pilih Pelanggaran</option>
+        @foreach($pelanggarans as $p)
+            <option value="{{ $p['id'] }}"
+                    data-kategori="{{ $p['kategori'] }}"
+                    data-point="{{ $p['point'] }}">
+                {{ $p['nama_pelanggaran'] }}
+            </option>
+        @endforeach
+    </select>
+    
       <input type="hidden" name="student_id" value="{{ $student->id }}">
       <input type="hidden" name="kelas_id" value="{{ $student->kelas->id }}">
 
