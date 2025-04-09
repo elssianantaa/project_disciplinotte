@@ -28,7 +28,6 @@ class dasboardStaffController extends Controller
     }
 
     public function createPelanggaran($id){
-
         $pelanggarans = Pelanggaran::select('id', 'nama_pelanggaran', 'kategori', 'point')->get();
         // $pelanggarans = $response->json();
         $student = Student::with('kelas', 'catatanpelanggarans')->findOrFail($id);
@@ -37,27 +36,14 @@ class dasboardStaffController extends Controller
 
 
     public function addPelanggaran(Request $request){
-        // $validateData = $request->validate([
-        //     'student_id' => ['required', 'exists:students,id'],
-        //     'kelas_id' => ['required', 'exists:kelas,id'],
-        //     'nama_pelanggaran' => ['required', 'string', 'max:255'],
-        //     'Kategori' => ['required', 'in:Ringan,Sedang,Berat'],
-        //     'point' => ['required', 'numeric'],
-        //     'deskripsi' => ['required', 'string', 'max:255'],
-        //     'foto' => ['nullable', 'image', 'mimes:jpg,jpeg,png'],
-        //     'staff_id' => ['required', 'exists:staff,id'],
-        // ]);
-
-
-        // $kategori = $request->Kategori;
-
-        // // Tentukan poin berdasarkan kategori
-        // $point = match ($kategori) {
-        //     'Ringan' => 10,
-        //     'Sedang' => 15,
-        //     'Berat' => 20,
-        //     default => 0, // Jika kategori tidak valid
-        // };
+        $validateData = $request->validate([
+        'student_id'      => ['required', 'exists:students,id'],
+        'kelas_id'        => ['required', 'exists:kelas,id'],
+        'pelanggaran_id'  => ['required', 'exists:pelanggarans,id'],
+        'deskripsi'       => ['required', 'string', 'max:255'],
+        'foto'            => ['nullable', 'image', 'mimes:jpg,jpeg,png'],
+        'tanggal'         => ['required', 'date'],
+        ]);
 
         $fileName = null;
 
@@ -83,7 +69,7 @@ class dasboardStaffController extends Controller
         // Ambil data kelas berdasarkan kelas_id
          $kelas = Kelas::findOrFail($request->kelas_id);
 
-         $pelanggaran = CatatanPelanggaran::create([
+         CatatanPelanggaran::create([
             'student_id'      => $request->student_id,
             'kelas_id'        => $request->kelas_id,
             'pelanggaran_id'  => $request->pelanggaran_id, // Ambil ID pelanggaran, bukan nama atau kategori

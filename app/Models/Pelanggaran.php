@@ -35,6 +35,4 @@ class Pelanggaran extends Model
         return $this->hasMany(CatatanPelanggaran::class, 'pelanggaran_id', 'id');
     }
 
-
-
 }

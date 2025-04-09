@@ -99,7 +99,7 @@
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
-          
+
             <li class="nav-item">
                 <a class="nav-link" href="pengaturan.html">
                     <i class="fas fa-cog"></i> Pengaturan
@@ -153,8 +153,10 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
                     <td>{{$item->status}}</td>
-                    <td>{{$item->catatanpelanggarans->sum('point') }}</td>
                     <td>
+                        {{ $item->catatanpelanggarans->sum(fn($cp) => $cp->pelanggaran->point ?? 0) }}
+                    </td>
+                                        <td>
                         <a href="/pelanggaran/{{$item->id}}" class="btn btn-danger btn-sm">
                             Tambah Pelanggaran
                         </a>
@@ -169,7 +171,7 @@
         <p>&copy; 2025. Admin Staf SMK - All Rights Reserved.</p>
         <p>Hand-crafted & made with ❤</p>
     </footer>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let sidebarLinks = document.querySelectorAll("#sidebar .nav-link");
