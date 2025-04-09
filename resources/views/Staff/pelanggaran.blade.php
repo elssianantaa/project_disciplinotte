@@ -10,19 +10,16 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
       background-color: #f5f5f5;
+      overflow-x: hidden;
     }
 
     .navbar-top {
       background: #fff;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       padding: 10px 20px;
-      z-index: 1000;
       margin-left: 250px;
+      z-index: 1000;
     }
 
     .sidebar {
@@ -45,14 +42,12 @@
       text-align: center;
       margin-top: 10px;
       color: #007bff;
-      font-weight: bold;
       font-size: 16px;
     }
 
     .sidebar .nav-link {
       color: #333;
       font-weight: 500;
-      border-radius: 5px;
       padding: 8px;
       font-size: 14px;
     }
@@ -61,13 +56,13 @@
     .sidebar .nav-link.active {
       background: #007bff;
       color: white;
+      border-radius: 5px;
     }
 
     .content {
       margin-left: 250px;
       padding: 30px;
       max-width: 900px;
-      padding-bottom: 130px;
     }
 
     .card-siswa {
@@ -93,21 +88,11 @@
 
     .form-control, .form-select {
       font-size: 14px;
-      padding: 6px 10px;
     }
 
     label {
       font-size: 13px;
       font-weight: 500;
-    }
-
-    button {
-      font-size: 14px;
-      border-radius: 8px;
-    }
-
-    button:hover {
-      background-color: #0056b3;
     }
 
     .mobile-nav {
@@ -119,13 +104,14 @@
         display: none;
       }
 
-      .navbar-top, .content {
+      .navbar-top,
+      .content {
         margin-left: 0;
         padding: 20px;
       }
 
-      .content {
-        padding-bottom: 150px;
+      form {
+        margin-bottom: 90px; /* Biar ga ketutupan nav bawah */
       }
 
       .mobile-nav {
@@ -161,7 +147,6 @@
       .card-siswa {
         flex-direction: column;
         align-items: flex-start;
-        text-align: left;
       }
 
       .card-siswa img {
@@ -225,46 +210,23 @@
       </div>
     </div>
 
-    <!-- Form -->
+    <!-- Form Input -->
     <div class="row g-4">
       <div class="col-md-6">
-        {{-- <label class="form-label">Nama Pelanggaran</label>
-        <select class="form-select" name="pelanggaran_id" required>
-          <option value="" disabled selected>Pilih Pelanggaran</option>
-          @foreach ($pelanggarans as $pelanggaran)
-            <option value="{{ $pelanggaran->id }}">{{ $pelanggaran->nama_pelanggaran }}</option>
-          @endforeach
-        </select> --}}
-        <input type="hidden" class="form-control" id="point" readonly>
-        <input type="hidden" class="form-control" id="kategori" readonly>
-
-      {{-- <div class="mb-3">
-        <label for="pelanggaran_id" class="form-label">Nama Pelanggaran</label>
+        <label class="form-label">Pilih Pelanggaran</label>
         <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
             <option disabled selected>Pilih Pelanggaran</option>
             @foreach($pelanggarans as $p)
-                <option value="{{ $p->id }}"
-                        data-kategori="{{ $p->kategori }}"
-                        data-point="{{ $p->point }}">
-                    {{ $p->nama_pelanggaran }}
+                <option value="{{ $p['id'] }}"
+                        data-kategori="{{ $p['kategori'] }}"
+                        data-point="{{ $p['point'] }}">
+                    {{ $p['nama_pelanggaran'] }}
                 </option>
             @endforeach
         </select>
-    </div> --}}
 
-    <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
-        <option disabled selected>Pilih Pelanggaran</option>
-        @foreach($pelanggarans as $p)
-            <option value="{{ $p['id'] }}"
-                    data-kategori="{{ $p['kategori'] }}"
-                    data-point="{{ $p['point'] }}">
-                {{ $p['nama_pelanggaran'] }}
-            </option>
-        @endforeach
-    </select>
-    
-      <input type="hidden" name="student_id" value="{{ $student->id }}">
-      <input type="hidden" name="kelas_id" value="{{ $student->kelas->id }}">
+        <input type="hidden" name="student_id" value="{{ $student->id }}">
+        <input type="hidden" name="kelas_id" value="{{ $student->kelas->id }}">
 
         <label class="form-label mt-3">Tanggal</label>
         <input type="date" class="form-control" name="tanggal" value="{{ date('Y-m-d') }}">
@@ -288,9 +250,10 @@
       </div>
     </div>
 
+    <!-- Tombol -->
     <div class="mt-4 d-flex gap-3">
-      <button type="submit" class="btn btn-primary px-4">Simpan</button>
-      <button type="button" class="btn btn-secondary px-4">Cancel</button>
+      <button type="submit" class="btn btn-primary">Simpan</button>
+      <a href="/daftarPelanggaran" class="btn btn-secondary">Cancel</a>
     </div>
   </form>
 </div>
