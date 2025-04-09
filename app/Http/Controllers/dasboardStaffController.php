@@ -82,6 +82,24 @@ class dasboardStaffController extends Controller
             'periode'         => $periode, // Simpan periode sebagai "Semester X Tahun"
         ]);
 
+        //status otomatis
+        $totalPoint = $student->catatanpelanggarans->sum(function ($cp) {
+            return $cp->pelanggaran->point ?? 0;
+        });
+
+        // Tentukan status baru berdasarkan total point
+        $statusBaru = 'aktif';
+        if ($totalPoint >= 40) {
+            $statusBaru = 'dikeluarkan';
+        } elseif ($totalPoint >= 30) {
+            $statusBaru = 'skorsing';
+        }
+
+        // Update status siswa
+        $student->update([
+            'status' => $statusBaru
+        ]);
+
         $student = Student::findOrFail($request->student_id);
         // $student->increment('point', $point);
 
