@@ -47,9 +47,10 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success" style="width: 100px;">Update</button>
+        <button type="submit" class="btn btn-primary" style="width: 100px;">Update</button>
         <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary" style="width: 100px;">Batal</a>
 
     </form>
+    jkssdhshd ksdkd kdjsksdd kjnhj klsdj kstatus 
 </div>
 @endsection
