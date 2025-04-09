@@ -80,29 +80,31 @@
         </div>
         <ul class="nav flex-column" id="sidebar">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/dashboardStaff">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="user.html">
                     <i class="fas fa-user"></i> Users
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="daftarsiswa.html">
                     <i class="fas fa-list"></i> Daftar Siswa
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pelanggaran.html">
+                <a class="nav-link" href="/daftarPelanggaran">
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="/daftarPelanggaran">
-                <i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li>
-           <li class="nav-item"><a class="nav-link" href="pengaturan.html">
-               <i class="fas fa-cog"></i> Pengaturan</a></li>
+          
+            <li class="nav-item">
+                <a class="nav-link" href="pengaturan.html">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
         </ul>
     </nav>
     <main class="flex-grow-1 p-4" style="margin-left: 260px;">

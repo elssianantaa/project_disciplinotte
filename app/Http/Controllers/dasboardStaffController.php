@@ -46,15 +46,15 @@ class dasboardStaffController extends Controller
         // ]);
 
 
-        $kategori = $request->Kategori;
+        // $kategori = $request->Kategori;
 
-        // Tentukan poin berdasarkan kategori
-        $point = match ($kategori) {
-            'Ringan' => 10,
-            'Sedang' => 15,
-            'Berat' => 20,
-            default => 0, // Jika kategori tidak valid
-        };
+        // // Tentukan poin berdasarkan kategori
+        // $point = match ($kategori) {
+        //     'Ringan' => 10,
+        //     'Sedang' => 15,
+        //     'Berat' => 20,
+        //     default => 0, // Jika kategori tidak valid
+        // };
 
         $fileName = null;
 
@@ -84,8 +84,8 @@ class dasboardStaffController extends Controller
             'student_id'      => $request->student_id,
             'kelas_id'        => $request->kelas_id,
             'pelanggaran_id'  => $request->pelanggaran_id, // Ambil ID pelanggaran, bukan nama atau kategori
-            'Kategori'        => $kategori,
-            'point'           => $point,
+            // 'Kategori'        => $request->pelanggaran_id,
+            // 'point'           => $request->pelanggaran_id,
             'deskripsi'       => $request->deskripsi,
             'foto'            => $fileName,
             'staff'           => auth()->user()->id, // Pastikan user adalah staff
@@ -94,7 +94,7 @@ class dasboardStaffController extends Controller
         ]);
 
         $student = Student::findOrFail($request->student_id);
-        $student->increment('point', $point);
+        // $student->increment('point', $point);
 
         return redirect('/daftarSiswa');
     }

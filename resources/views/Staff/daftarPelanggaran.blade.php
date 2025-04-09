@@ -39,6 +39,12 @@
     vertical-align: middle;
 }
 
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -76,9 +82,24 @@
     </style>
 </head>
 <body>
+    <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
+        <h4 class="my-2">Daftar Pelanggaran Siswa</h4>
+        <div class="dropdown">
+            <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
+                <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+                <span class="fw-bold"> {{ Auth::user()->name }}</span>
+                <i class="fas fa-caret-down ms-2"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
+                <li><a class="dropdown-item text-danger" href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    
     <nav class="sidebar">
         <div class="text-center mb-3">
-            <img src="/img/Logo smk-2.gif" alt="Logo Sekolah">
+            <img src="/gambar/images.png" alt="Logo Sekolah">
             <h5>ADMIN STAF</h5>
         </div>
         <ul class="nav flex-column" id="sidebar">
@@ -87,29 +108,30 @@
                     <i class="fas fa-home"></i> Dashboard
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="user.html">
                     <i class="fas fa-user"></i> Users
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="daftarsiswa.html">
                     <i class="fas fa-list"></i> Daftar Siswa
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pelanggaran.html">
+                <a class="nav-link" href="/daftarPelanggaran">
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="/daftarPelanggaran">
-                <i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li>
-           <li class="nav-item"><a class="nav-link" href="pengaturan.html">
-               <i class="fas fa-cog"></i> Pengaturan</a></li>
+          
+            <li class="nav-item">
+                <a class="nav-link" href="pengaturan.html">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
         </ul>
     </nav>
     <main class="flex-grow-1 p-4" style="margin-left: 260px;">
-        <h2>Detail Daftar Pelanggaran Siswa</h2>
 
         <form method="GET" action="{{ route('staff.laporan') }}" class="mb-3">
             <div class="row">
@@ -124,6 +146,7 @@
 
         <div class="table-container">
             <table class="table table-bordered table-striped">
+
                 <thead class="table-light">
                     <tr>
                         <th>No</th>
@@ -150,9 +173,10 @@
                         <td>{{ $item->kelas->nama_kelas }}</td>
                         <td>{{ $item->kelas->wali_kelas }}</td>
                         <td>{{ $item->pelanggaran->nama_pelanggaran }}</td>
-                        <td>{{ $item->Kategori }}</td>
-                        <td>{{ $item->point }}</td>
+                        <td>{{ $item->pelanggaran->Kategori }}</td>
+                        <td>{{ $item->pelanggaran->point }}</td>
                         <td>{{ $item->deskripsi }}</td>
+
                         <td>
                             <img src="{{ asset('storage/foto_pelanggaran/'.$item->foto) }}" alt="bukti" width="40" height="40">
                         </td>

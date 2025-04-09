@@ -10,9 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
 <style>
-  body {
-    font-family: 'Poppins', sans-serif;
-  }
+   body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
   .card-siswa {
     max-width: 600px;
     width: 100%;
@@ -41,7 +43,7 @@
       overflow-x: hidden;
     }
     .sidebar {
-      width: 230px;
+      width: 250px;
       height: 100vh;
       position: fixed;
       background: #f8f9fa;
@@ -94,26 +96,60 @@
 </head>
 <body>
 
+    <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
+        <h4 class="my-2">Monitoring Pelanggaran</h4>
+        <div class="dropdown">
+            <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
+                <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+                <span class="fw-bold"> {{ Auth::user()->name }}</span>
+                <i class="fas fa-caret-down ms-2"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
+                <li><a class="dropdown-item text-danger" href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
   <!-- Sidebar -->
   <nav class="sidebar">
     <div class="text-center mb-3">
-      <img src="/img/Logo smk-2.gif" alt="Logo Sekolah" />
-      <h5>ADMIN STAF</h5>
+        <img src="/gambar/images.png" alt="Logo Sekolah">
+        <h5>ADMIN STAF</h5>
     </div>
-    <ul class="nav flex-column">
-      <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
-      <li class="nav-item"><a class="nav-link" href="user.html"><i class="fas fa-user"></i> Users</a></li>
-      <li class="nav-item"><a class="nav-link" href="daftarsiswa.html"><i class="fas fa-list"></i> Daftar Siswa</a></li>
-      <li class="nav-item"><a class="nav-link active" href="pelanggaran.html"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
-      <li class="nav-item"><a class="nav-link" href="laporan.html"><i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li>
-      <li class="nav-item"><a class="nav-link" href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
+    
+    <ul class="nav flex-column" id="sidebar">
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboardStaff">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+        </li>
+        {{-- <li class="nav-item">
+            <a class="nav-link" href="user.html">
+                <i class="fas fa-user"></i> Users
+            </a>
+        </li> --}}
+        <li class="nav-item">
+            <a class="nav-link" href="daftarsiswa.html">
+                <i class="fas fa-list"></i> Daftar Siswa
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/daftarPelanggaran">
+                <i class="fas fa-exclamation-circle"></i> Pelanggaran
+            </a>
+        </li>
+      
+        <li class="nav-item">
+            <a class="nav-link" href="pengaturan.html">
+                <i class="fas fa-cog"></i> Pengaturan
+            </a>
+        </li>
     </ul>
-  </nav>
+</nav>
 
   <!-- Konten -->
   <div class="content">
-    <h4 class="mb-4">Monitoring Pelanggaran</h4>
-
     <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
 
@@ -137,7 +173,7 @@
 <div class="row g-4">
     <!-- Kolom Kiri -->
     <div class="col-md-6">
-      <div class="mb-3">
+      {{-- <div class="mb-3">
         <label for="pelanggaran" class="form-label">Nama Pelanggaran</label>
         <select class="form-select" id="pelanggaran" name="pelanggaran_id" required>
           <option value="" disabled selected>Pilih Pelanggaran</option>
@@ -145,15 +181,28 @@
             <option value="{{ $pelanggaran->id }}">{{ $pelanggaran->nama_pelanggaran }}</option>
           @endforeach
         </select>
-      </div>
+      </div> --}}
+
+      <div class="mb-3">
+        <label for="pelanggaran_id" class="form-label">Nama Pelanggaran</label>
+        <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
+            <option disabled selected>Pilih Pelanggaran</option>
+            @foreach($pelanggarans as $p)
+                <option value="{{ $p->id }}"
+                        data-kategori="{{ $p->kategori }}"
+                        data-point="{{ $p->point }}">
+                    {{ $p->nama_pelanggaran }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+      
   
       <input type="hidden" name="student_id" value="{{ $student->id }}">
       <input type="hidden" name="kelas_id" value="{{ $student->kelas->id }}">
 
-      <div class="mb-3">
-        <label for="point" class="form-label">Point Pelanggaran</label>
-        <input type="number" class="form-control" id="point" name="point" readonly>
-      </div>
+      <input type="hidden" class="form-control" id="point" readonly>
+      <input type="hidden" class="form-control" id="kategori" readonly>
   
       <div class="mb-3">
         <label for="tanggal" class="form-label">Tanggal</label>
@@ -163,15 +212,6 @@
   
     <!-- Kolom Kanan -->
     <div class="col-md-6">
-      <div class="mb-3">
-        <label for="kategori" class="form-label">Kategori</label>
-        <select class="form-select" name="Kategori" required>
-          <option value="Ringan">Ringan</option>
-          <option value="Sedang">Sedang</option>
-          <option value="Berat">Berat</option>
-        </select>
-      </div>
-  
       <div class="mb-3">
         <label for="deskripsi" class="form-label">Deskripsi</label>
         <input type="text" class="form-control" name="deskripsi" required>
@@ -225,20 +265,27 @@
     }
   }
 
-  function setPointByKategori() {
-    const selectKategori = document.querySelector('select[name="Kategori"]');
-    const pointField = document.querySelector('input[name="point"]');
-    const kategori = selectKategori.value;
-    const point = kategori === "Ringan" ? 10 : kategori === "Sedang" ? 15 : kategori === "Berat" ? 20 : 0;
-    pointField.value = point;
-  }
+//   function setPointByKategori() {
+//     const selectKategori = document.querySelector('select[name="Kategori"]');
+//     const pointField = document.querySelector('input[name="point"]');
+//     const kategori = selectKategori.value;
+//     const point = kategori === "Ringan" ? 10 : kategori === "Sedang" ? 15 : kategori === "Berat" ? 20 : 0;
+//     pointField.value = point;
+//   }
 
-  // Set point saat kategori berubah
-  document.querySelector('select[name="Kategori"]').addEventListener('change', setPointByKategori);
+//   // Set point saat kategori berubah
+//   document.querySelector('select[name="Kategori"]').addEventListener('change', setPointByKategori);
 
-  // Set point saat halaman pertama kali dimuat
-  window.addEventListener('DOMContentLoaded', setPointByKategori);
-  </script>
+//   // Set point saat halaman pertama kali dimuat
+//   window.addEventListener('DOMContentLoaded', setPointByKategori);
+document.getElementById('pelanggaran_id').addEventListener('change', function () {
+        const selected = this.options[this.selectedIndex];
+        document.getElementById('Kategori').value = selected.getAttribute('data-kategori');
+        document.getElementById('point').value = selected.getAttribute('data-point');
+    });
+</script>
+
+
 
 </body>
 </html>
