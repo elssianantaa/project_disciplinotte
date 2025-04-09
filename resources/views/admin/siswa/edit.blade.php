@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>Edit Siswa</h2>
-    
+
     <form action="{{ route('admin.siswa.update', $siswa->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -14,7 +14,7 @@
             @if($siswa->foto)
                 <p><img src="{{ asset('storage/foto_siswa/' . $siswa->foto) }}" alt="Foto" width="100"></p>
             @endif
-            
+
         </div>
         <div class="mb-3">
             <label class="form-label">Nama</label>
@@ -34,7 +34,7 @@
             <label class="form-label">Jenis Kelamin</label>
             <select name="jenis_kelamin" class="form-control" required>
                 <option value="Laki-laki" {{ $siswa->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                <option value="Perempuan" {{ $siswa->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>                               
+                <option value="Perempuan" {{ $siswa->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
             </select>
         </div>
 
@@ -51,6 +51,5 @@
         <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary" style="width: 100px;">Batal</a>
 
     </form>
-    jkssdhshd ksdkd kdjsksdd kjnhj klsdj kstatus 
 </div>
 @endsection
