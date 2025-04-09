@@ -18,8 +18,8 @@ return new class extends Migration
             // $table->unsignedBigInteger('kelas_id');
             // $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('nama_pelanggaran', 255);
-            // $table->enum('Kategori', ['Ringan', 'Sedang', 'Berat'])->default('Ringan');
-            // $table->string('point', 255);
+            $table->string('Kategori');
+            $table->string('point', 255);
             // $table->string('deskripsi', 255);
             // $table->string('foto', 255);
             // $table->string('staff');

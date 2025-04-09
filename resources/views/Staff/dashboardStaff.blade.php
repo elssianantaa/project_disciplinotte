@@ -62,7 +62,7 @@
 <body>
 <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
     <h4 class="my-2">Dashboard</h4>
-    <div class="dropdown">
+    <div class="dropdown ">
         <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
             <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40">
             <span class="fw-bold"> {{ Auth::user()->name }}</span>

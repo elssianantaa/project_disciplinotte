@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('pelanggaran_id');
             $table->foreign('pelanggaran_id')->references('id')->on('pelanggarans')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->enum('Kategori', ['Ringan', 'Sedang', 'Berat'])->default('Ringan');
-            $table->string('point', 255);
+            // $table->enum('Kategori', ['Ringan', 'Sedang', 'Berat'])->default('Ringan');
+            // $table->string('point', 255);
             $table->string('deskripsi', 255);
             $table->string('foto', 255);
             $table->string('staff');

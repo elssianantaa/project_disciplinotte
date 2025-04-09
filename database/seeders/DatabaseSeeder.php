@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
             'point' => 0,
             'foto' => '-'
         ]);
+
         Student::create([
             'nisn' => '0076346790',
             'name' => 'Siti Aisyah',
@@ -73,8 +74,8 @@ class DatabaseSeeder extends Seeder
 
         Pelanggaran::create([
             'nama_pelanggaran' => 'Bolos',
-            // 'Kategori' => 'Ringan',
-            // 'point' => '10'
+            'Kategori' => 'Ringan',
+            'point' => '10'
         ]);
 
         Staff::create([
