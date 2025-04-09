@@ -44,50 +44,50 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="table-responsive">
-        <table class="table table-bordered align-middle">
-            <thead>
-                <tr class="text-center">
-                    <th>NO</th>
-                    <th>Foto</th>
-                    <th>NISN</th>
-                    <th>Nama</th>
-                    <th>Kelas</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Status</th>
-                    <th>Point</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($students as $siswa)
-                <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="text-center">
-                        <img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="Foto Siswa" class="foto-siswa">
-                    </td>
-                    <td>{{ $siswa->nisn }}</td>
-                    <td>{{ $siswa->name }}</td>
-                    <td>{{ $siswa->kelas->nama_kelas }}</td>
-                    <td>{{ $siswa->jenis_kelamin }}</td>
-                    <td>{{ ucfirst($siswa->status) }}</td>
-                    <td>{{ $siswa->point ?? '0' }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
-                        <form action="{{ route('admin.siswa.destroy', $siswa->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" style="width: 70px;" onclick="return confirm('Yakin ingin menghapus siswa ini?')">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="9" class="text-center">Data tidak ditemukan.</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-    
+   <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead>
+            <tr class="text-center">
+                <th>NO</th>
+                <th>Foto</th>
+                <th>NISN</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Jenis Kelamin</th>
+                <th>Status</th>
+                <th>Point</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($students as $siswa)
+            <tr>
+                <td class="text-center">{{ $loop->iteration }}</td>
+                <td class="text-center">
+                    <img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="Foto Siswa" class="foto-siswa">
+                </td>
+                <td>{{ $siswa->nisn }}</td>
+                <td>{{ $siswa->name }}</td>
+                <td>{{ $siswa->kelas->nama_kelas }}</td>
+                <td>{{ $siswa->jenis_kelamin }}</td>
+                <td>{{ ucfirst($siswa->status) }}</td>
+                <td>{{ $siswa->point ?? '0' }}</td>
+                <td class="text-center">
+                    <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
+                    <form action="{{ route('admin.siswa.destroy', $siswa->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" style="width: 70px;" onclick="return confirm('Yakin ingin menghapus siswa ini?')">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="9" class="text-center">Data tidak ditemukan.</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
 @endsection
