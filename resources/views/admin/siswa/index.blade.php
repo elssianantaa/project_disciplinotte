@@ -18,7 +18,7 @@
                     @endforeach
                 </select>
             </div>
-    
+
             @if(request('kelas_id')) {{-- Munculkan hanya jika kelas dipilih --}}
             <div class="col-md-4">
                 <label for="nama" class="form-label">Cari Nama Siswa:</label>
@@ -35,8 +35,8 @@
             </div>
         </div>
     </form>
-    
-  
+
+
 
     <a href="{{ route('admin.siswa.create') }}" class="btn btn-primary mb-3">Tambah Siswa</a>
 
@@ -71,8 +71,10 @@
                 <td>{{ $siswa->kelas->nama_kelas }}</td>
                 <td>{{ $siswa->jenis_kelamin }}</td>
                 <td>{{ ucfirst($siswa->status) }}</td>
-                <td>{{ $siswa->point ?? '0' }}</td>
-                <td class="text-center">
+                <td>
+                    {{ $siswa->catatanpelanggarans->sum(fn($cp) => $cp->pelanggaran->point ?? 0) }}
+                </td>
+                                <td class="text-center">
                     <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
                     <form action="{{ route('admin.siswa.destroy', $siswa->id) }}" method="POST" class="d-inline">
                         @csrf

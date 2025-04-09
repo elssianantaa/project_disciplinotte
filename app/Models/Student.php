@@ -46,4 +46,8 @@ class Student extends Model
     public function catatan_pelanggarans(){
         return $this->belongsTo(CatatanPelanggaran::class, 'pelanggaran_id');
     }
+
+    // public function pelanggaran(){
+    //     return $this->belongsTo(Pelanggaran::class, 'pelanggaran_id');
+    // }
 }

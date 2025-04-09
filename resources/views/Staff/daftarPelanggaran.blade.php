@@ -6,7 +6,7 @@
     <title>Admin Staf</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+
     <style>
         .table-container {
     max-width: 100%;         /* Biar nggak melebar banget */
@@ -96,7 +96,7 @@
             </ul>
         </div>
     </nav>
-    
+
     <nav class="sidebar">
         <div class="text-center mb-3">
             <img src="/gambar/images.png" alt="Logo Sekolah">
@@ -123,7 +123,7 @@
                     <i class="fas fa-exclamation-circle"></i> Pelanggaran
                 </a>
             </li>
-          
+
             <li class="nav-item">
                 <a class="nav-link" href="pengaturan.html">
                     <i class="fas fa-cog"></i> Pengaturan
@@ -136,7 +136,7 @@
         <form method="GET" action="{{ route('staff.laporan') }}" class="mb-3">
             <div class="row">
                 <div class="col-md-4">
-                    <input type="date" name="tanggal" class="form-control" value="{{ request('tanggal') }}">
+                    <input type="date" name="tanggal" class="form-control" value="{{ request('tanggal', \Carbon\Carbon::now()->format('Y-m-d')) }}">
                 </div>
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary">Tampilkan</button>
@@ -178,8 +178,13 @@
                         <td>{{ $item->deskripsi }}</td>
 
                         <td>
-                            <img src="{{ asset('storage/foto_pelanggaran/'.$item->foto) }}" alt="bukti" width="40" height="40">
+                            @if ($item->foto)
+                                <img src="{{ asset('storage/foto_pelanggaran/'.$item->foto) }}" alt="bukti" width="40" height="40">
+                            @else
+                                -
+                            @endif
                         </td>
+
                         <td>{{ auth()->user()->name }}</td>
                         <td>{{ $item->tanggal }}</td>
                         <td>{{ $item->periode }}</td>
@@ -188,9 +193,9 @@
                 </tbody>
             </table>
         </div>
-        
-        
-        
+
+
+
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

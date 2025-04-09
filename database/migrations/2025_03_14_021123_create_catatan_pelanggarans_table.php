@@ -22,7 +22,7 @@ return new class extends Migration
             // $table->enum('Kategori', ['Ringan', 'Sedang', 'Berat'])->default('Ringan');
             // $table->string('point', 255);
             $table->string('deskripsi', 255);
-            $table->string('foto', 255);
+            $table->string('foto', 255)->nullable();
             $table->string('staff');
             $table->string('tanggal');
             $table->string('periode');

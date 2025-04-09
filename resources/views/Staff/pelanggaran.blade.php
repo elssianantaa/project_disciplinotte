@@ -233,8 +233,8 @@
         <input type="text" class="form-control" name="deskripsi" required>
 
         <label class="form-label mt-3">Foto Bukti</label>
-        <input type="file" class="form-control" name="foto" accept="image/*" onchange="previewFoto(event)">
-        <img id="preview" src="#" alt="Preview Foto" style="display:none; max-width:150px; margin-top:10px; border-radius:8px;">
+        <input type="file" class="form-control" name="foto" accept="image/*" onchange="previewFoto(event)" >
+        {{-- <img id="preview" src="#" alt="Preview Foto" style="display:none; max-width:150px; margin-top:10px; border-radius:8px;"> --}}
       </div>
     </div>
 

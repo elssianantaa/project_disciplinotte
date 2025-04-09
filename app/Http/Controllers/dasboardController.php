@@ -56,22 +56,22 @@ class dasboardController extends Controller
 
     public function index(Request $request)
     {
-           
-        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get(); 
+
+        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get();
         $kelasList = Kelas::all(); // untuk dropdown
         $query = Student::with('kelas');
-    
+
         if ($request->kelas_id) {
             $query->where('kelas_id', $request->kelas_id);
         }
-    
+
         if ($request->nama) {
             $query->where('name', 'like', '%' . $request->nama . '%');
         }
-    
+
         $students = $query->get();
         $totalSiswa = $students->count();
-    
+
         return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList'));
     }
 
@@ -80,7 +80,11 @@ class dasboardController extends Controller
     public function show(Request $request)
     {
 
-        $query = Student::with(['kelas', 'catatanpelanggarans']);
+        // $query = Student::with(['kelas', 'catatanpelanggarans']);
+
+        $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran']);
+
+
 
         if ($request->nama) {
             $query->where('name', 'like', '%' . $request->nama . '%');
@@ -160,7 +164,7 @@ class dasboardController extends Controller
             if ($siswa->foto && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
                 Storage::disk('public')->delete('foto_siswa/' . $siswa->foto);
             }
-        
+
             $file = $request->file('foto');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/foto_siswa', $fileName);
