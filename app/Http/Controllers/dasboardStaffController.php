@@ -28,7 +28,7 @@ class dasboardStaffController extends Controller
     }
 
     public function createPelanggaran($id){
-        $response = Http::get('http://localhost:8000/api/pelanggaran');
+        $response = Http::get('http://192.168.18.25/api/pelanggaran');
         $pelanggarans = $response->json();
         $student = Student::with('kelas', 'catatanpelanggarans')->findOrFail($id);
         return view('Staff.pelanggaran', compact('student', 'pelanggarans'));

@@ -228,17 +228,16 @@
     <!-- Form -->
     <div class="row g-4">
       <div class="col-md-6">
-        <label class="form-label">Nama Pelanggaran</label>
+        {{-- <label class="form-label">Nama Pelanggaran</label>
         <select class="form-select" name="pelanggaran_id" required>
           <option value="" disabled selected>Pilih Pelanggaran</option>
           @foreach ($pelanggarans as $pelanggaran)
             <option value="{{ $pelanggaran->id }}">{{ $pelanggaran->nama_pelanggaran }}</option>
           @endforeach
-        </select>
+        </select> --}}
         <input type="hidden" class="form-control" id="point" readonly>
         <input type="hidden" class="form-control" id="kategori" readonly>
 
-<<<<<<< HEAD
       {{-- <div class="mb-3">
         <label for="pelanggaran_id" class="form-label">Nama Pelanggaran</label>
         <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
