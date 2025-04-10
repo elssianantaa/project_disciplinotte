@@ -11,8 +11,8 @@
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f5f5f5;
-      overflow-x: hidden;       
-    }     
+      overflow-x: hidden;
+    }
 
     .navbar-top {
       background: #fff;
@@ -217,10 +217,21 @@
         <select class="form-select" name="pelanggaran_id" required>
           <option value="" disabled selected>Pilih Pelanggaran</option>
           @foreach ($pelanggarans as $pelanggaran)
-            <option value="{{ $pelanggaran->id }}">{{ $pelanggaran->nama_pelanggaran }}</option>
-          @endforeach
+  <option
+    value="{{ $pelanggaran->id }}"
+    data-point="{{ $pelanggaran->point }}"
+  >
+    {{ $pelanggaran->nama_pelanggaran }}
+  </option>
+@endforeach
+
         </select>
-        <input type="hidden" class="form-control" id="point" readonly>
+
+        <div class="mt-3">
+            <label class="form-label">Point Pelanggaran</label>
+            <input type="text" class="form-control" id="point" name="point" readonly>
+        </div>
+        {{-- <input type="hidden" class="form-control" id="point" readonly> --}}
         <input type="hidden" class="form-control" id="kategori" readonly>
 
         <input type="hidden" name="staff_id" value="{{ auth()->user()->id }}">
@@ -262,6 +273,16 @@
       reader.readAsDataURL(input.files[0]);
     }
   }
+
+  document.querySelector('select[name="pelanggaran_id"]').addEventListener('change', function() {
+    const selected = this.options[this.selectedIndex];
+    const point = selected.getAttribute('data-point');
+
+    document.getElementById('point').value = point || '';
+  });
+
+</script>
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
