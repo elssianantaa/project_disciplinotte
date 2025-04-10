@@ -42,6 +42,7 @@ Route::post('/register/create', [userController::class, 'addRe']);
 
 //Nampilin
 Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
+Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
 //CRUD STUDENTS
 Route::get('/daftarSiswa', [dasboardController::class, 'show']);

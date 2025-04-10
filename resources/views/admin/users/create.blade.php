@@ -3,11 +3,16 @@
 @section('content')
 <div class="container mt-4">
     <h1>{{ isset($user) ? 'Edit User' : 'Tambah User' }}</h1>
-    <form action="{{ isset($user) ? route('admin.users.update', $user->id) : route('admin.users.store') }}" method="POST">
+    <form action="{{ isset($user) ? route('admin.users.update', $user->id) : route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if (isset($user))
             @method('PUT')
         @endif
+
+        <div class="form-group mb-3">
+            <label class="form-label">Foto</label>
+            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
+        </div>
 
         <div class="form-group mb-3">
             <label for="name">Nama</label>

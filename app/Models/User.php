@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     use HasFactory;
 
-    
+
 
     protected $fillable = [
         'name',
@@ -29,9 +29,10 @@ class User extends Authenticatable
         'role',
         'nohp',
         'address',
+        'foto'
     ];
     protected $guarded = ['id'];
-  
+
 
     /**
      * The attributes that should be hidden for serialization.

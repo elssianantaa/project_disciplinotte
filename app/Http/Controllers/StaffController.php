@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class StaffController extends Controller
 {
@@ -64,6 +65,8 @@ class StaffController extends Controller
             'nohp' => 'required|string|max:15',
             'role' => 'required|in:satpam,guru,bk',
         ]);
+
+        
 
         $staff->update([
             'nama' => $request->nama,

@@ -7,11 +7,17 @@ use App\Models\Kelas;
 use App\Models\Pelanggaran;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class dasboardStaffController extends Controller
 {
     //
+
+    public function showprofil(){
+        $user = Auth::user();
+        return view('Staff.Profil', compact('user'));
+    }
 
     public function showpe(){
         return view('Staff.Pengaturan');
@@ -22,30 +28,30 @@ class dasboardStaffController extends Controller
         $nama = $request->nama;
         $totalPelanggaran = CatatanPelanggaran::count();
 
-    
+
         $query = CatatanPelanggaran::with(['student', 'kelas', 'pelanggaran']);
-    
+
         if ($tanggal) {
             $query->whereDate('tanggal', $tanggal);
         }
-    
+
         if ($kelas_id) {
             $query->where('kelas_id', $kelas_id);
         }
-    
+
         if ($nama) {
             $query->whereHas('student', function ($q) use ($nama) {
                 $q->where('name', 'like', '%' . $nama . '%');
             });
         }
-    
+
         $catatanpelanggaran = $query->get();
         $kelasList = Kelas::all();
-    
-    
+
+
         return view('Staff.daftarPelanggaran', compact('catatanpelanggaran', 'kelasList'));
     }
-    
+
 
     public function createPelanggaran($id){
         $pelanggarans = Pelanggaran::select('id', 'nama_pelanggaran', 'kategori', 'point')->get();

@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'nohp' => '08212234436x',
             'address' => 'singaparna',
+            'foto' => '-'
+
         ]);
 
 
@@ -36,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'staff',
             'nohp' => '08212288344',
             'address' => 'tawang',
+            'foto' => '-'
         ]);
 
         Kelas::create([

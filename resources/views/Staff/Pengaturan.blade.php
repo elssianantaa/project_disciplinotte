@@ -151,7 +151,7 @@
         <i class="fas fa-caret-down ms-2"></i>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
+        <li><a class="dropdown-item" href="/profil"><i class="fas fa-cog"></i> Profil</a></li>
         <li><a class="dropdown-item text-danger" href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
       </ul>
     </div>
@@ -159,14 +159,14 @@
   <div class="wrapper">
     <nav class="sidebar d-none d-md-block">
       <div class="text-center mb-3">
-        <img src="/img/Logo smk-2.gif" alt="Logo Sekolah">
+        <img src="/gambar/images.png" alt="Logo Sekolah">
         <h5>ADMIN STAF</h5>
       </div>
       <ul class="nav flex-column" id="sidebar">
-        <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="daftarsiswa.html"><i class="fas fa-list"></i> Daftar Siswa</a></li>
-        <li class="nav-item"><a class="nav-link" href="pelanggaran1.html"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
-        <li class="nav-item"><a class="nav-link active" href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
+        <li class="nav-item"><a class="nav-link" href="/dashboardStaff"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/daftarSiswa"><i class="fas fa-list"></i> Daftar Siswa</a></li>
+        <li class="nav-item"><a class="nav-link" href="/daftarPelanggaran"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/pengaturan"><i class="fas fa-cog"></i> Pengaturan</a></li>
       </ul>
     </nav>
     <div class="content container mt-5">
@@ -193,10 +193,10 @@
     </div>
   </div>
   <div class="mobile-nav d-md-none">
-    <a href="index.html"><i class="fas fa-home"></i><span>Dashboard</span></a>
-    <a href="daftarsiswa.html"><i class="fas fa-list"></i><span>Siswa</span></a>
-    <a href="pelanggaran1.html"><i class="fas fa-exclamation-circle"></i><span>Pelanggaran</span></a>
-    <a href="pengaturan.html" class="active"><i class="fas fa-cog"></i><span>Setting</span></a>
+    <a href="/dashboardStaff"><i class="fas fa-home"></i><span>Dashboard</span></a>
+    <a href="/daftarSiswa"><i class="fas fa-list"></i><span>Siswa</span></a>
+    <a href="/daftarPelanggaran"><i class="fas fa-exclamation-circle"></i><span>Pelanggaran</span></a>
+    <a href="/pengaturan" class="active"><i class="fas fa-cog"></i><span>Setting</span></a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

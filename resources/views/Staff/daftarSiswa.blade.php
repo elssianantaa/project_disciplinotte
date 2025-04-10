@@ -58,16 +58,46 @@
     </style>
 </head>
 <body>
+
+     <!-- Modal Profil -->
+<div class="modal fade" id="profilModal" tabindex="-1" aria-labelledby="profilModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background-color: #f4f6f8;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="profilModalLabel">Profil Pengguna</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
+          <h5>{{ Auth::user()->name }}</h5>
+          <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
+          <hr>
+          <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+          <p><strong>No HP:</strong> {{ Auth::user()->nohp }}</p>
+          <p><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
+        </div>
+        <div class="modal-footer">
+          <a href="/pengaturan" class="btn btn-primary">Edit Profil</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
         <h4 class="my-2">Tambah Pelanggaran Siswa</h4>
         <div class="dropdown">
             <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
-                {{-- <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
-                <span class="fw-bold">{{ Auth::user()->name }}</span>
+                <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+                <span class="fw-bold"> {{ Auth::user()->name }}</span>
                 <i class="fas fa-caret-down ms-2"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
+                <li>
+                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profilModal">
+                      <i class="fas fa-user"></i> Profil
+                    </button>
+                  </li>
                 <li><a class="dropdown-item text-danger" href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </div>
@@ -90,7 +120,7 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a class="nav-link" href="daftarsiswa.html">
+                <a class="nav-link" href="/daftarSiswa">
                     <i class="fas fa-list"></i> Daftar Siswa
                 </a>
             </li>
@@ -101,7 +131,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="pengaturan.html">
+                <a class="nav-link" href="/pengaturan">
                     <i class="fas fa-cog"></i> Pengaturan
                 </a>
             </li>
@@ -123,7 +153,7 @@
                         @endforeach
                     </select>
                 </div>
-        
+
                 @if(request('kelas_id'))
                 <div class="col-md-4">
                     <label for="nama" class="form-label">Cari Nama Siswa:</label>
@@ -133,7 +163,7 @@
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
                 @endif
-        
+
                 <div class="col-md-2">
                     <div class="form-label d-block">
                         Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
@@ -141,8 +171,8 @@
                 </div>
             </div>
         </form>
-        
-    
+
+
         <table class="table table-bordered">
             <thead>
                 <tr>

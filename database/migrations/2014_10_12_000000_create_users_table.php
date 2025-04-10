@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nohp');
             $table->string('address');
             $table->enum('role', ['admin', 'staff', 'student'])->default('student');
+            $table->string('foto');
             $table->rememberToken();
             $table->timestamps();
         });

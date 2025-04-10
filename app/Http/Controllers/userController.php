@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class userController extends Controller
 {
@@ -38,6 +39,14 @@ class userController extends Controller
             'role' => 'required|in:admin,staff,student',
         ]);
 
+        $fileName = null;
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/foto_user', $fileName);
+        }
+
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -45,6 +54,7 @@ class userController extends Controller
             'nohp' => $request->nohp,
             'address' => $request->address,
             'role' => $request->role,
+            'foto' => $fileName
         ]);
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan!');
@@ -67,7 +77,21 @@ class userController extends Controller
             'nohp' => 'required',
             'address' => 'required',
             'role' => 'required|in:admin,staff,student',
+            'foto' => 'nullable'
         ]);
+
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama
+            if ($user->foto && Storage::disk('public')->exists('foto_user/' . $user->foto)) {
+                Storage::disk('public')->delete('foto_user/' . $user->foto);
+            }
+
+            $file = $request->file('foto');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/foto_user', $fileName);
+        } else {
+            $fileName = $user->foto; // Tetap pakai yang lama
+        }
 
         $user->update([
             'name' => $request->name,
@@ -76,6 +100,7 @@ class userController extends Controller
             'nohp' => $request->nohp,
             'address' => $request->address,
             'role' => $request->role,
+            'foto' => $fileName
         ]);
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil diupdate!');
@@ -89,7 +114,7 @@ class userController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus!');
     }
 
-    
+
 
 }
 

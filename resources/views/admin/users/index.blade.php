@@ -7,7 +7,7 @@
     <div class="col-md-4">
         <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Tambah User</a>
     </div>
-    <div class="col-md-4"></div> 
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="form-label">
             Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
@@ -25,6 +25,7 @@
                 <th>Role</th>
                 <th>NO HP</th>
                 <th>Address</th>
+                <th>Foto</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -37,6 +38,9 @@
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->nohp }}</td>
                 <td>{{ $user->address }}</td>
+                <td class="text-center">
+                    <img src="{{ asset('storage/foto_user/'.$user->foto) }}" alt="Foto Siswa" class="foto-siswa">
+                </td>
                 <td style="text-align: center">
                     <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
