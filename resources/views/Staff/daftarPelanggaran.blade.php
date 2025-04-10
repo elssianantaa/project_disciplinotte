@@ -143,6 +143,40 @@
                 </div>
             </div>
         </form>
+        {{-- Form Pencarian Pelanggaran --}}
+<form action="{{ route('staff.laporan') }}" method="GET" class="mb-4">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-3">
+            <label for="kelas_id" class="form-label">Pilih Kelas:</label>
+            <select name="kelas_id" id="kelas_id" class="form-select" onchange="this.form.submit()">
+                <option value="">-- Semua Kelas --</option>
+                @foreach($kelasList as $kelas)
+                    <option value="{{ $kelas->id }}" {{ request('kelas_id') == $kelas->id ? 'selected' : '' }}>
+                        {{ $kelas->nama_kelas }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        @if(request('kelas_id'))
+        <div class="col-md-3">
+            <label for="nama" class="form-label">Cari Nama Siswa:</label>
+            <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama"
+                value="{{ request('nama') }}">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </div>
+        @endif
+
+        <div class="col-md-4">
+            <div class="form-label d-block">
+                Jumlah Data Pelanggaran: <span class="fw-bold">{{ $catatanpelanggaran->count() }}</span>
+            </div>
+        </div>
+    </div>
+</form>
+
 
         <div class="table-container">
             <table class="table table-bordered table-striped">

@@ -11,8 +11,8 @@
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f5f5f5;
-      overflow-x: hidden;
-    }
+      overflow-x: hidden;       
+    }     
 
     .navbar-top {
       background: #fff;
@@ -213,18 +213,17 @@
     <!-- Form Input -->
     <div class="row g-4">
       <div class="col-md-6">
-        <label class="form-label">Pilih Pelanggaran</label>
-        <select class="form-select" name="pelanggaran_id" id="pelanggaran_id" required>
-            <option disabled selected>Pilih Pelanggaran</option>
-            @foreach($pelanggarans as $p)
-                <option value="{{ $p['id'] }}"
-                        data-kategori="{{ $p['kategori'] }}"
-                        data-point="{{ $p['point'] }}">
-                    {{ $p['nama_pelanggaran'] }}
-                </option>
-            @endforeach
+        <label class="form-label">Nama Pelanggaran</label>
+        <select class="form-select" name="pelanggaran_id" required>
+          <option value="" disabled selected>Pilih Pelanggaran</option>
+          @foreach ($pelanggarans as $pelanggaran)
+            <option value="{{ $pelanggaran->id }}">{{ $pelanggaran->nama_pelanggaran }}</option>
+          @endforeach
         </select>
+        <input type="hidden" class="form-control" id="point" readonly>
+        <input type="hidden" class="form-control" id="kategori" readonly>
 
+        <input type="hidden" name="staff_id" value="{{ auth()->user()->id }}">
         <input type="hidden" name="student_id" value="{{ $student->id }}">
         <input type="hidden" name="kelas_id" value="{{ $student->kelas->id }}">
 
@@ -239,14 +238,6 @@
         <label class="form-label mt-3">Foto Bukti</label>
         <input type="file" class="form-control" name="foto" accept="image/*" onchange="previewFoto(event)" >
         {{-- <img id="preview" src="#" alt="Preview Foto" style="display:none; max-width:150px; margin-top:10px; border-radius:8px;"> --}}
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-md-6">
-        <label class="form-label">Petugas (Staff)</label>
-        <input type="text" class="form-control" value="{{ auth()->user()->name ?? 'Tidak diketahui' }}" readonly>
-        <input type="hidden" name="staff_id" value="{{ auth()->user()->id }}">
       </div>
     </div>
 
