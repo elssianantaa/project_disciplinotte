@@ -78,27 +78,24 @@ class dasboardController extends Controller
 
     //Buat nampilin di dasboard staff
     public function show(Request $request)
-    {
+{
+    $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran']);
 
-        // $query = Student::with(['kelas', 'catatanpelanggarans']);
-
-        $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran']);
-
-
-
-        if ($request->nama) {
-            $query->where('name', 'like', '%' . $request->nama . '%');
-        }
-
-        if ($request->kelas_id) {
-            $query->where('kelas_id', $request->kelas_id);
-        }
-
-        $students = $query->get();
-        $kelasList = Kelas::all(); // buat dropdown kelas
-
-        return view('Staff.daftarSiswa', compact('students', 'kelasList'));
+    if ($request->nama) {
+        $query->where('name', 'like', '%' . $request->nama . '%');
     }
+
+    if ($request->kelas_id) {
+        $query->where('kelas_id', $request->kelas_id);
+    }
+
+    $students = $query->get();
+    $totalSiswa = $students->count();
+    $kelasList = Kelas::all();
+
+    return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
+}
+
 
     public function create()
     {

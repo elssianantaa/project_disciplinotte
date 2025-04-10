@@ -110,25 +110,39 @@
     <main class="flex-grow-1 p-4" style="margin-left: 260px;">
         {{-- <h2>Daftar Pelanggaran Siswa</h2> --}}
 
-        <form method="GET" action="" class="row mb-3">
-            <div class="col-md-4">
-                <input id="search-nama" type="text" name="nama" class="form-control" placeholder="Cari Nama Siswa" value="{{ request('name') }}">
-            </div>
-            <div class="col-md-4">
-                <select name="kelas_id" class="form-select">
-                    <option value="">Pilih Kelas</option>
-                    @foreach ($kelasList as $kelas)
-                        <option value="{{ $kelas->id }}" {{ request('kelas_id') == $kelas->id ? 'selected' : '' }}>
-                            {{ $kelas->nama_kelas }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">Cari</button>
+        <form action="/daftarSiswa" method="GET" class="mb-4">
+            <div class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label for="kelas_id" class="form-label">Pilih Kelas:</label>
+                    <select name="kelas_id" id="kelas_id" class="form-select" onchange="this.form.submit()">
+                        <option value="">-- Semua Kelas --</option>
+                        @foreach($kelasList as $kelas)
+                            <option value="{{ $kelas->id }}" {{ request('kelas_id') == $kelas->id ? 'selected' : '' }}>
+                                {{ $kelas->nama_kelas }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+        
+                @if(request('kelas_id'))
+                <div class="col-md-4">
+                    <label for="nama" class="form-label">Cari Nama Siswa:</label>
+                    <input type="text" name="nama" id="nama" value="{{ request('nama') }}" class="form-control" placeholder="Masukkan nama">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+                @endif
+        
+                <div class="col-md-2">
+                    <div class="form-label d-block">
+                        Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
+                    </div>
+                </div>
             </div>
         </form>
-
+        
+    
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -169,7 +183,6 @@
 
     <footer>
         <p>&copy; 2025. Admin Staf SMK - All Rights Reserved.</p>
-        <p>Hand-crafted & made with ❤</p>
     </footer>
 
     <script>

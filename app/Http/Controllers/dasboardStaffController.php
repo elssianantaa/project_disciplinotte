@@ -15,17 +15,34 @@ class dasboardStaffController extends Controller
 
     public function show(Request $request){
         $tanggal = $request->tanggal;
+        $kelas_id = $request->kelas_id;
+        $nama = $request->nama;
+        $totalPelanggaran = CatatanPelanggaran::count();
 
-    $catatanpelanggaran = [];
-
-    if ($tanggal) {
-        $catatanpelanggaran = CatatanPelanggaran::with(['student', 'kelas', 'pelanggaran'])
-            ->whereDate('tanggal', $tanggal)
-            ->get();
+    
+        $query = CatatanPelanggaran::with(['student', 'kelas', 'pelanggaran']);
+    
+        if ($tanggal) {
+            $query->whereDate('tanggal', $tanggal);
+        }
+    
+        if ($kelas_id) {
+            $query->where('kelas_id', $kelas_id);
+        }
+    
+        if ($nama) {
+            $query->whereHas('student', function ($q) use ($nama) {
+                $q->where('name', 'like', '%' . $nama . '%');
+            });
+        }
+    
+        $catatanpelanggaran = $query->get();
+        $kelasList = Kelas::all();
+    
+    
+        return view('Staff.daftarPelanggaran', compact('catatanpelanggaran', 'kelasList'));
     }
-
-    return view('Staff.daftarPelanggaran', compact('catatanpelanggaran'));
-    }
+    
 
     public function createPelanggaran($id){
         $pelanggarans = Pelanggaran::select('id', 'nama_pelanggaran', 'kategori', 'point')->get();
