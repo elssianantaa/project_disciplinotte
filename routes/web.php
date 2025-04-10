@@ -40,6 +40,8 @@ Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
 
+//Nampilin
+Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
 
 //CRUD STUDENTS
 Route::get('/daftarSiswa', [dasboardController::class, 'show']);
@@ -74,7 +76,7 @@ Route::put('/admin/users/{user}', [userController::class, 'update'])->name('admi
 Route::delete('/admin/users/{user}', [userController::class, 'destroy'])->name('admin.users.destroy');
 
 
- 
+
 
 
 

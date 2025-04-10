@@ -17,19 +17,19 @@ class PelanggaranApiController extends Controller
     }
 
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'nama_pelanggaran' => 'required|string|max:255',
-        'kategori' => 'required|in:Ringan,Sedang,Berat',
-        'point' => 'required|integer|min:1',
-    ]);
+    {
+        $validated = $request->validate([
+            'nama_pelanggaran' => 'required|string|max:255',
+            'kategori' => 'required|in:Ringan,Sedang,Berat',
+            'point' => 'required|integer|min:1',
+        ]);
 
-    $pelanggaran = Pelanggaran::create($validated);
+        $pelanggaran = Pelanggaran::create($validated);
 
-    return response()->json([
-        'message' => 'Pelanggaran berhasil ditambahkan',
-        'data' => $pelanggaran
-    ], 201);
-}
+        return response()->json([
+            'message' => 'Pelanggaran berhasil ditambahkan',
+            'data' => $pelanggaran
+        ], 201);
+    }
 
 }

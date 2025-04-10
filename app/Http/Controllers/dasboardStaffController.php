@@ -13,6 +13,9 @@ class dasboardStaffController extends Controller
 {
     //
 
+    public function showpe(){
+        return view('Staff.Pengaturan');
+    }
     public function show(Request $request){
         $tanggal = $request->tanggal;
 
