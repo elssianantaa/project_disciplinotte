@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class userController extends Controller
@@ -14,7 +15,22 @@ class userController extends Controller
         return view('admin.register');
     }
 
-    // public function addRe(Request $request)
+    public function addRe(Request $request){
+        $validateData = $request->validate([
+            'name' =>['required', 'min:3'],
+            'email' =>['required', 'email'],
+            'password' =>['required'],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? bcrypt($request->password) : DB ::raw('password'),
+            'role' => 'staff', 
+        ]);
+
+        return redirect('/');
+    }
 
     public function index()
     {
