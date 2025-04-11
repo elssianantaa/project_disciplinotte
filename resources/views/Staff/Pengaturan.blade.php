@@ -211,7 +211,7 @@
                 {{ session('success') }}
                 </div>
               @endif
-              <form action="/pengaturan" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('profil.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="namaAdmin" class="form-label">Nama</label>

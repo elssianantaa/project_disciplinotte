@@ -44,20 +44,11 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 Route::middleware('auth')->group(function () {
-    //Nampilin
-    Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
+
+    //PENGATURAN SAMA PROFIL
+    Route::get('/pengaturan', [dasboardStaffController::class, 'edit'])->name('profil.edit');
+    Route::post('/pengaturan/update', [dasboardStaffController::class, 'update'])->name('profil.update');
     Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
-
-    
-
-
-
-//PENGATURAN SAMA PROFIL
-// Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
-// Route::put('/updateProfilAdmin', [dasboardStaffController::class, 'updateProfil']);
-Route::get('/pengaturan', [dasboardStaffController::class, 'pengaturan'])->middleware('auth');
-Route::post('/pengaturan', [dasboardStaffController::class, 'updatePengaturan'])->middleware('auth');
-Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
     //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);

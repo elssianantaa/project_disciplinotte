@@ -16,43 +16,43 @@ class dasboardStaffController extends Controller
     //
     public function showprofil()
     {
-        $user = Auth::user();
+        dd(Auth::user());
         return view('Staff.Profil', compact('user'));
     }
 
-    public function pengaturan()
+    public function edit()
     {
-        return view('Staff.Pengaturan');
+        return view('Staff.Pengaturan', ['user' => Auth::user()]);
     }
 
-    public function updatePengaturan(Request $request)
+    public function update(Request $request)
     {
-        $user = Auth::user();
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'nohp' => 'nullable|string|max:20',
+        'address' => 'nullable|string|max:255',
+        'foto' => 'nullable|image|max:2048',
+    ]);
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'nohp' => 'nullable|string|max:15',
-            'address' => 'nullable|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+    $user = Auth::user();
+    $user->name = $request->name;
+    $user->nohp = $request->nohp;
+    $user->address = $request->address;
 
-        $user->name = $request->name;
-        $user->nohp = $request->nohp;
-        $user->address = $request->address;
-
-        if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
-            if ($user->foto) {
-                Storage::delete('public/' . $user->foto);
-            }
-
-            $fotoBaru = $request->file('foto')->store('foto_user', 'public');
-            $user->foto = $fotoBaru;
+    if ($request->hasFile('foto')) {
+        // hapus foto lama kalau ada
+        if ($user->foto) {
+            Storage::delete('public/foto_user/' . $user->foto);
         }
-
-
-        return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui.');
+        $foto = $request->file('foto')->store('public/foto_user');
+        $user->foto = basename($foto);
     }
+
+    $user->save();
+
+    return redirect()->route('profil.edit')->with('success', 'Profil berhasil diperbarui.');
+    }
+
 
 
 
@@ -87,12 +87,12 @@ class dasboardStaffController extends Controller
 //         'nohp' => $admin->nohp,
 //         'address' => $admin->address,
 //     ]);
-    
+
 //     return redirect('/pengaturan')->with('success', 'Profil berhasil diperbarui!');
 // }
 
 
-    
+
     public function show(Request $request){
         $tanggal = $request->tanggal;
         $kelas_id = $request->kelas_id;

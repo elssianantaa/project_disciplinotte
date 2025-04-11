@@ -109,13 +109,20 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body text-center">
-          <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
+            @if(Auth::user()->foto)
+            {{-- <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;"> --}}
+            <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
+            @else
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 100px; height: 100px; font-size: 40px;">
+                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            </div>
+        @endif
           <h5>{{ Auth::user()->name }}</h5>
           <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
           <hr>
-          <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-          <p><strong>No HP:</strong> {{ Auth::user()->nohp }}</p>
-          <p><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
+          <p><strong>Email:</strong> <span>{{ Auth::user()->email }}</span></p>
+          <p><strong>No HP:</strong> <span>{{ Auth::user()->nohp ?: '-' }}</span></p>
+          <p><strong>Alamat:</strong> <span>{{ Auth::user()->address ?: '-' }}</span></p>
         </div>
         <div class="modal-footer">
           <a href="/pengaturan" class="btn btn-primary">Edit Profil</a>
@@ -129,17 +136,17 @@
 <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
     <h4 class="my-2">Dashboard</h4>
     <div class="dropdown">
-        <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
+        <button class="btn btn-white d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
             {{-- <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
             @if(Auth::user()->foto)
-                        <img src="{{ asset('storage/' . Auth::user()->foto) }}" class="rounded mb-2" style="width: 80px; height: 80px; object-fit: cover;">
-                    @else
-                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-2" style="width: 80px; height: 80px; font-size: 30px;">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                        </div>
-                    @endif
-            <span class="fw-bold"> {{ Auth::user()->name }}</span>
-            <i class="fas fa-caret-down ms-2"></i>
+            {{-- <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;"> --}}
+            <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+        @else
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 20px;">
+                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            </div>
+        @endif
+
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
