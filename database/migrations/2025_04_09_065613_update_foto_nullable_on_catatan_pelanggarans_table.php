@@ -15,13 +15,26 @@ return new class extends Migration
         Schema::table('catatan_pelanggarans', function (Blueprint $table) {
             $table->string('foto')->nullable()->change();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('nohp')->nullable()->change();
+            $table->string('address')->nullable()->change();
+            $table->string('foto')->nullable()->change();
+        });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('nohp')->nullable(false)->change();
+            $table->string('address')->nullable(false)->change();
+            $table->string('foto')->nullable(false)->change();
+        });
         //
         Schema::table('catatan_pelanggarans', function (Blueprint $table) {
             $table->string('foto')->nullable(false)->change(); // balik ke NOT NULL

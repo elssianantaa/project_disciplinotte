@@ -31,37 +31,56 @@
             <div class="row justify-content-center align-items-center" style="margin-top: -310px;">
                 <div class="col-md-6">
                     <div class="card p-5 shadow" style="border-radius: 10px; background-color: white;">
-                        <h1 class="text-center text-primary" style="font-family: 'Trebuchet MS', sans-serif;">DiscipliNotes</h1>
-                        <h2 class="text-center text-secondary" style="font-family: 'Trebuchet MS', sans-serif;">Sign Into Your Account</h2>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <a href="/" class="text-decoration-none text-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>
+                            </a>
+                            <h1 class="text-center flex-grow-1 text-primary m-0" style="font-family: 'Trebuchet MS', sans-serif;">DiscipliNotes</h1>
+                            <span style="width: 24px;"></span> <!-- Placeholder biar teks tetap di tengah -->
+                        </div>
+
+                        <h2 class="text-center text-secondary" style="font-family: 'Trebuchet MS', sans-serif;">Create Your Account</h2>
 
                         <p class="pt-3" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
-                            Silakan masuk untuk memantau, memperbarui, dan mengelola data pelanggaran siswa
+                            Buat akun untuk mulai memantau dan mencatat pelanggaran siswa.
                         </p>
 
-                        <form action="/auth" method="post" class="pt-2">
+
+                        <form action="/register/create" method="post">
                             @csrf
-                            <div class="form-group py-3">
-                                <input type="email" name="email" class="form-control" placeholder="Enter your email" style="height: 50px; background-color: #F5F7FF;">
-                            </div>
 
-                            <div class="form-group position-relative">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" style="height: 50px; background-color: #F5F7FF;">
-                                <span onclick="togglePassword()" class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;">
-                                    <i id="toggleIcon" class="fas fa-eye"></i>
-                                </span>
-                            </div>
+                            {{-- Full Name --}}
+                            <input type="text" name="name" placeholder="Full Name"
+                                class="form-control mb-3 @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
 
-                            <div class="form-group pt-4">
-                                <button type="submit" class="btn w-100" style="height: 50px; font-size: 20px; border-radius: 15px; background-color: #7DA0FA; color: white; border: none;">
-                                    Login
-                                </button>
-                            </div>
+                            {{-- Email --}}
+                            <input type="email" name="email" placeholder="Email"
+                                class="form-control mb-3 @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
 
-                            <div class="pt-4 text-center">
-                                <a href="#">Forgot your password?</a>
-                                <p>Don't have an account? <a href="/register">Register here</a></p>
-                            </div>
+                            {{-- Password --}}
+                            <input type="password" name="password" placeholder="Password"
+                                class="form-control mb-3 @error('password') is-invalid @enderror">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+
+                            {{-- Konfirmasi Password --}}
+                            <input type="password" name="password_confirmation" placeholder="Confirm Password"
+                                class="form-control mb-3">
+
+                            {{-- Role Tersembunyi (Kalau role-nya fix staff misalnya) --}}
+                            <input type="hidden" name="role" value="staff">
+
+                            <button type="submit" class="btn w-100" style="background-color: #7DA0FA;color: white;">Register</button>
                         </form>
+
+
                     </div>
                 </div>
 

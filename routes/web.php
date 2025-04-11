@@ -59,18 +59,21 @@ Route::get('/pengaturan', [dasboardStaffController::class, 'pengaturan'])->middl
 Route::post('/pengaturan', [dasboardStaffController::class, 'updatePengaturan'])->middleware('auth');
 Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
-//CRUD STUDENTS
+    //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
-//CRUD PELANGGARAN
+    //CRUD PELANGGARAN
     Route::get('/daftarPelanggaran', [dasboardStaffController::class, 'show'])->name('staff.laporan');
     Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
     Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran'])->name('pelanggaran.store');
 
 });
+
+
 //CRUDE TAMBAH SISWA
 // Route::get('/admin/dashboard', [DasboardController::class, 'index'])->name('admin.siswa.index');
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/pengaturan', [dasboardController::class, 'showpe']);
     Route::get('/admin/siswa', [dasboardController::class, 'index'])->name('admin.siswa.index');
     Route::get('/admin/siswa/create', [dasboardController::class, 'create'])->name('admin.siswa.create');
     Route::post('/admin/siswa/store', [dasboardController::class, 'store'])->name('admin.siswa.store');
