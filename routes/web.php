@@ -53,8 +53,10 @@ Route::middleware('auth')->group(function () {
 
 
 //PENGATURAN SAMA PROFIL
-Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
-Route::put('/updateProfilAdmin', [dasboardStaffController::class, 'updateProfil']);
+// Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
+// Route::put('/updateProfilAdmin', [dasboardStaffController::class, 'updateProfil']);
+Route::get('/pengaturan', [dasboardStaffController::class, 'pengaturan'])->middleware('auth');
+Route::post('/pengaturan', [dasboardStaffController::class, 'updatePengaturan'])->middleware('auth');
 Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
 //CRUD STUDENTS

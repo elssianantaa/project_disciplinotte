@@ -54,7 +54,17 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
             <div class="modal-body text-center">
-              <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" class="profile-img mb-3" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
+              @if(Auth::user()->foto)
+    <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Admin" class="rounded-circle me-2" width="40" height="40" style="object-fit: cover;">
+@else
+    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px; font-size: 18px;">
+        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+    </div>
+@endif
+
+<span class="fw-bold">{{ Auth::user()->name }}</span>
+
+              
               <h5>{{ Auth::user()->name }}</h5>
               <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
               <hr>

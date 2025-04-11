@@ -141,17 +141,46 @@
 </head>
 <body>
 
+   <!-- Modal Profil -->
+<div class="modal fade" id="profilModal" tabindex="-1" aria-labelledby="profilModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: #f4f6f8;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profilModalLabel">Profil Pengguna</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
+        <h5>{{ Auth::user()->name }}</h5>
+        <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
+        <hr>
+        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+        <p><strong>No HP:</strong> {{ Auth::user()->nohp }}</p>
+        <p><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="/pengaturan" class="btn btn-primary">Edit Profil</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Navbar -->
   <nav class="navbar">
     <h4 class="my-2">Dashboard</h4>
     <div class="dropdown">
       <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
-        <img src="/img/profile-admin.png" alt="Admin" class="rounded-circle me-2" width="40" height="40">
-        <span class="fw-bold">Alya Cantik</span>
+        <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+        <span class="fw-bold"> {{ Auth::user()->name }}</span>
         <i class="fas fa-caret-down ms-2"></i>
-      </button>
+    </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="/profil"><i class="fas fa-cog"></i> Profil</a></li>
+        <li>
+          <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profilModal">
+            <i class="fas fa-user"></i> Profil
+          </button>
+        </li>
         <li><a class="dropdown-item text-danger" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
       </ul>
     </div>
@@ -177,21 +206,39 @@
           <div class="card mb-3">
             <div class="card-header">Profil Admin</div>
             <div class="card-body">
-              <div class="mb-3">
-                <label for="namaAdmin" class="form-label">Nama Admin</label>
-                <input type="text" class="form-control" id="namaAdmin" value="Alya Cantik">
-              </div>
-              <div class="mb-3">
-                <label for="fotoAdmin" class="form-label">Foto Profil</label>
-                <input type="file" class="form-control" id="fotoAdmin">
-              </div>
-              <button class="btn btn-primary">Simpan</button>
-            </div>
+              @if(session('success'))
+                <div class="alert alert-success">
+                {{ session('success') }}
+                </div>
+              @endif
+              <form action="/pengaturan" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label for="namaAdmin" class="form-label">Nama</label>
+                    <input type="text" class="form-control" id="namaAdmin" name="name" value="{{ Auth::user()->name }}">
+                </div>
+                <div class="mb-3">
+                    <label for="nohp" class="form-label">No. HP</label>
+                    <input type="text" class="form-control" name="nohp" value="{{ Auth::user()->nohp }}">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Alamat</label>
+                    <input type="text" class="form-control" name="address" value="{{ Auth::user()->address }}">
+                </div>
+                <div class="mb-3">
+                    <label for="fotoAdmin" class="form-label">Foto Profil</label><br>
+                    @if(Auth::user()->foto)
+                        <img src="{{ asset('storage/' . Auth::user()->foto) }}" class="rounded mb-2" style="width: 80px; height: 80px; object-fit: cover;">
+                    @else
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-2" style="width: 80px; height: 80px; font-size: 30px;">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        </div>
+                    @endif
+                    <input type="file" class="form-control mt-2" id="fotoAdmin" name="foto">
+                </div>
+                <button class="btn btn-primary">Simpan</button>
+            </form>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="mobile-nav d-md-none">
     <a href="/dashboardStaff"><i class="fas fa-home"></i><span>Dashboard</span></a>
     <a href="/daftarSiswa"><i class="fas fa-list"></i><span>Siswa</span></a>

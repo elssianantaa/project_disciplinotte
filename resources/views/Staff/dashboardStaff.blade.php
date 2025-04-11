@@ -130,7 +130,14 @@
     <h4 class="my-2">Dashboard</h4>
     <div class="dropdown">
         <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
-            <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40">
+            {{-- <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
+            @if(Auth::user()->foto)
+                        <img src="{{ asset('storage/' . Auth::user()->foto) }}" class="rounded mb-2" style="width: 80px; height: 80px; object-fit: cover;">
+                    @else
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-2" style="width: 80px; height: 80px; font-size: 30px;">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        </div>
+                    @endif
             <span class="fw-bold"> {{ Auth::user()->name }}</span>
             <i class="fas fa-caret-down ms-2"></i>
         </button>

@@ -14,11 +14,47 @@ use Illuminate\Support\Facades\Storage;
 class dasboardStaffController extends Controller
 {
     //
-
-    public function showprofil(){
+    public function showprofil()
+    {
         $user = Auth::user();
         return view('Staff.Profil', compact('user'));
     }
+
+    public function pengaturan()
+    {
+        return view('Staff.Pengaturan');
+    }
+
+    public function updatePengaturan(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'nohp' => 'nullable|string|max:15',
+            'address' => 'nullable|string|max:255',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user->name = $request->name;
+        $user->nohp = $request->nohp;
+        $user->address = $request->address;
+
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($user->foto) {
+                Storage::delete('public/' . $user->foto);
+            }
+
+            $fotoBaru = $request->file('foto')->store('foto_user', 'public');
+            $user->foto = $fotoBaru;
+        }
+
+
+        return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui.');
+    }
+
+
 
 //     public function updateProfil(Request $request)
 // {
@@ -56,9 +92,7 @@ class dasboardStaffController extends Controller
 // }
 
 
-    public function showpe(){
-        return view('Staff.Pengaturan');
-    }
+    
     public function show(Request $request){
         $tanggal = $request->tanggal;
         $kelas_id = $request->kelas_id;
