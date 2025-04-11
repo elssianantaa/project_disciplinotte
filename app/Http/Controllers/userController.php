@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class userController extends Controller
@@ -112,6 +113,12 @@ class userController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus!');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 
 

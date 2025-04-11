@@ -98,7 +98,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-3">
-                    <div class="card-header">Profil Admin</div>
+                    <div class="card-header">Profil Admin</div>d
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="namaAdmin" class="form-label">Nama Admin</label>
