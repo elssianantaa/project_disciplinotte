@@ -41,20 +41,17 @@ Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-<<<<<<< HEAD
+
 Route::middleware('auth')->group(function () {
     //Nampilin
     Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
     Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
     
-=======
 //PENGATURAN SAMA PROFIL
 Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
 Route::put('/updateProfilAdmin', [dasboardStaffController::class, 'updateProfil']);
 Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
-
->>>>>>> b36af04c19279c66d821f3c0fcd7ec82fc9fd5d5
 //CRUD STUDENTS
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 

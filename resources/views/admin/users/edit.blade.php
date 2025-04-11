@@ -4,19 +4,25 @@
 
     <div class="container mt-4">
         <h1>{{ isset($user) ? 'Edit User' : 'Tambah User' }}</h1>
-        <form action="{{ isset($user) ? route('admin.users.update', $user->id) : route('admin.users.store') }}" method="POST">
+        <form action="{{ isset($user) ? route('admin.users.update', $user->id) : route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @if (isset($user))
                 @method('PUT')
             @endif
 
-            <div class="form-group mb-3">
+            {{-- <div class="form-group mb-3">
                 <label for="form-label">Foto</label>
-            <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+                <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+                @if(isset($user) && $user->foto)
+                <p><img src="{{ asset('storage/foto_user/' . $user->foto) }}" alt="Foto" width="100"></p>
+                @endif
+            </div>  --}}
+
+            {{-- <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
             @if($user->foto)
                 <p><img src="{{ asset('storage/foto_user/' . $user->foto) }}" alt="Foto" width="100"></p>
             @endif
-            </div>
+            </div> --}}
 
             <div class="form-group mb-3">
                 <label for="name">Nama</label>

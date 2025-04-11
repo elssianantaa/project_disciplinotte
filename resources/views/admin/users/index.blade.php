@@ -25,7 +25,7 @@
                 <th>Role</th>
                 <th>NO HP</th>
                 <th>Address</th>
-                <th>Foto</th>
+                {{-- <th>Foto</th> --}}
                 <th>Action</th>
             </tr>
         </thead>
@@ -38,9 +38,9 @@
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->nohp }}</td>
                 <td>{{ $user->address }}</td>
-                <td class="text-center">
+                {{-- <td class="text-center">
                     <img src="{{ asset('storage/foto_user/'.$user->foto) }}" alt="Foto Siswa" class="foto-siswa">
-                </td>
+                </td> --}}
                 <td style="text-align: center">
                     <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">

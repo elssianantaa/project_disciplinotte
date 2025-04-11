@@ -9,10 +9,10 @@
             @method('PUT')
         @endif
 
-        <div class="form-group mb-3">
+        {{-- <div class="form-group mb-3">
             <label class="form-label">Foto</label>
             <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
-        </div>
+        </div> --}}
 
         <div class="form-group mb-3">
             <label for="name">Nama</label>
