@@ -42,11 +42,16 @@ Route::post('/register/create', [userController::class, 'addRe']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
+
 Route::middleware('auth')->group(function () {
     //Nampilin
     Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
     Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
+
     
+
+
+
 //PENGATURAN SAMA PROFIL
 Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
 Route::put('/updateProfilAdmin', [dasboardStaffController::class, 'updateProfil']);
