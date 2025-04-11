@@ -14,20 +14,20 @@
                         @method('PUT')
 
                         {{-- Foto Profil --}}
-                        <div class="text-center mb-3">
+                        <div class="d-flex justify-content-center mb-3">
                             @if (Auth::user()->foto)
-                            <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" 
-                                 alt="Admin" 
-                                 class="rounded-circle me-2" 
-                                 style="width: 120px; height: 120px; object-fit: cover;">
-                        @else
-                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                                 style="width: 120px; height: 120px; font-size: 40px;">
-                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                            </div>
-                        @endif
-                        
+                                <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" 
+                                     alt="Admin" 
+                                     class="rounded-circle shadow" 
+                                     style="width: 120px; height: 120px; object-fit: cover;">
+                            @else
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
+                                     style="width: 120px; height: 120px; font-size: 40px;">
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                </div>
+                            @endif
                         </div>
+                        
 
                         {{-- Input Fields --}}
                         <div class="mb-3">

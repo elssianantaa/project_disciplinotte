@@ -106,22 +106,27 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
             <div class="modal-body text-center">
-                @if(Auth::user()->foto)
-                <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}"
-                     alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
-            @else
-                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                     style="width: 100px; height: 100px; font-size: 40px;">
-                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                <div class="d-flex justify-content-center mb-3">
+                    @if(Auth::user()->foto)
+                        <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}"
+                             alt="Foto Profil" class="rounded-circle shadow" width="100" height="100" style="object-fit: cover;">
+                    @else
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
+                             style="width: 100px; height: 100px; font-size: 40px;">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        </div>
+                    @endif
                 </div>
-            @endif
             
               <h5>{{ Auth::user()->name }}</h5>
               <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
               <hr>
-              <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-              <p><strong>No HP:</strong> {{ Auth::user()->nohp }}</p>
-              <p><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
+              <div class="text-center">
+                <p class="mb-2"><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                <p class="mb-2"><strong>No HP:</strong> {{ Auth::user()->nohp }}</p>
+                <p class="mb-0"><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
+            </div>
+            
             </div>
             <div class="modal-footer">
                 <a href="{{ route('admin.profile.edit', Auth::user()->id) }}" class="btn btn-primary">Edit Profile</a>
@@ -136,8 +141,15 @@
         <h4 class="my-2">@yield('title', 'Dashboard')</h4>
         <div class="dropdown">
             <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
+                @if(Auth::user()->foto)
+                {{-- <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;"> --}}
                 <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40">
-                <span class="fw-bold">{{ Auth::user()->name }}</span>
+            @else
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 20px;">
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                </div>
+            @endif
+                {{-- <span class="fw-bold">{{ Auth::user()->name }}</span> --}}
                 <i class="fas fa-caret-down ms-2"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -164,7 +176,7 @@
             <li class="nav-item"><a class="nav-link" href="/admin/users"><i class="fas fa-list"></i> Daftar Pengguna</a></li>
             {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/pelanggaran') }}"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/laporan') }}"><i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li> --}}
-            <li class="nav-item"><a class="nav-link" href="/pengaturan"><i class="fas fa-cog"></i> Pengaturan</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/profile"><i class="fas fa-cog"></i> Pengaturan</a></li>
         </ul>
     </nav>
 
