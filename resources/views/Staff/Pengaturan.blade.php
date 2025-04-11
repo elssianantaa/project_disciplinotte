@@ -205,40 +205,61 @@
         <div class="col-md-6">
           <div class="card mb-3">
             <div class="card-header">Profil Admin</div>
-            <div class="card-body">
-              @if(session('success'))
-                <div class="alert alert-success">
-                {{ session('success') }}
-                </div>
+            <form action="{{ route('w', $user->id) }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
+
+              {{-- Foto Profil --}}
+              <div class="text-center mb-3">
+                  @if (Auth::user()->foto)
+                  <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" 
+                       alt="Admin" 
+                       class="rounded-circle me-2" 
+                       style="width: 120px; height: 120px; object-fit: cover;">
+              @else
+                  <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                       style="width: 120px; height: 120px; font-size: 40px;">
+                      {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                  </div>
               @endif
-              <form action="/pengaturan" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-3">
-                    <label for="namaAdmin" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="namaAdmin" name="name" value="{{ Auth::user()->name }}">
-                </div>
-                <div class="mb-3">
-                    <label for="nohp" class="form-label">No. HP</label>
-                    <input type="text" class="form-control" name="nohp" value="{{ Auth::user()->nohp }}">
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Alamat</label>
-                    <input type="text" class="form-control" name="address" value="{{ Auth::user()->address }}">
-                </div>
-                <div class="mb-3">
-                    <label for="fotoAdmin" class="form-label">Foto Profil</label><br>
-                    @if(Auth::user()->foto)
-                        <img src="{{ asset('storage/' . Auth::user()->foto) }}" class="rounded mb-2" style="width: 80px; height: 80px; object-fit: cover;">
-                    @else
-                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-2" style="width: 80px; height: 80px; font-size: 30px;">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                        </div>
-                    @endif
-                    <input type="file" class="form-control mt-2" id="fotoAdmin" name="foto">
-                </div>
-                <button class="btn btn-primary">Simpan</button>
-            </form>
-          </div>
+              
+              </div>
+
+              {{-- Input Fields --}}
+              <div class="mb-3">
+                  <label for="name" class="form-label">Nama</label>
+                  <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="nohp" class="form-label">Nomor HP</label>
+                  <input type="text" class="form-control" id="nohp" name="nohp" value="{{ old('nohp', $user->nohp) }}" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="address" class="form-label">Alamat</label>
+                  <textarea class="form-control" id="address" name="address" rows="3" required>{{ old('address', $user->address) }}</textarea>
+              </div>
+
+              <div class="mb-3">
+                  <label for="photo" class="form-label">Foto Profil</label>
+                  <input type="file" class="form-control" id="foto" name="foto">
+              </div>
+
+              {{-- Tombol Simpan --}}
+              <button type="submit" class="btn btn-primary w-100">Simpan Perubahan</button>
+          </form>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
   <div class="mobile-nav d-md-none">
     <a href="/dashboardStaff"><i class="fas fa-home"></i><span>Dashboard</span></a>
     <a href="/daftarSiswa"><i class="fas fa-list"></i><span>Siswa</span></a>
