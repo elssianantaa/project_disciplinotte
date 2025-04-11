@@ -9,6 +9,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class dasboardStaffController extends Controller
 {
@@ -18,6 +19,42 @@ class dasboardStaffController extends Controller
         $user = Auth::user();
         return view('Staff.Profil', compact('user'));
     }
+
+//     public function updateProfil(Request $request)
+// {
+//     $request->validate([
+//         'name' => 'required',
+//         'email' => 'required|email|unique:users',
+//         'password' => 'required',
+//         'nohp' => 'required',
+//         'address' => 'required',
+//         'role' => 'required|in:admin,staff,student',
+//         'foto' => 'nullable'
+//     ]);
+
+//     $admin = Auth::user(); // atau ambil dari ID, tergantung sistem login kamu
+
+//     $admin->name = $request->nama;
+
+//     if ($request->hasFile('foto')) {
+//         $fotoBaru = $request->file('foto')->store('foto-admin', 'public');
+//         $admin->foto = $fotoBaru;
+//     }
+
+//     $admin->update([
+//         'name' => $request->nama,
+//         'foto' => $fotoBaru ?? $admin->foto,
+//         // tambahkan yang lain juga kalau kolomnya required
+//         'email' => $admin->email,
+//         'password' => $admin->password,
+//         'role' => $admin->role,
+//         'nohp' => $admin->nohp,
+//         'address' => $admin->address,
+//     ]);
+    
+//     return redirect('/pengaturan')->with('success', 'Profil berhasil diperbarui!');
+// }
+
 
     public function showpe(){
         return view('Staff.Pengaturan');
