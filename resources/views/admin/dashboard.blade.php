@@ -187,6 +187,7 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+
 <div class="alert alert-info" background-color: #e3f2fd;>
     <h2 class="fw-bold animate__animated animate__fadeInDown">Selamat Datang, {{ Auth::user()->name }}!</h2>
     <p class="text-muted animate__animated animate__fadeInUp animate__delay-1s">
