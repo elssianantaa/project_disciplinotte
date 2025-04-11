@@ -64,7 +64,7 @@
 
 <span class="fw-bold">{{ Auth::user()->name }}</span>
 
-              
+
               <h5>{{ Auth::user()->name }}</h5>
               <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
               <hr>
@@ -75,7 +75,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <a href="/pengaturan" class="btn btn-primary"><i class="fas fa-edit me-1"></i>Edit Profil</a>
+              <a href="/{{ route('admin.profile.edit', $user->id) }}" class="btn btn-primary"><i class="fas fa-edit me-1"></i>Edit Profil</a>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
           </div>

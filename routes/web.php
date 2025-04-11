@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\dasboardController;
 use App\Http\Controllers\dasboardStaffController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\userController;
@@ -41,15 +42,18 @@ Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
+// Route::get('/pengaturan', [dasboardStaffController::class, 'pengaturan'])->name('pengaturan');
+// Route::post('/pengaturan', [dasboardStaffController::class, 'updatePengaturan'])->name('staff.pengaturan');
+// Rute untuk form edit profil
+Route::get('/staff/profile/{id}/edit', [dasboardStaffController::class, 'edit'])->name('staff.profile.edit');
+
+// Rute untuk proses update profil
+Route::put('/staff/profile/{id}', [dasboardStaffController::class, 'update'])->name('staff.profile.update');
+Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
 
-Route::middleware('auth')->group(function () {
 
-    //PENGATURAN SAMA PROFIL
-    Route::get('/pengaturan', [dasboardStaffController::class, 'edit'])->name('profil.edit');
-    Route::post('/pengaturan/update', [dasboardStaffController::class, 'update'])->name('profil.update');
-    Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
-
+Route::middleware('auth', 'staff')->group(function () {
     //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
@@ -86,6 +90,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/users/{user}/edit', [userController::class, 'edit'])->name('admin.users.edit');
     Route::put('/admin/users/{user}', [userController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{user}', [userController::class, 'destroy'])->name('admin.users.destroy');
+
+    Route::get('/admin/profile', [ProfileController::class, 'show'])->name('admin.profile.show');
+
+// Rute untuk form edit profil
+Route::get('/admin/profile/{id}/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+
+// Rute untuk proses update profil
+Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
 
 

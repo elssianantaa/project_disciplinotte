@@ -6,6 +6,7 @@ use App\Models\CatatanPelanggaran;
 use App\Models\Kelas;
 use App\Models\Pelanggaran;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -20,37 +21,43 @@ class dasboardStaffController extends Controller
         return view('Staff.Profil', compact('user'));
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('Staff.Pengaturan', ['user' => Auth::user()]);
+        $user = User::findOrFail($id);
+        return view('Staff.Pengaturan', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'nohp' => 'nullable|string|max:20',
-        'address' => 'nullable|string|max:255',
-        'foto' => 'nullable|image|max:2048',
-    ]);
+        $user = User::findOrFail($id);
 
-    $user = Auth::user();
-    $user->name = $request->name;
-    $user->nohp = $request->nohp;
-    $user->address = $request->address;
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'nohp' => 'required|string|max:20',
+            'address' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+        ]);
 
-    if ($request->hasFile('foto')) {
-        // hapus foto lama kalau ada
-        if ($user->foto) {
-            Storage::delete('public/foto_user/' . $user->foto);
+        // Simpan foto baru
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama dulu kalau ada
+            if ($user->foto && Storage::exists('public/foto_user/' . $user->foto)) {
+                Storage::delete('public/foto_user/' . $user->foto);
+            }
+
+            // Simpan foto baru
+            $file = $request->file('foto');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+
+            $file->storeAs('public/foto_user', $fileName);
+
+            $validated['foto'] = $fileName;
         }
-        $foto = $request->file('foto')->store('public/foto_user');
-        $user->foto = basename($foto);
-    }
 
-    $user->save();
+        $user->update($validated);
 
-    return redirect()->route('profil.edit')->with('success', 'Profil berhasil diperbarui.');
+        return redirect('dashboardStaff')->with('success', 'Profil berhasil diperbarui.');
     }
 
 

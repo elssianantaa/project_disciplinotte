@@ -125,8 +125,8 @@
           <p><strong>Alamat:</strong> <span>{{ Auth::user()->address ?: '-' }}</span></p>
         </div>
         <div class="modal-footer">
-          <a href="/pengaturan" class="btn btn-primary">Edit Profil</a>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            <a href="{{ route('staff.profile.edit', Auth::user()->id) }}" class="btn btn-primary">Edit Profil</a>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
         </div>
       </div>
     </div>
@@ -148,6 +148,7 @@
         @endif
 
         </button>
+
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
                 <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profilModal">
@@ -175,7 +176,7 @@
             <a class="nav-link" href="/daftarPelanggaran"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/pengaturan"><i class="fas fa-cog"></i> Pengaturan</a>
+            <a class="nav-link" href="{{ route('staff.profile.edit', Auth::user()->id) }}"><i class="fas fa-cog"></i> Pengaturan</a>
         </li>
     </ul>
 </nav>

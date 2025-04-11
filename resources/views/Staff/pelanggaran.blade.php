@@ -165,7 +165,14 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
             <div class="modal-body text-center">
-              <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
+                @if(Auth::user()->foto)
+                {{-- <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;"> --}}
+                <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
+                @else
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 100px; height: 100px; font-size: 40px;">
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                </div>
+            @endif
               <h5>{{ Auth::user()->name }}</h5>
               <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
               <hr>
@@ -174,8 +181,8 @@
               <p><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
             </div>
             <div class="modal-footer">
-              <a href="/pengaturan" class="btn btn-primary">Edit Profil</a>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <a href="{{ route('staff.profile.edit', Auth::user()->id) }}" class="btn btn-primary">Edit Profil</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
           </div>
         </div>
@@ -185,10 +192,17 @@
 <nav class="navbar-top d-flex justify-content-between align-items-center">
   <h4 class="my-2">Monitoring Pelanggaran</h4>
   <div class="dropdown">
-    <button class="btn btn-light d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
+    <button class="btn btn-white d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
+        {{-- <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
+        @if(Auth::user()->foto)
+        {{-- <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;"> --}}
         <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40">
-        <span class="fw-bold"> {{ Auth::user()->name }}</span>
-        <i class="fas fa-caret-down ms-2"></i>
+    @else
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 20px;">
+            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+        </div>
+    @endif
+
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
         <li>
@@ -211,7 +225,7 @@
     <li class="nav-item"><a class="nav-link" href="/dashboardStaff"><i class="fas fa-home"></i> Dashboard</a></li>
     <li class="nav-item"><a class="nav-link" href="/daftarSiswa"><i class="fas fa-list"></i> Daftar Siswa</a></li>
     <li class="nav-item"><a class="nav-link active" href="/daftarPelanggaran"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
-    <li class="nav-item"><a class="nav-link" href="/pengaturan"><i class="fas fa-cog"></i> Pengaturan</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('staff.profile.edit', Auth::user()->id) }}"><i class="fas fa-cog"></i> Pengaturan</a></li>
   </ul>
 </nav>
 
