@@ -40,9 +40,11 @@ Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
 
-//Nampilin
+//PENGATURAN SAMA PROFIL
 Route::get('/pengaturan', [dasboardStaffController::class, 'showpe']);
+Route::put('/updateProfilAdmin', [dasboardStaffController::class, 'updateProfil']);
 Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
+
 
 //CRUD STUDENTS
 Route::get('/daftarSiswa', [dasboardController::class, 'show']);

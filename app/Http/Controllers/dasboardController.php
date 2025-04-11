@@ -156,6 +156,7 @@ class dasboardController extends Controller
             'status' => 'nullable|in:aktif,skorsing,dikeluarkan',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+        
         if ($request->hasFile('foto')) {
             // Hapus foto lama
             if ($siswa->foto && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
