@@ -99,6 +99,12 @@ class DatabaseSeeder extends Seeder
             'point' => '10'
         ]);
 
+        Pelanggaran::create([
+            'nama_pelanggaran' => 'Tawuran',
+            'Kategori' => 'Berat',
+            'point' => '30'
+        ]);
+
         Staff::create([
             'nama' => 'Aiden',
             'email' => 'aiden@gmail.com',

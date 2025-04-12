@@ -33,6 +33,9 @@ Route::get('/login', [dasboardController::class, 'login'])->name('login');
 
 Route::middleware('login','auth', 'staff')->group(function () {
     Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
+    //NAMPILIN DAFTAR SKORSING
+    Route::get('/daftarSkorsing', [dasboardStaffController::class, 'showSkorsing']);
+
     //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 

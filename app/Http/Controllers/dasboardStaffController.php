@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CatatanPelanggaran;
 use App\Models\Kelas;
 use App\Models\Pelanggaran;
+use App\Models\Skorsing;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -99,9 +100,13 @@ class dasboardStaffController extends Controller
     // }
 
 
+<<<<<<< HEAD
 
     public function show(Request $request)
     {
+=======
+    public function show(Request $request){
+>>>>>>> 095659e5462614003b372a4f181433831782115c
         $tanggal = $request->tanggal;
         $kelas_id = $request->kelas_id;
         $nama = $request->nama;
@@ -129,6 +134,41 @@ class dasboardStaffController extends Controller
 
 
         return view('Staff.daftarPelanggaran', compact('catatanpelanggaran', 'kelasList'));
+    }
+
+    // Nampilin skorsing
+    public function showSkorsing(Request $request){
+        $tanggal = $request->tanggal;
+        $kelas_id = $request->kelas_id;
+        $nama = $request->nama;
+        $totalSkorsing = Skorsing::count();
+
+
+        $query = Skorsing::with(['student', 'kelas']);
+
+        if ($tanggal) {
+            $query->whereDate('tanggal', $tanggal);
+        }
+
+        if ($kelas_id) {
+            $query->where('kelas_id', $kelas_id);
+        }
+
+        if ($nama) {
+            $query->whereHas('student', function ($q) use ($nama) {
+                $q->where('name', 'like', '%' . $nama . '%');
+            });
+        }
+
+        $skorsing = $query->get();
+        $kelasList = Kelas::all();
+
+        $students = Student::with(['skorsings' => function ($q) {
+            $q->latest('mulai')->limit(1);
+        }, 'kelas'])->get();        
+        
+
+        return view('Staff.daftarSkorsing', compact('students', 'kelasList'));
     }
 
 
@@ -190,11 +230,39 @@ class dasboardStaffController extends Controller
         ]);
 
         //status otomatis
+        // $totalPoint = $student->catatanpelanggarans->sum(function ($cp) {
+        //     return $cp->pelanggaran->point ?? 0;
+        // });
+
+        // // Tentukan status baru berdasarkan total point
+        // $statusBaru = 'aktif';
+        // if ($totalPoint >= 40) {
+        //     $statusBaru = 'dikeluarkan';
+        // } elseif ($totalPoint >= 30) {
+        //     $statusBaru = 'skorsing';
+        // }
+
+        // // Update status siswa
+        // $student->update([
+        //     'status' => $statusBaru
+        // ]);
+
+        // Cek skorsing terakhir
+        $skorsingTerakhir = Skorsing::where('student_id', $student->id)
+        ->latest('selesai')
+        ->first();
+
+        // Jika status skorsing tapi tanggal selesai sudah lewat → ubah ke aktif dulu
+        if ($student->status === 'skorsing' && $skorsingTerakhir && $skorsingTerakhir->selesai < now()) {
+                $student->update(['status' => 'aktif']);
+        }
+
+        // Hitung ulang total poin jadi gaakan noll meskipun masa nya udah abis
         $totalPoint = $student->catatanpelanggarans->sum(function ($cp) {
-            return $cp->pelanggaran->point ?? 0;
+        return $cp->pelanggaran->point ?? 0;
         });
 
-        // Tentukan status baru berdasarkan total point
+        // Tentukan status baru berdasarkan total poin
         $statusBaru = 'aktif';
         if ($totalPoint >= 40) {
             $statusBaru = 'dikeluarkan';
@@ -202,14 +270,37 @@ class dasboardStaffController extends Controller
             $statusBaru = 'skorsing';
         }
 
-        // Update status siswa
-        $student->update([
+        $statusLama = $student->status;
+
+        // Update status jika berubah
+        if ($statusBaru !== $statusLama) {
+            $student->update([
             'status' => $statusBaru
         ]);
+        }
 
-        $student = Student::findOrFail($request->student_id);
-        // $student->increment('point', $point);
+        // Buat entri skorsing jika baru kena
+        if ($statusBaru === 'skorsing' && $statusLama !== 'skorsing') {
+        $sudahDiskors = Skorsing::where('student_id', $student->id)
+        ->whereDate('selesai', '>=', now())
+        ->exists();
+
+        if (!$sudahDiskors) {
+        Skorsing::create([
+            'student_id' => $student->id,
+            'kelas_id'   => $student->kelas_id,
+            'mulai'      => now(),
+            'selesai'    => now()->addDays(1), // misal 3 hari
+            'alasan'     => 'Poin mencapai ' . $totalPoint
+        ]);
+        }
+        }
 
         return redirect('/daftarSiswa');
+<<<<<<< HEAD
     }
+=======
+    }        
+
+>>>>>>> 095659e5462614003b372a4f181433831782115c
 }
