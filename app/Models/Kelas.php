@@ -17,9 +17,14 @@ class Kelas extends Model
         return $this->hasMany(Student::class, 'kelas_id', 'id');
     }
 
-    // catatan pelanggaran sama kelas
+    // catatan pelanggaran sama kelas   
     public function catatanpelanggarans(){
         return $this->hasMany(CatatanPelanggaran::class, 'kelas_id', 'id');
+    }
+
+    // skorsing sama kelas
+    public function skorsings(){
+        return $this->hasMany(Skorsing::class, 'kelas_id', 'id');
     }
 
 }

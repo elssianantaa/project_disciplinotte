@@ -207,12 +207,23 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-4">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <h5 class="card-title">Pelanggaran</h5>
                     <p class="card-text">Catatan pelanggaran siswa.</p>
                     <a href="/daftarPelanggaran" class="btn btn-warning">Lihat Pelanggaran</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Skorsing</h5>
+                    <p class="card-text">Catatan Skorsing siswa.</p>
+                    <a href="/daftarSkorsing" class="btn btn-warning">Lihat Data</a>
                 </div>
             </div>
         </div>

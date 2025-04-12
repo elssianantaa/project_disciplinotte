@@ -54,6 +54,9 @@ Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
 
 Route::middleware('auth', 'staff')->group(function () {
+
+    //NAMPILIN DAFTAR SKORSING
+    Route::get('/daftarSkorsing', [dasboardStaffController::class, 'showSkorsing']);
     //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 

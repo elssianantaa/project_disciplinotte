@@ -50,4 +50,9 @@ class Student extends Model
     // public function pelanggaran(){
     //     return $this->belongsTo(Pelanggaran::class, 'pelanggaran_id');
     // }
+
+    // skorsing sama siswa
+    public function skorsings(){
+        return $this->hasMany(Skorsing::class, 'student_id', 'id');
+    }
 }

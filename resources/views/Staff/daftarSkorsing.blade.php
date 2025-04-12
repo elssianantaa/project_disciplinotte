@@ -178,10 +178,10 @@
                 </div>
                 @endif
 
-                <div class="col-md-2">
+                {{-- <div class="col-md-2">
                     <div class="form-label d-block">
-                        Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
-                    </div>
+                        Jumlah Siswa Skorsing: <span class="fw-bold">{{ $totalSkorsing }}</span>
+                    </div> --}}
                 </div>
             </div>
         </form>
@@ -196,8 +196,8 @@
                     <th>Nama Siswa</th>
                     <th>Kelas</th>
                     <th>Status</th>
-                    <th>Point Pelanggaran</th>
-                    <th>Aksi</th>
+                    <th>Skorsing</th>
+                    {{-- <th>Aksi</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -210,17 +210,30 @@
                     <td>{{$item->nisn}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
-                    <td>{{$item->status}}</td>
                     <td>
+                        <span class="badge 
+                          {{ $item->status == 'skorsing' ? 'bg-warning' : 
+                             ($item->status == 'dikeluarkan' ? 'bg-danger' : 'bg-success') }}">
+                          {{ ucfirst($item->status) }}
+                        </span>
+                      </td>
+                    {{-- <td>
                         {{ $item->catatanpelanggarans->sum(fn($cp) => $cp->pelanggaran->point ?? 0) }}
-                    </td>
+                    </td> --}}
                     <td>
-                        <a href="/pelanggaran/{{$item->id}}" class="btn btn-danger btn-sm">
-                            Catat Pelanggaran
-                        </a>
+                        @php
+                        $skorsingTerbaru = $item->skorsings->first();
+                      @endphp
+                      
+                      @if ($item->status == 'skorsing' && $skorsingTerbaru)
+                        {{ \Carbon\Carbon::parse($skorsingTerbaru->mulai)->format('d M Y') }} -
+                        {{ \Carbon\Carbon::parse($skorsingTerbaru->selesai)->format('d M Y') }}
+                      @else
+                        -
+                      @endif
                     </td>
                 </tr>
-                @endforeach
+                @endforeach 
             </tbody>
         </table>
     </main>
