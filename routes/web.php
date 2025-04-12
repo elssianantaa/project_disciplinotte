@@ -26,13 +26,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/dasboard', [dasboardController::class, 'showDasboard']);
 Route::get('/', [dasboardController::class, 'login']);
 Route::post('/auth', [dasboardController::class, 'authentication']);
+Route::get('/login', [dasboardController::class, 'login'])->name('login');
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
-Route::get('/login', [dasboardController::class, 'login'])->name('login');
 
-
-
-Route::middleware('login','auth', 'staff')->group(function () {
+Route::middleware('staff')->group(function () {
     Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
     //NAMPILIN DAFTAR SKORSING
     Route::get('/daftarSkorsing', [dasboardStaffController::class, 'showSkorsing']);
@@ -57,7 +55,7 @@ Route::middleware('login','auth', 'staff')->group(function () {
 
 //CRUDE TAMBAH SISWA
 // Route::get('/admin/dashboard', [DasboardController::class, 'index'])->name('admin.siswa.index');
-Route::middleware(['login','auth', 'admin'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/pengaturan', [dasboardController::class, 'showpe']);
     Route::get('/dashboard', [dasboardController::class, 'dashboard']);
     Route::get('/admin/siswa', [dasboardController::class, 'index'])->name('admin.siswa.index');

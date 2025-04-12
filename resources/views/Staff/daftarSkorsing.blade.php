@@ -92,7 +92,7 @@
   </div>
 
     <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
-        <h4 class="my-2">Tambah Pelanggaran Siswa</h4>
+        <h4 class="my-2">Data Siswa Skorsing</h4>
         <div class="dropdown">
             <button class="btn btn-white d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
                 {{-- <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
@@ -197,6 +197,7 @@
                     <th>Kelas</th>
                     <th>Status</th>
                     <th>Skorsing</th>
+                    <th>Durasi</th>
                     {{-- <th>Aksi</th> --}}
                 </tr>
             </thead>
@@ -232,6 +233,8 @@
                         -
                       @endif
                     </td>
+
+                    {{-- <td>{{ $item->durasi}}</td> --}}
                 </tr>
                 @endforeach 
             </tbody>

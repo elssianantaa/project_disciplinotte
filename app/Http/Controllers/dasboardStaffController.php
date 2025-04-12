@@ -159,10 +159,14 @@ class dasboardStaffController extends Controller
         $skorsing = $query->get();
         $kelasList = Kelas::all();
 
-        $students = Student::with(['skorsings' => function ($q) {
-            $q->latest('mulai')->limit(1);
-        }, 'kelas'])->get();        
-        
+        //ngambil data yang terbaru dan hanya 1 per siswa   
+        $students = Student::with([
+            'skorsings' => function ($q) {
+                $q->latest('mulai')->limit(1);
+            },
+            'kelas'
+        ])->where('status', 'skorsing')->get();
+              
 
         return view('Staff.daftarSkorsing', compact('students', 'kelasList'));
     }
@@ -281,6 +285,8 @@ class dasboardStaffController extends Controller
         ->whereDate('selesai', '>=', now())
         ->exists();
 
+        //durasi
+
         if (!$sudahDiskors) {
         Skorsing::create([
             'student_id' => $student->id,
@@ -294,9 +300,9 @@ class dasboardStaffController extends Controller
 
         return redirect('/daftarSiswa');
 
+
     }
 
 }        
-
 
 
