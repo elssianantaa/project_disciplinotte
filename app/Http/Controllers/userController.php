@@ -10,23 +10,33 @@ use Illuminate\Support\Facades\Storage;
 
 class userController extends Controller
 {
-    //
-    public function createRe(){
+    public function __construct()
+    {
+        $this->middleware('auth'); // wajib login
+
+        // hanya admin yang bisa akses semua method kecuali logout
+        $this->middleware('admin')->except(['logout']);
+    }
+
+    //w
+    public function createRe()
+    {
         return view('admin.register');
     }
 
-    public function addRe(Request $request){
+    public function addRe(Request $request)
+    {
         $validateData = $request->validate([
-            'name' =>['required', 'min:3'],
-            'email' =>['required', 'email'],
-            'password' =>['required'],
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password ? bcrypt($request->password) : DB ::raw('password'),
-            'role' => 'staff', 
+            'password' => $request->password ? bcrypt($request->password) : DB::raw('password'),
+            'role' => 'staff',
         ]);
 
         return redirect('/');
@@ -136,13 +146,4 @@ class userController extends Controller
         Auth::logout();
         return redirect('/');
     }
-
-
-
 }
-
-
-
-
-
-

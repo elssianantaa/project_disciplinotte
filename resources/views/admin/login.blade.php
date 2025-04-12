@@ -40,6 +40,12 @@
 
                         <form action="/auth" method="post" class="pt-2">
                             @csrf
+                            {{-- @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error')}}
+                                </div>
+                            @endif --}}
+                            
                             <div class="form-group py-3">
                                 <input type="email" name="email" class="form-control" placeholder="Enter your email" style="height: 50px; background-color: #F5F7FF;">
                             </div>
@@ -71,7 +77,7 @@
             </div>
         </div>
     </div>
-    </div>
+    </div>a
 
     <script>
         function togglePassword() {

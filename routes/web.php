@@ -20,40 +20,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/hello', function () {
-//     return 'Hello Olaf';
-// });
-
-// Route::get('test', function () {
-//     return 'testt yak';
-// });
 
 //LOGIN
 // Route::get('/dasboard', [dasboardController::class, 'showDasboard']);
 Route::get('/', [dasboardController::class, 'login']);
 Route::post('/auth', [dasboardController::class, 'authentication']);
-Route::get('/dashboard', [dasboardController::class, 'showDb']);
-Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-// Route::get('/pengaturan', [dasboardStaffController::class, 'pengaturan'])->name('pengaturan');
-// Route::post('/pengaturan', [dasboardStaffController::class, 'updatePengaturan'])->name('staff.pengaturan');
-// Rute untuk form edit profil
-Route::get('/staff/profile/{id}/edit', [dasboardStaffController::class, 'edit'])->name('staff.profile.edit');
-
-// Rute untuk proses update profil
-Route::put('/staff/profile/{id}', [dasboardStaffController::class, 'update'])->name('staff.profile.update');
-Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
+Route::get('/login', [dasboardController::class, 'login'])->name('login');
 
 
 
-Route::middleware('auth', 'staff')->group(function () {
+Route::middleware('login','auth', 'staff')->group(function () {
+    Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
     //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
@@ -61,14 +40,20 @@ Route::middleware('auth', 'staff')->group(function () {
     Route::get('/daftarPelanggaran', [dasboardStaffController::class, 'show'])->name('staff.laporan');
     Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
     Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran'])->name('pelanggaran.store');
+    Route::get('/staff/profile/{id}/edit', [dasboardStaffController::class, 'edit'])->name('staff.profile.edit');
+
+// Rute untuk proses update profil
+    Route::put('/staff/profile/{id}', [dasboardStaffController::class, 'update'])->name('staff.profile.update');
+    Route::get('/profil', [dasboardStaffController::class, 'showprofil']);
 
 });
 
 
 //CRUDE TAMBAH SISWA
 // Route::get('/admin/dashboard', [DasboardController::class, 'index'])->name('admin.siswa.index');
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['login','auth', 'admin'])->group(function () {
     Route::get('/pengaturan', [dasboardController::class, 'showpe']);
+    Route::get('/dashboard', [dasboardController::class, 'dashboard']);
     Route::get('/admin/siswa', [dasboardController::class, 'index'])->name('admin.siswa.index');
     Route::get('/admin/siswa/create', [dasboardController::class, 'create'])->name('admin.siswa.create');
     Route::post('/admin/siswa/store', [dasboardController::class, 'store'])->name('admin.siswa.store');
@@ -92,15 +77,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/users/{user}', [userController::class, 'destroy'])->name('admin.users.destroy');
 
     Route::get('/admin/profile', [ProfileController::class, 'show'])->name('admin.profile.show');
-
-// Rute untuk form edit profil
-Route::get('/admin/profile/{id}/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
-
-// Rute untuk proses update profil
-Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
+    Route::get('/admin/profile/{id}/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
+    
 });
 
-
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 

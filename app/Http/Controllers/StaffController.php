@@ -66,7 +66,7 @@ class StaffController extends Controller
             'role' => 'required|in:satpam,guru,bk',
         ]);
 
-        
+
 
         $staff->update([
             'nama' => $request->nama,

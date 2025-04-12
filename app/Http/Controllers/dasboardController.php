@@ -15,37 +15,48 @@ class dasboardController extends Controller
     {
         return view('Admin.login');
     }
+    // public function __construct()
+    // {
+    //     $this->middleware('login')->only(['showDb', 'showDbStaff']);  // hanya metode ini yang membutuhkan login
+    //     $this->middleware('staff')->only(['showDb', 'showDbStaff']); // pengecekan login
+    //     $this->middleware('admin')->only(['dashboard']); // hanya admin yang bisa akses
+    // }
 
     public function authentication(Request $request)
-    {
-        $validateData = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => 'required'
-        ]);
+{
+    // Validasi input
+    $validateData = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => 'required'
+    ]);
 
-        if (Auth::attempt($validateData)) {
-            $user = Auth::user();
+    // Coba login menggunakan Auth::attempt() dengan data yang sudah tervalidasi
+    if (Auth::attempt([
+        'email' => $request->email,
+        'password' => $request->password
+    ])) {
+        // Ambil user yang berhasil login
+        $user = Auth::user();
 
-            if ($user->role === 'admin') {
-                return redirect('/dashboard');
-            } elseif ($user->role === 'staff') {
-                return redirect('/dashboardStaff');
-            } elseif ($user->role === 'student') {
-                return redirect()->route('home');
-            }
+        // Pengalihan berdasarkan role
+        if ($user->role === 'admin') {
+            return redirect('/dashboard'); // Arahkan ke dashboard admin
+        } elseif ($user->role === 'staff') {
+            return redirect('/dashboardStaff'); // Arahkan ke dashboard staff
+        } elseif ($user->role === 'student') {
+            return redirect()->route('home'); // Arahkan ke halaman home
         }
-
-        return back()->withErrors(['email' => 'Email atau password salah.']);
     }
 
-    public function showpe(){
-        return view('layouts.Pengaturan');
-    }
+    // Jika login gagal, beri pesan kesalahan
+    return back()->withErrors(['error' => 'Email atau password salah.']);
+}
 
-    public function showDb()
-    {
-        return view('Admin.dashboard');
-    }
+
+    // public function showDb()
+    // {
+    //     return view('Admin.dashboard');
+    // }
 
     public function showDbStaff()
     {
@@ -82,23 +93,23 @@ class dasboardController extends Controller
 
     //Buat nampilin di dasboard staff
     public function show(Request $request)
-{
-    $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran']);
+    {
+        $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran']);
 
-    if ($request->nama) {
-        $query->where('name', 'like', '%' . $request->nama . '%');
+        if ($request->nama) {
+            $query->where('name', 'like', '%' . $request->nama . '%');
+        }
+
+        if ($request->kelas_id) {
+            $query->where('kelas_id', $request->kelas_id);
+        }
+
+        $students = $query->get();
+        $totalSiswa = $students->count();
+        $kelasList = Kelas::all();
+
+        return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
     }
-
-    if ($request->kelas_id) {
-        $query->where('kelas_id', $request->kelas_id);
-    }
-
-    $students = $query->get();
-    $totalSiswa = $students->count();
-    $kelasList = Kelas::all();
-
-    return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
-}
 
 
     public function create()

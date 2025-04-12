@@ -63,44 +63,45 @@ class dasboardStaffController extends Controller
 
 
 
-//     public function updateProfil(Request $request)
-// {
-//     $request->validate([
-//         'name' => 'required',
-//         'email' => 'required|email|unique:users',
-//         'password' => 'required',
-//         'nohp' => 'required',
-//         'address' => 'required',
-//         'role' => 'required|in:admin,staff,student',
-//         'foto' => 'nullable'
-//     ]);
+    //     public function updateProfil(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required',
+    //         'nohp' => 'required',
+    //         'address' => 'required',
+    //         'role' => 'required|in:admin,staff,student',
+    //         'foto' => 'nullable'
+    //     ]);
 
-//     $admin = Auth::user(); // atau ambil dari ID, tergantung sistem login kamu
+    //     $admin = Auth::user(); // atau ambil dari ID, tergantung sistem login kamu
 
-//     $admin->name = $request->nama;
+    //     $admin->name = $request->nama;
 
-//     if ($request->hasFile('foto')) {
-//         $fotoBaru = $request->file('foto')->store('foto-admin', 'public');
-//         $admin->foto = $fotoBaru;
-//     }
+    //     if ($request->hasFile('foto')) {
+    //         $fotoBaru = $request->file('foto')->store('foto-admin', 'public');
+    //         $admin->foto = $fotoBaru;
+    //     }
 
-//     $admin->update([
-//         'name' => $request->nama,
-//         'foto' => $fotoBaru ?? $admin->foto,
-//         // tambahkan yang lain juga kalau kolomnya required
-//         'email' => $admin->email,
-//         'password' => $admin->password,
-//         'role' => $admin->role,
-//         'nohp' => $admin->nohp,
-//         'address' => $admin->address,
-//     ]);
+    //     $admin->update([
+    //         'name' => $request->nama,
+    //         'foto' => $fotoBaru ?? $admin->foto,
+    //         // tambahkan yang lain juga kalau kolomnya required
+    //         'email' => $admin->email,
+    //         'password' => $admin->password,
+    //         'role' => $admin->role,
+    //         'nohp' => $admin->nohp,
+    //         'address' => $admin->address,
+    //     ]);
 
-//     return redirect('/pengaturan')->with('success', 'Profil berhasil diperbarui!');
-// }
+    //     return redirect('/pengaturan')->with('success', 'Profil berhasil diperbarui!');
+    // }
 
 
 
-    public function show(Request $request){
+    public function show(Request $request)
+    {
         $tanggal = $request->tanggal;
         $kelas_id = $request->kelas_id;
         $nama = $request->nama;
@@ -131,7 +132,8 @@ class dasboardStaffController extends Controller
     }
 
 
-    public function createPelanggaran($id){
+    public function createPelanggaran($id)
+    {
         $pelanggarans = Pelanggaran::select('id', 'nama_pelanggaran', 'kategori', 'point')->get();
         // $pelanggarans = $response->json();
         $student = Student::with('kelas', 'catatanpelanggarans')->findOrFail($id);
@@ -139,14 +141,15 @@ class dasboardStaffController extends Controller
     }
 
 
-    public function addPelanggaran(Request $request){
+    public function addPelanggaran(Request $request)
+    {
         $validateData = $request->validate([
-        'student_id'      => ['required', 'exists:students,id'],
-        'kelas_id'        => ['required', 'exists:kelas,id'],
-        'pelanggaran_id'  => ['required', 'exists:pelanggarans,id'],
-        'deskripsi'       => ['required', 'string', 'max:255'],
-        'foto'            => ['nullable', 'image', 'mimes:jpg,jpeg,png'],
-        'tanggal'         => ['required', 'date'],
+            'student_id'      => ['required', 'exists:students,id'],
+            'kelas_id'        => ['required', 'exists:kelas,id'],
+            'pelanggaran_id'  => ['required', 'exists:pelanggarans,id'],
+            'deskripsi'       => ['required', 'string', 'max:255'],
+            'foto'            => ['nullable', 'image', 'mimes:jpg,jpeg,png'],
+            'tanggal'         => ['required', 'date'],
         ]);
 
         $fileName = null;
@@ -168,12 +171,12 @@ class dasboardStaffController extends Controller
         }
 
         // Ambil data siswa berdasarkan student_id
-                $student = Student::with('kelas')->findOrFail($request->student_id);
+        $student = Student::with('kelas')->findOrFail($request->student_id);
 
         // Ambil data kelas berdasarkan kelas_id
-         $kelas = Kelas::findOrFail($request->kelas_id);
+        $kelas = Kelas::findOrFail($request->kelas_id);
 
-         CatatanPelanggaran::create([
+        CatatanPelanggaran::create([
             'student_id'      => $request->student_id,
             'kelas_id'        => $request->kelas_id,
             'pelanggaran_id'  => $request->pelanggaran_id, // Ambil ID pelanggaran, bukan nama atau kategori
@@ -209,5 +212,4 @@ class dasboardStaffController extends Controller
 
         return redirect('/daftarSiswa');
     }
-
 }
