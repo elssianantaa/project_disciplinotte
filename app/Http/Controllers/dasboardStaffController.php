@@ -100,13 +100,9 @@ class dasboardStaffController extends Controller
     // }
 
 
-<<<<<<< HEAD
 
-    public function show(Request $request)
-    {
-=======
     public function show(Request $request){
->>>>>>> 095659e5462614003b372a4f181433831782115c
+
         $tanggal = $request->tanggal;
         $kelas_id = $request->kelas_id;
         $nama = $request->nama;
@@ -297,10 +293,10 @@ class dasboardStaffController extends Controller
         }
 
         return redirect('/daftarSiswa');
-<<<<<<< HEAD
-    }
-=======
-    }        
 
->>>>>>> 095659e5462614003b372a4f181433831782115c
-}
+    }
+
+}        
+
+
+
