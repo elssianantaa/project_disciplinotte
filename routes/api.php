@@ -18,6 +18,7 @@ use App\Http\Controllers\PelanggaranApiController;
 
 Route::get('/pelanggaran', [PelanggaranApiController::class, 'index']);
 Route::post('/pelanggaran', [PelanggaranApiController::class, 'store']);
+Route::delete('/pelanggaran/{id}', [PelanggaranApiController::class, 'destroy']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
