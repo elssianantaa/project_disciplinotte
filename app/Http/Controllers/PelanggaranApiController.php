@@ -33,20 +33,20 @@ class PelanggaranApiController extends Controller
     }
 
     public function destroy($id)
-{
-    $pelanggaran = Pelanggaran::find($id);
+    {
+        $pelanggaran = Pelanggaran::find($id);
 
-    if (!$pelanggaran) {
-        return response()->json([
-            'message' => 'Data pelanggaran tidak ditemukan'
-        ], 404);
+        if (!$pelanggaran) {
+            return response()->json([
+                'message' => 'Data pelanggaran tidak ditemukan'
+            ], 404);
     }
 
     $pelanggaran->delete();
 
     return response()->json([
-        'message' => 'Pelanggaran berhasil dihapus'
-    ], 200);
+            'message' => 'Pelanggaran berhasil dihapus'
+        ], 200);
 }
 
 }
