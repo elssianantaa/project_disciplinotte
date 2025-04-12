@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\dasboardController;
 use App\Http\Controllers\dasboardStaffController;
+use App\Http\Controllers\PelanggaranApiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\studentController;
@@ -42,6 +43,8 @@ Route::middleware('staff')->group(function () {
     Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
     Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran'])->name('pelanggaran.store');
     Route::get('/staff/profile/{id}/edit', [dasboardStaffController::class, 'edit'])->name('staff.profile.edit');
+  
+
 
 // Rute untuk proses update profil
     Route::put('/staff/profile/{id}', [dasboardStaffController::class, 'update'])->name('staff.profile.update');
@@ -82,6 +85,12 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
     
 });
+
+Route::middleware(['login','auth', 'student'])->group(function () {
+    Route::get('/dashboardSiswa', [dasboardController::class, 'showDbStudent'])->name('dashboardSiswa');
+
+});
+
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 

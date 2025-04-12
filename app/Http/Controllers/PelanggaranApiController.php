@@ -32,6 +32,7 @@ class PelanggaranApiController extends Controller
         ], 201);
     }
 
+
     public function destroy($id)
     {
         $pelanggaran = Pelanggaran::find($id);

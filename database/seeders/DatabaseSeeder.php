@@ -41,6 +41,16 @@ class DatabaseSeeder extends Seeder
             'foto' => '-'
         ]);
 
+        User::create([
+            'name' => 'Oliv',
+            'email'=> 'oliv@gmail.com',
+            'password' => bcrypt('12345'),
+            'role' => 'student',
+            'nohp' => '08212288394',
+            'address' => 'bandung',
+            'foto' => '-'
+        ]);
+
         Kelas::create([
             'nama_kelas' => 'X DKV 1',
             'wali_kelas' => 'Ibu Vera',

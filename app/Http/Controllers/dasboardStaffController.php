@@ -300,7 +300,9 @@ class dasboardStaffController extends Controller
 
         return redirect('/daftarSiswa');
 
+
     }
-    }        
+
+}        
 
 

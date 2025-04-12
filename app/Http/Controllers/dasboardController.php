@@ -44,7 +44,7 @@ class dasboardController extends Controller
         } elseif ($user->role === 'staff') {
             return redirect('/dashboardStaff'); // Arahkan ke dashboard staff
         } elseif ($user->role === 'student') {
-            return redirect()->route('home'); // Arahkan ke halaman home
+            return redirect('/dashboardSiswa'); // Arahkan ke halaman home
         }
     }
 
@@ -61,6 +61,10 @@ class dasboardController extends Controller
     public function showDbStaff()
     {
         return view('Staff.dashboardStaff');
+    }
+    public function showDbStudent()
+    {
+        return view('Student.dashboardSiswa');
     }
 
     // public function index()
