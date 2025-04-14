@@ -159,18 +159,37 @@ class dasboardStaffController extends Controller
         $skorsing = $query->get();
         $kelasList = Kelas::all();
 
-        //ngambil data yang terbaru dan hanya 1 per siswa   
+        //ngambil data yang terbaru dan hanya 1 per siswa
         $students = Student::with([
             'skorsings' => function ($q) {
                 $q->latest('mulai')->limit(1);
             },
             'kelas'
         ])->where('status', 'skorsing')->get();
-              
+
 
         return view('Staff.daftarSkorsing', compact('students', 'kelasList'));
     }
 
+    //show siswa dikeluarkan
+    public function showOut(Request $request){
+        $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran'])
+        ->where('status', 'dikeluarkan'); // ⬅️ Fokus hanya yang dikeluarkan
+
+    if ($request->nama) {
+        $query->where('name', 'like', '%' . $request->nama . '%');
+    }
+
+    if ($request->kelas_id) {
+        $query->where('kelas_id', $request->kelas_id);
+    }
+
+    $students = $query->get();
+    $totalSiswa = $students->count();
+    $kelasList = Kelas::all();
+
+    return view('Staff.daftarSiswaOut', compact('students', 'kelasList', 'totalSiswa'));
+    }
 
     public function createPelanggaran($id)
     {
@@ -303,6 +322,6 @@ class dasboardStaffController extends Controller
 
     }
 
-}        
+}
 
 

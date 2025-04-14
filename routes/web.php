@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\dasboardController;
+use App\Http\Controllers\dasboardSiswaController;
 use App\Http\Controllers\dasboardStaffController;
 use App\Http\Controllers\PelanggaranApiController;
 use App\Http\Controllers\ProfileController;
@@ -32,9 +33,13 @@ Route::post('/register/create', [userController::class, 'addRe']);
 
 Route::middleware('staff')->group(function () {
     Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
+
     //NAMPILIN DAFTAR SKORSING
     Route::get('/daftarSkorsing', [dasboardStaffController::class, 'showSkorsing']);
 
+    //NAMPILIN DAFTAR SISWA DIKELUARKAN
+    Route::get('/daftarOut', [dasboardStaffController::class, 'showOut']);
+    
     //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
@@ -43,7 +48,7 @@ Route::middleware('staff')->group(function () {
     Route::get('/pelanggaran/{id}', [dasboardStaffController::class, 'createPelanggaran']);
     Route::post('/pelanggaran/create/', [dasboardStaffController::class, 'addPelanggaran'])->name('pelanggaran.store');
     Route::get('/staff/profile/{id}/edit', [dasboardStaffController::class, 'edit'])->name('staff.profile.edit');
-  
+
 
 
 // Rute untuk proses update profil
@@ -83,13 +88,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/profile', [ProfileController::class, 'show'])->name('admin.profile.show');
     Route::get('/admin/profile/{id}/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
-    
+
 });
 
 Route::middleware(['login','auth', 'student'])->group(function () {
-    Route::get('/dashboardSiswa', [dasboardController::class, 'showDbStudent'])->name('dashboardSiswa');
-
 });
+
+Route::get('/dashboardSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
 
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

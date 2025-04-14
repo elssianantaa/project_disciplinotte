@@ -103,17 +103,17 @@ class DatabaseSeeder extends Seeder
             'foto'=> '-'
         ]);
 
-        // Pelanggaran::create([
-        //     'nama_pelanggaran' => 'Bolos',
-        //     'Kategori' => 'Ringan',
-        //     'point' => '10'
-        // ]);
+        Pelanggaran::create([
+            'nama_pelanggaran' => 'Tawuran',
+            'Kategori' => 'Berat',
+            'point' => '40'
+        ]);
 
-        // Pelanggaran::create([
-        //     'nama_pelanggaran' => 'Tawuran',
-        //     'Kategori' => 'Berat',
-        //     'point' => '30'
-        // ]);
+        Pelanggaran::create([
+            'nama_pelanggaran' => 'Melawan guru',
+            'Kategori' => 'Berat',
+            'point' => '30'
+        ]);
 
         Staff::create([
             'nama' => 'Aiden',

@@ -158,7 +158,7 @@
         </div>
       </div>
     </section>
-    
+
 
     <!-- Riwayat Pelanggaran -->
     <div class="card mb-5 shadow-sm" style="margin-left: 96px; margin-right: 96px;">
@@ -167,35 +167,35 @@
       </div>
       <div class="card-body">
         <table class="table table-striped">
-          <thead>
-            <tr>
-                <th>Jenis Pelanggaran</th>
-                <th>Skor</th>
-                <th>Keterangan</th>
-                <th>Tanggal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-                <td>Tidak Menggunakan Seragam</td>
-                <td>20</td>
-                <td>Tanpa jas almamater</td>
-                <td>03-04-2025</td>
-            </tr>
-            <tr>
-                <td>Merokok</td>
-                <td>45</td>
-                <td>Kantin belakang sekolah</td>
-                <td>01-04-2025</td>
-            </tr>
-            <tr>
-                <td>Terlambat Masuk</td>
-                <td>10</td>
-                <td>Datang pukul 07:45</td>
-                <td>05-04-2025</td>
-            </tr>
-          </tbody>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>NISN</th>
+                    <th>Nama</th>
+                    <th>Pelanggaran</th>
+                    <th>Skor</th>
+                    <th>Tanggal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($pelanggarans as $p)
+                <tr @if($loop->first) class="table-danger" @endif>
+                    <td>
+                        {{ $loop->iteration }}
+                        @if ($loop->first)
+                        <span class="badge bg-warning text-dark">Perlu Pendampingan</span>
+                        @endif
+                    </td>
+                    <td>{{ $p->student->nisn }}</td>
+                    <td>{{ Str::limit($p->student->name, 1, '**') }}</td>
+                    <td>{{ $p->pelanggaran->nama_pelanggaran }}</td>
+                    <td>{{ $p->pelanggaran->point }}</td>
+                    <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
+
       </div>
     </div>
             <div class="alert alert-warning" role="alert" style="margin-left: 96px; margin-right: 96px;">

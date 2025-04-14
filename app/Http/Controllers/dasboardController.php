@@ -62,10 +62,10 @@ class dasboardController extends Controller
     {
         return view('Staff.dashboardStaff');
     }
-    public function showDbStudent()
-    {
-        return view('Student.dashboardSiswa');
-    }
+    // public function showDbStudent()
+    // {
+    //     return view('Student.dashboardSiswa');
+    // }
 
     // public function index()
     // {
@@ -98,7 +98,8 @@ class dasboardController extends Controller
     //Buat nampilin di dasboard staff
     public function show(Request $request)
     {
-        $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran']);
+        $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran'])
+            ->where('status', '!=', 'dikeluarkan'); // ⬅️ Tambahan ini
 
         if ($request->nama) {
             $query->where('name', 'like', '%' . $request->nama . '%');
@@ -114,6 +115,7 @@ class dasboardController extends Controller
 
         return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
     }
+
 
 
     public function create()
