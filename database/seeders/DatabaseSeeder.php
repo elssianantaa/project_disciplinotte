@@ -51,35 +51,89 @@ class DatabaseSeeder extends Seeder
             'foto' => '-'
         ]);
 
-        Kelas::create([
-            'nama_kelas' => 'X DKV 1',
-            'wali_kelas' => 'Ibu Vera',
-            'Jurusan' => 'DKV'
-        ]);
+        // Kelas::create([
+        //     'nama_kelas' => 'X DKV 1',
+        //     'wali_kelas' => 'Ibu Vera',
+        //     'Jurusan' => 'DKV'
+        // ]);
 
-        Kelas::create([
-            'nama_kelas' => 'XI RPL 1',
-            'wali_kelas' => 'Bapak Fahmi',
-            'Jurusan' => 'RPL'
-        ]);
+        // Kelas::create([
+        //     'nama_kelas' => 'X TKR 1',
+        //     'wali_kelas' => 'Ibu Dian',
+        //     'Jurusan' => 'DKV'
+        // ]);
 
-        Kelas::create([
-            'nama_kelas' => 'XI RPL 2',
-            'wali_kelas' => 'Ibu Feby',
-            'Jurusan' => 'RPL'
-        ]);
+        // Kelas::create([
+        //     'nama_kelas' => 'X TKR 2',
+        //     'wali_kelas' => 'Pak Muna',
+        //     'Jurusan' => 'DKV'
+        // ]);
 
-        Kelas::create([
-            'nama_kelas' => 'XII TO 1',
-            'wali_kelas' => 'Ibu Ajeng',
-            'Jurusan' => 'Teknik Otomotif'
-        ]);
+        // Kelas::create([
+        //     'nama_kelas' => 'X TKR 3',
+        //     'wali_kelas' => 'Ibu Dian',
+        //     'Jurusan' => 'DKV'
+        // ]);
 
-        Kelas::create([
-            'nama_kelas' => 'XII TO 2',
-            'wali_kelas' => 'Bapak Ridwan',
-            'Jurusan' => 'Teknik Otomotif'
-        ]);
+        // Kelas::create([
+        //     'nama_kelas' => 'X TBSM 1',
+        //     'wali_kelas' => 'Ibu Eva',
+        //     'Jurusan' => 'DKV'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'X TBSM 2',
+        //     'wali_kelas' => 'Ibu Pipit',
+        //     'Jurusan' => 'DKV'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'X TBSM 2',
+        //     'wali_kelas' => 'Ibu Irma',
+        //     'Jurusan' => 'DKV'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'X TBSM 2',
+        //     'wali_kelas' => 'Pak Beni',
+        //     'Jurusan' => 'DKV'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'X TBSM 2',
+        //     'wali_kelas' => 'Pak Helmi',
+        //     'Jurusan' => 'DKV'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'X TBSM 2',
+        //     'wali_kelas' => 'Pak Helmi',
+        //     'Jurusan' => 'DKV'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'XI RPL 1',
+        //     'wali_kelas' => 'Bapak Fahmi',
+        //     'Jurusan' => 'RPL'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'XI RPL 2',
+        //     'wali_kelas' => 'Ibu Feby',
+        //     'Jurusan' => 'RPL'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'XII TO 1',
+        //     'wali_kelas' => 'Ibu Ajeng',
+        //     'Jurusan' => 'Teknik Otomotif'
+        // ]);
+
+        // Kelas::create([
+        //     'nama_kelas' => 'XII TO 2',
+        //     'wali_kelas' => 'Bapak Ridwan',
+        //     'Jurusan' => 'Teknik Otomotif'
+        // ]);
 
         Student::create([
             'nisn' => '00737456',
@@ -104,13 +158,20 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pelanggaran::create([
+
             'nama_pelanggaran' => 'Tawuran',
             'Kategori' => 'Berat',
             'point' => '40'
         ]);
 
         Pelanggaran::create([
-            'nama_pelanggaran' => 'Melawan guru',
+            'nama_pelanggaran' => 'Bolos',
+            'Kategori' => 'Ringan',
+            'point' => '10'
+        ]);
+
+        Pelanggaran::create([
+            'nama_pelanggaran' => 'Tawuran',
             'Kategori' => 'Berat',
             'point' => '30'
         ]);
