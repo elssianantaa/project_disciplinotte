@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('total_point');
-            $table->string('jumlah_pelanggaran');
+            $table->string('jumlah_pelasnggaran');
             $table->string('terakhir_melanggar');
             $table->enum('Status', ['Aman', 'Dapat Peringatan', 'Dapat Sanksi']);
             $table->timestamps();

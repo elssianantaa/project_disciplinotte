@@ -9,6 +9,7 @@ use App\Http\Controllers\studentController;
 use App\Http\Controllers\userController;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,11 @@ Route::middleware(['login','auth', 'student'])->group(function () {
     Route::get('/dashboardSiswa', [dasboardController::class, 'showDbStudent'])->name('dashboardSiswa');
 
 });
+
+
+Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+Route::post('/kelas/import', [KelasController::class, 'import'])->name('kelas.import');
+
 
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

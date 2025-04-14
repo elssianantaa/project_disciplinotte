@@ -25,7 +25,7 @@
             <label class="form-label">Kelas</label>
             <select name="kelas_id" class="form-control" required>
                 @foreach($kelas as $k)
-                <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                    <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option> 
                 @endforeach
             </select>
         </div>
