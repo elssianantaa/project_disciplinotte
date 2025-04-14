@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\StudentImportController;
+use App\Http\Controllers\KelasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PelanggaranApiController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PelanggaranApiController;
 |
 */
 
+Route::post('kelas/import', [KelasController::class, 'importkelas']);
 Route::post('students/import', [StudentImportController::class, 'import']);
 Route::get('/pelanggaran', [PelanggaranApiController::class, 'index']);
 Route::post('/pelanggaran', [PelanggaranApiController::class, 'store']);
