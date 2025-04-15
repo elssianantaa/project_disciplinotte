@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'student' => [ // tambahkan ini untuk siswa
+            'driver' => 'session',
+            'provider' => 'students',
+        ], 
     ],
 
     /*
@@ -65,11 +70,18 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'students' => [ // tambahkan ini
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
     ],
+
+   
 
     /*
     |--------------------------------------------------------------------------

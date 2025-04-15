@@ -5,6 +5,7 @@ use App\Http\Controllers\dasboardSiswaController;
 use App\Http\Controllers\dasboardStaffController;
 use App\Http\Controllers\PelanggaranApiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileStudentController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\userController;
@@ -31,7 +32,14 @@ Route::post('/auth', [dasboardController::class, 'authentication']);
 Route::get('/login', [dasboardController::class, 'login'])->name('login');
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
+Route::get('/loginSiswa', [StudentController::class, 'showLoginForm'])->name('Student.login');
+Route::post('/loginSiswa', [StudentController::class, 'login'])->name('Student.login');
+Route::post('/auth', [StudentController::class, 'login']);
 
+
+Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+Route::post('/kelas/import', [KelasController::class, 'import'])->name('kelas.import');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::middleware('staff')->group(function () {
     Route::get('/dashboardStaff', [dasboardController::class, 'showDbStaff']);
 
@@ -92,18 +100,14 @@ Route::middleware(['admin'])->group(function () {
 
 });
 
-Route::middleware(['login','auth', 'student'])->group(function () {
-});
+Route::get('/dashboardSiswa', [StudentController::class, 'dashboard'])->name('Student.dashboardSiswa');
+Route::get('/student/profile', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
+Route::get('/student/profile/edit/{id}', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
+Route::post('/student/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
 
-Route::get('/dashboardSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
-
-
-Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
-Route::post('/kelas/import', [KelasController::class, 'import'])->name('kelas.import');
+// Route::get('/dashboardSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
 
 
-
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 

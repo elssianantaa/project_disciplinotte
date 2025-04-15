@@ -97,7 +97,7 @@
                 <span class="fw-semibold">Vii</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="profilesiswa.html"><i class="fas fa-user me-2"></i>Profil</a></li>
+                <li><a class="dropdown-item" href="/student/profile/"><i class="fas fa-user me-2"></i>Profil</a></li>
                 <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Pengaturan</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
@@ -177,8 +177,8 @@
                     <th>Tanggal</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach($pelanggarans as $p)
+            {{-- <tbody>
+                @foreach($pelanggarans as $pelanggaran)
                 <tr @if($loop->first) class="table-danger" @endif>
                     <td>
                         {{ $loop->iteration }}
@@ -193,7 +193,7 @@
                     <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                 </tr>
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
 
       </div>

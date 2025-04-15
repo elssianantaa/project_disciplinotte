@@ -27,3 +27,11 @@ Route::delete('/pelanggaran/{id}', [PelanggaranApiController::class, 'destroy'])
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/test-upload', function (Request $request) {
+    if ($request->hasFile('file')) {
+        return response()->json(['success' => 'File diterima']);
+    } else {
+        return response()->json(['error' => 'File tidak ditemukan'] , 400);
+    }
+});

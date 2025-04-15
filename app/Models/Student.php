@@ -3,19 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Student extends Model
+
+class Student extends Authenticatable
 {
     use HasFactory;
-    protected $guarded = [];
+
     protected $fillable = [
-        'nisn', 'name', 'kelas_id', 'jenis_kelamin', 'password', 'status', 'point', 'foto'
+        'nisn', 'name', 'password', 'kelas_id', 'jenis_kelamin', 'status', 'point', 'foto',
     ];
 
-    protected $hidden = [
-        'password',
-    ];
+    protected $hidden = ['password'];
+
+    public function getAuthIdentifierName()
+    {
+        return 'nisn';
+    }
 
     // student sama kelas
     public function kelas(){

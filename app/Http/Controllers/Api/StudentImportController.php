@@ -18,6 +18,11 @@ class StudentImportController extends Controller
      */
     public function import(Request $request)
     {
+
+        if (!$request->hasFile('file')) {
+            return response()->json(['error' => 'File tidak ditemukan dalam request'], 400);
+        }
+    
         // Validasi file yang di-upload
         $validator = Validator::make($request->all(), [
             'file' => 'required|mimes:xlsx,xls,csv|max:2048',
