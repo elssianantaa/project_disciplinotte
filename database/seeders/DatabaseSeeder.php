@@ -51,17 +51,17 @@ class DatabaseSeeder extends Seeder
             'foto' => '-'
         ]);
 
-        // Kelas::create([
-        //     'nama_kelas' => 'X DKV 1',
-        //     'wali_kelas' => 'Ibu Vera',
-        //     'Jurusan' => 'DKV'
-        // ]);
+        Kelas::create([
+            'nama_kelas' => 'X DKV 1',
+            'wali_kelas' => 'Ibu Vera',
+            'Jurusan' => 'DKV'
+        ]);
 
-        // Kelas::create([
-        //     'nama_kelas' => 'X TKR 1',
-        //     'wali_kelas' => 'Ibu Dian',
-        //     'Jurusan' => 'DKV'
-        // ]);
+        Kelas::create([
+            'nama_kelas' => 'X TKR 1',
+            'wali_kelas' => 'Ibu Dian',
+            'Jurusan' => 'DKV'
+        ]);
 
         // Kelas::create([
         //     'nama_kelas' => 'X TKR 2',

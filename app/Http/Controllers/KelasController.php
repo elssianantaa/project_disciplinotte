@@ -15,7 +15,7 @@ class KelasController extends Controller
     // {
     //     // Ambil semua data kelas dari database
     //     $kelas = Kelas::all();
-        
+
     //     return view('admin.kelas.index', compact('kelas'));
     // }
 
@@ -38,7 +38,7 @@ class KelasController extends Controller
     // {
     //     // Ambil semua data kelas dari database (kelas yang sudah di-import)
     //     $kelas = Kelas::all();
-        
+
     //     return view('admin.siswa.create', compact('kelas'));
     // }
 
@@ -56,7 +56,7 @@ class KelasController extends Controller
         // Mengimpor file Excel
         try {
             Excel::import(new KelasImport, $request->file('file'));
-            return response()->json(['message' => 'Data siswa berhasil diimpor'], 200);
+            return response()->json(['message' => 'Data kelas berhasil diimpor'], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Terjadi kesalahan saat mengimpor data: ' . $e->getMessage()], 500);
         }
