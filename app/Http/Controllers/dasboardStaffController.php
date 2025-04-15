@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CatatanPelanggaran;
 use App\Models\Kelas;
 use App\Models\Pelanggaran;
+use App\Models\RiwayatKelas;
 use App\Models\Skorsing;
 use App\Models\Student;
 use App\Models\User;
@@ -318,9 +319,48 @@ class dasboardStaffController extends Controller
         }
 
         return redirect('/daftarSiswa');
-
-
     }
+
+
+    //NAIK KELAS
+
+    public function showKelas(){
+        $data['kelas'] = RiwayatKelas::with(['kelasLama', 'kelas', 'student'])->get();
+        return view('Staff.daftarRiwayatKelas', $data);
+    }
+    public function showRiwayatKelas(){
+        $daftarKelas = Kelas::all(); 
+        return view('Staff.kenaikanKelas', compact('daftarKelas'));
+    }
+
+    public function naikKelas(Request $request)
+    {
+        $periode = $request->input('periode');
+        $kelasAsal = $request->input('kelas_lama_id'); // Kelas asal yang dipilih (misalnya 10, 11, 12)
+        $kelasBaruId = $request->input('kelas_id'); // Kelas tujuan yang dipilih
+    
+        // Ambil semua siswa dari kelas asal yang dipilih
+        $students = Student::where('kelas_id', $kelasAsal)->get(); // Filter berdasarkan kelas asal (10, 11, 12)
+    
+        foreach ($students as $student) {
+            // Simpan riwayat kenaikan kelas
+            RiwayatKelas::create([
+                'student_id' => $student->id,
+                'kelas_lama_id' => $student->kelas_id,  // Kelas lama
+                'kelas_id' => $kelasBaruId,              // Kelas baru
+                'periode' => $periode,
+            ]);
+    
+            // Update ke kelas baru
+            $student->update([
+                'kelas_id' => $kelasBaruId,
+            ]);
+        }
+    
+        return redirect('/riwayatKelas');
+    }
+    
+
 
 }
 

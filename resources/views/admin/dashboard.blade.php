@@ -205,12 +205,23 @@ d{{-- <!DOCTYPE html>
             </div>
         </div>
     </div>
+    
     <div class="col-md-4">
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="card-title">Daftar Pengguna</h5>
                 <p class="card-text">Lihat dan kelola data pengguna.</p>
                 <a href="{{ url('admin/users') }}" class="btn btn-warning">Lihat Data</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Kenaikan Kelas</h5>
+                <p class="card-text">Lihat dan kelola data kenaikan kelas siswa.</p>
+                <a href="{{ url('/riwayatKelas') }}" class="btn btn-warning">Kelola Data</a>
             </div>
         </div>
     </div>

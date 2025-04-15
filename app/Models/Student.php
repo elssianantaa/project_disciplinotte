@@ -37,6 +37,11 @@ class Student extends Authenticatable
     //     return $this->hasMany(Pelanggaran::class, 'kelas_id', 'id');
     // }
 
+    //>> Riwayat kelas sama siswa
+    public function riwayatkelas(){
+        return $this->hasMany(RiwayatKelas::class, 'student_id', 'id');
+    }
+
 
     // >> catatan pelanggaran sama siswa
     public function catatanPelanggarans(){

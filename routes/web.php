@@ -48,7 +48,7 @@ Route::middleware('staff')->group(function () {
 
     //NAMPILIN DAFTAR SISWA DIKELUARKAN
     Route::get('/daftarOut', [dasboardStaffController::class, 'showOut']);
-    
+
     //NAMPILIN SISWA DI DASBOARD STAFF
     Route::get('/daftarSiswa', [dasboardController::class, 'show']);
 
@@ -109,6 +109,10 @@ Route::post('/student/profile/update/{id}', [ProfileStudentController::class, 'u
 
 
 
+// naik kelas
+Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas']);
+Route::get('/kenaikanKelas', [dasboardStaffController::class, 'showRiwayatKelas'])->name('form.naik.kelas');
+Route::post('/naikKelas', [dasboardStaffController::class, 'naikKelas'])->name('naik.kelas');
 
 
 
