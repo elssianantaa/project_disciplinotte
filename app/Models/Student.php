@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Student extends Authenticatable
 {
     use HasFactory;
-
+    protected $guard = 'student';
     protected $fillable = [
         'nisn', 'name', 'password', 'kelas_id', 'jenis_kelamin', 'status', 'point', 'foto',
     ];
@@ -65,4 +65,9 @@ class Student extends Authenticatable
     public function skorsings(){
         return $this->hasMany(Skorsing::class, 'student_id', 'id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
 }

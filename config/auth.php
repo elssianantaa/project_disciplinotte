@@ -41,10 +41,10 @@ return [
             'provider' => 'users',
         ],
 
-        'student' => [ // tambahkan ini untuk siswa
-            'driver' => 'session',
-            'provider' => 'students',
-        ], 
+        // 'student' => [ // tambahkan ini untuk siswa
+        //     'driver' => 'session',
+        //     'provider' => 'students',
+        // ], 
     ],
 
     /*
@@ -70,10 +70,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'students' => [ // tambahkan ini
-            'driver' => 'eloquent',
-            'model' => App\Models\Student::class,
-        ],
+        // 'students' => [ // tambahkan ini
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Student::class,
+        // ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -109,6 +109,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        // 'students' => [ // Menambahkan konfigurasi reset password untuk siswa
+        //     'provider' => 'students',
+        //     'table' => 'password_reset_tokens',
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ],
     ],
 
     /*

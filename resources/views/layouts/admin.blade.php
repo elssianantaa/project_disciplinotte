@@ -113,7 +113,7 @@
                     @else
                         <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
                              style="width: 100px; height: 100px; font-size: 40px;">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            {{ strtoupper(subsstr(Auth::user()->name, 0, 1)) }}
                         </div>
                     @endif
                 </div>

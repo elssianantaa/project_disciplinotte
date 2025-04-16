@@ -15,13 +15,13 @@ class StudentMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next)
-    {
-        // Cek apakah pengguna yang login adalah siswa
-        if (Auth::check() && Auth::user()->role != 'student') {
-            return redirect()->route('loginSiswa'); // Redirect ke halaman login jika bukan siswa
-        }
-
-        return $next($request);
+{
+    // Jika belum login atau bukan student, redirect
+    if (!Auth::check() || Auth::user()->role !== 'student') {
+        return redirect('/loginSiswa');
     }
+
+    return $next($request);
+}
     
 }

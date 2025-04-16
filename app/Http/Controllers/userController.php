@@ -10,13 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class userController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth'); // wajib login
-
-        // hanya admin yang bisa akses semua method kecuali logout
-        $this->middleware('admin')->except(['logout']);
-    }
+   
 
     //w
     public function createRe()

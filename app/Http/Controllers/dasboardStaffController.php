@@ -128,6 +128,7 @@ class dasboardStaffController extends Controller
 
         $catatanpelanggaran = $query->get();
         $kelasList = Kelas::all();
+        // $totalSkorsing = $totalSkorsing->count();
 
 
         return view('Staff.daftarPelanggaran', compact('catatanpelanggaran', 'kelasList'));
@@ -169,7 +170,8 @@ class dasboardStaffController extends Controller
         ])->where('status', 'skorsing')->get();
 
 
-        return view('Staff.daftarSkorsing', compact('students', 'kelasList'));
+        return view('Staff.daftarSkorsing', compact('students', 'kelasList', 'totalSkorsing'));
+ 
     }
 
     //show siswa dikeluarkan

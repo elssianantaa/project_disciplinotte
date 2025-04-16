@@ -33,6 +33,10 @@ class User extends Authenticatable
     ];
     protected $guarded = ['id'];
 
+    public function student()
+{
+    return $this->hasOne(Student::class);  // pastikan relasi ini benar
+}
 
     /**
      * The attributes that should be hidden for serialization.

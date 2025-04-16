@@ -183,6 +183,11 @@
                         Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
                     </div>
                 </div>
+                <div class="col-md-2">
+                    <div class="form-label d-block">
+                        Jumlah Skorsing: <span class="fw-bold">{{ $totalSkorsing }}</span>
+                    </div>
+                </div>
             </div>
         </form>
 

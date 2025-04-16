@@ -25,31 +25,26 @@ class dasboardController extends Controller
     public function authentication(Request $request)
 {
     // Validasi input
-    $validateData = $request->validate([
+    $credentials = $request->only('email', 'password');
+
+    // Validasi input
+    $request->validate([
         'email' => ['required', 'email'],
         'password' => 'required'
     ]);
 
-    // Coba login menggunakan Auth::attempt() dengan data yang sudah tervalidasi
-    if (Auth::attempt([
-        'email' => $request->email,
-        'password' => $request->password
-    ])) {
-        // Ambil user yang berhasil login
+    // Coba login menggunakan guard yang sesuai
+    if (Auth::guard('web')->attempt($credentials)) {
         $user = Auth::user();
-
-        // Pengalihan berdasarkan role
         if ($user->role === 'admin') {
             return redirect('/dashboard'); // Arahkan ke dashboard admin
         } elseif ($user->role === 'staff') {
             return redirect('/dashboardStaff'); // Arahkan ke dashboard staff
-        } elseif ($user->role === 'student') {
-            return redirect('/dashboardSiswa'); // Arahkan ke halaman home
-        }
+        } 
+    } else {
+        // Jika login gagal
+        return back()->withErrors(['loginSiswa' => 'Invalid credentials']);
     }
-
-    // Jika login gagal, beri pesan kesalahan
-    return back()->withErrors(['error' => 'Email atau password salah.']);
 }
 
 
@@ -90,8 +85,10 @@ class dasboardController extends Controller
 
         $students = $query->get();
         $totalSiswa = $students->count();
+        $totalSkorsing = $students->where('status', 'skorsing')->count();
 
-        return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList'));
+
+        return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList','totalSkorsing'));
     }
 
 
@@ -111,9 +108,11 @@ class dasboardController extends Controller
 
         $students = $query->get();
         $totalSiswa = $students->count();
+        $totalSkorsing = $students->where('status', 'skorsing')->count(); // Tambahan ini
+
         $kelasList = Kelas::all();
 
-        return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
+        return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa','totalSkorsing'));
     }
 
 
