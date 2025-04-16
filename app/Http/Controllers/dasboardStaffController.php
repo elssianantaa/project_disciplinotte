@@ -331,37 +331,49 @@ class dasboardStaffController extends Controller
         return view('Staff.daftarRiwayatKelas', $data);
     }
     public function showRiwayatKelas(){
-        $daftarKelas = Kelas::all(); 
-        return view('Staff.kenaikanKelas', compact('daftarKelas'));
+        $daftarKelas = Kelas::all();
+        $periodeList = [];
+
+        $startYear = 2018;
+        $endYear = 2030;
+
+        for ($year = $startYear; $year < $endYear; $year++) {
+            $periodeList[] = $year . '/' . ($year + 1);
+        }
+
+        // hasilnya: ['2018/2019', '2019/2020', ..., '2029/2030']
+        return view('Staff.kenaikanKelas', compact('daftarKelas', 'periodeList'));
     }
 
     public function naikKelas(Request $request)
     {
-        $periode = $request->input('periode');
-        $kelasAsal = $request->input('kelas_lama_id'); // Kelas asal yang dipilih (misalnya 10, 11, 12)
-        $kelasBaruId = $request->input('kelas_id'); // Kelas tujuan yang dipilih
-    
-        // Ambil semua siswa dari kelas asal yang dipilih
-        $students = Student::where('kelas_id', $kelasAsal)->get(); // Filter berdasarkan kelas asal (10, 11, 12)
-    
+        $periode = $request->input('periode_baru'); // Periode baru (contoh: 2024/2025)
+        $periodeLama = $request->input('periode_lama'); // Tambahan
+        $kelasAsal = $request->input('kelas_lama_id');
+        $kelasBaruId = $request->input('kelas_id');
+
+        $students = Student::where('kelas_id', $kelasAsal)->get();
+
         foreach ($students as $student) {
             // Simpan riwayat kenaikan kelas
             RiwayatKelas::create([
                 'student_id' => $student->id,
-                'kelas_lama_id' => $student->kelas_id,  // Kelas lama
-                'kelas_id' => $kelasBaruId,              // Kelas baru
-                'periode' => $periode,
+                'kelas_lama_id' => $student->kelas_id,
+                'kelas_id' => $kelasBaruId,
+                'periode_lama' => $periodeLama, // ini tambahan
+                'periode_baru' => $periode,
             ]);
-    
+
             // Update ke kelas baru
             $student->update([
                 'kelas_id' => $kelasBaruId,
             ]);
         }
-    
+
+
         return redirect('/riwayatKelas');
     }
-    
+
 
 
 }

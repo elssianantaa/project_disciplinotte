@@ -98,6 +98,8 @@ Route::middleware(['auth:web','admin'])->group(function () {
     Route::put('/admin/dashboard/{siswa}', [dasboardController::class, 'update'])->name('admin.siswa.update');
     Route::delete('/admin/dashboard/{siswa}', [dasboardController::class, 'destroy'])->name('admin.siswa.destroy');
 
+    Route::get('/rekapSiswa', [dasboardController::class, 'showRekap'])->name('rekap.siswa');
+
     Route::get('/admin/kelolastaff', [StaffController::class, 'index'])->name('admin.kelolastaff.index');
     Route::get('/admin/kelolastaff/create', [StaffController::class, 'create'])->name('admin.kelolastaff.create');
     Route::post('/admin/kelolastaff/store', [StaffController::class, 'store'])->name('admin.kelolastaff.store');
@@ -138,11 +140,18 @@ Route::middleware(['auth:web','admin'])->group(function () {
 // Route::get('/dashboardSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
 
 
+<<<<<<< HEAD
+=======
+Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+Route::post('/kelas/import', [KelasController::class, 'import'])->name('kelas.import');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+>>>>>>> 5453769cc96a9c9882e661190acee6a6259d23c6
 
 // naik kelas
 Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas']);
 Route::get('/kenaikanKelas', [dasboardStaffController::class, 'showRiwayatKelas'])->name('form.naik.kelas');
 Route::post('/naikKelas', [dasboardStaffController::class, 'naikKelas'])->name('naik.kelas');
+
 
 
 

@@ -219,9 +219,9 @@ d{{-- <!DOCTYPE html>
     <div class="col-md-4">
         <div class="card">
             <div class="card-body text-center">
-                <h5 class="card-title">Kenaikan Kelas</h5>
+                <h5 class="card-title">Tahun Ajaran Baru</h5>
                 <p class="card-text">Lihat dan kelola data kenaikan kelas siswa.</p>
-                <a href="{{ url('/riwayatKelas') }}" class="btn btn-warning">Kelola Data</a>
+                <a href="{{ url('/riwayatKelas') }}" class="btn btn-danger">Kelola Data</a>
             </div>
         </div>
     </div>

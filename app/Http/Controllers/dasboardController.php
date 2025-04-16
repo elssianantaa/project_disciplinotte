@@ -47,6 +47,51 @@ class dasboardController extends Controller
     }
 }
 
+    // REKAP SISWA
+    public function showRekap(Request $request)
+    {
+        // Ambil daftar kelas untuk dropdown
+        $kelasList = Kelas::all();
+    
+        // Ambil daftar periode
+        $periodeList = [];
+        $startYear = 2018;
+        $endYear = 2031;
+        for ($year = $startYear; $year < $endYear; $year++) {
+            $periodeList[] = $year . '/' . ($year + 1);
+        }
+    
+        // Query siswa dengan relasi yang dibutuhkan
+        $query = Student::with(['riwayatkelas', 'catatan_pelanggarans']);
+    
+        // Filter berdasarkan kelas jika ada
+        if ($request->kelas_id) {
+            $query->where('kelas_id', $request->kelas_id);
+        }
+    
+        // Filter berdasarkan nama jika ada
+        if ($request->nama) {
+            $query->where('name', 'like', '%' . $request->nama . '%');
+        }
+    
+        // Filter berdasarkan periode jika ada (periode lama atau periode baru)
+        if ($request->periode) {
+            $query->whereHas('riwayatkelas', function ($q) use ($request) {
+                // Cek apakah periode lama atau periode baru ada yang cocok
+                $q->where('periode_lama', $request->periode)
+                  ->orWhere('periode_baru', $request->periode);
+            });
+        }
+    
+        // Ambil data siswa setelah filter
+        $students = $query->get();
+    
+        // Hitung total siswa
+        $totalSiswa = $students->count();
+    
+        return view('admin.rekapSiswa', compact('students', 'totalSiswa', 'request', 'kelasList', 'periodeList'));
+    }
+    
 
     // public function showDb()
     // {
@@ -68,9 +113,29 @@ class dasboardController extends Controller
     //     return view('admin.siswa.index', compact('students'));
     // }
 
+    // public function index(Request $request)
+    // {
+
+    //     $students = Student::with(['kelas', 'catatan_pelanggarans'])->get();
+    //     $kelasList = Kelas::all(); // untuk dropdown
+    //     $query = Student::with('kelas');
+
+    //     if ($request->kelas_id) {
+    //         $query->where('kelas_id', $request->kelas_id);
+    //     }
+
+    //     if ($request->nama) {
+    //         $query->where('name', 'like', '%' . $request->nama . '%');
+    //     }
+
+    //     $students = $query->get();
+    //     $totalSiswa = $students->count();
+
+    //     return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList'));
+    // }
+
     public function index(Request $request)
     {
-
         $students = Student::with(['kelas', 'catatan_pelanggarans'])->get();
         $kelasList = Kelas::all(); // untuk dropdown
         $query = Student::with('kelas');
@@ -83,7 +148,8 @@ class dasboardController extends Controller
             $query->where('name', 'like', '%' . $request->nama . '%');
         }
 
-        $students = $query->get();
+        // Mengurutkan berdasarkan inisial nama (huruf pertama)
+        $students = $query->orderByRaw('UPPER(SUBSTRING(name, 1, 1))')->get();
         $totalSiswa = $students->count();
         $totalSkorsing = $students->where('status', 'skorsing')->count();
 
@@ -96,16 +162,18 @@ class dasboardController extends Controller
     public function show(Request $request)
     {
         $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran'])
-            ->where('status', '!=', 'dikeluarkan'); // ⬅️ Tambahan ini
+        ->where('status', '!=', 'dikeluarkan') // ⬅️ Tambahan ini
+        ->orderBy('name', 'asc'); // ⬅️ Urutkan berdasarkan nama A-Z
 
-        if ($request->nama) {
-            $query->where('name', 'like', '%' . $request->nama . '%');
-        }
+    if ($request->nama) {
+        $query->where('name', 'like', '%' . $request->nama . '%');
+    }
 
-        if ($request->kelas_id) {
-            $query->where('kelas_id', $request->kelas_id);
-        }
+    if ($request->kelas_id) {
+        $query->where('kelas_id', $request->kelas_id);
+    }
 
+<<<<<<< HEAD
         $students = $query->get();
         $totalSiswa = $students->count();
         $totalSkorsing = $students->where('status', 'skorsing')->count(); // Tambahan ini
@@ -113,6 +181,14 @@ class dasboardController extends Controller
         $kelasList = Kelas::all();
 
         return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa','totalSkorsing'));
+=======
+    $students = $query->get();
+    $totalSiswa = $students->count();
+    $kelasList = Kelas::all();
+
+    return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
+
+>>>>>>> 5453769cc96a9c9882e661190acee6a6259d23c6
     }
 
 
