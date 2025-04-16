@@ -55,7 +55,7 @@
                 <th>Kelas</th>
                 <th>Jenis Kelamin</th>
                 <th>Status</th>
-                <th>Point</th>
+                <th>Point Pelanggaran</th>
                 <th>Aksi</th>
             </tr>
         </thead>

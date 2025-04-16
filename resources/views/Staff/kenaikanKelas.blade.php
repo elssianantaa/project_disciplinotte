@@ -190,7 +190,7 @@
 
 <!-- Navbar Top -->
 <nav class="navbar-top d-flex justify-content-between align-items-center">
-  <h4 class="my-2">Monitoring Pelanggaran</h4>
+  <h4 class="my-2">Kenaikan Kelas</h4>
   <div class="dropdown">
     <button class="btn btn-white d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
         {{-- <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
@@ -222,7 +222,7 @@
     <h5>ADMIN STAF</h5>
   </div>
   <ul class="nav flex-column">
-    <li class="nav-item"><a class="nav-link" href="/dashboardStaff"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
     <li class="nav-item"><a class="nav-link" href="/daftarSiswa"><i class="fas fa-list"></i> Daftar Siswa</a></li>
     <li class="nav-item"><a class="nav-link active" href="/daftarPelanggaran"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
     <li class="nav-item"><a class="nav-link" href="{{ route('staff.profile.edit', Auth::user()->id) }}"><i class="fas fa-cog"></i> Pengaturan</a></li>
@@ -241,20 +241,42 @@
 <div class="content">
     <form action="{{ route('naik.kelas') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
+        {{-- Periode Lama --}}
         <div class="mb-3">
-            <label for="periode" class="form-label">Periode / Tahun Ajaran</label>
-            <input type="text" name="periode" class="form-control" placeholder="2024/2025" required>
+        <label for="periode_lama" class="form-label">Periode Lama</label>
+        <select name="periode_lama" class="form-control" required>
+            <option value="">Pilih Periode Lama</option>
+            @foreach($periodeList as $periode)
+                <option value="{{ $periode }}">{{ $periode }}</option>
+            @endforeach
+        </select>
         </div>
-    
+
+
+
+        {{-- Kelas Lama --}}
         <div class="mb-3">
             <label for="kelas_asal" class="form-label">Kelas lama</label>
             <select name="kelas_lama_id" class="form-control" required>
                 @foreach($daftarKelas as $kelas)
-                <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
-            @endforeach            
+                    <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
+                @endforeach
             </select>
         </div>
-    
+
+        {{-- Periode Baru --}}
+        <div class="mb-3">
+            <label for="periode_baru" class="form-label">Periode Baru</label>
+            <select name="periode_baru" class="form-control" required>
+                <option value="">Pilih Periode Baru</option>
+                @foreach($periodeList as $periode)
+                    <option value="{{ $periode }}">{{ $periode }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        {{-- Kelas Baru --}}
         <div class="mb-3">
             <label for="kelas_id" class="form-label">Kelas baru</label>
             <select name="kelas_id" class="form-control" required>
@@ -263,11 +285,12 @@
                 @endforeach
             </select>
         </div>
-    
+
         <button type="submit" class="btn btn-success">Naikkan Semua Siswa</button>
     </form>
-    
-    
+
+
+
 
 </div>
 

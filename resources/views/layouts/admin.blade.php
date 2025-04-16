@@ -117,7 +117,7 @@
                         </div>
                     @endif
                 </div>
-            
+
               <h5>{{ Auth::user()->name }}</h5>
               <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
               <hr>
@@ -126,7 +126,7 @@
                 <p class="mb-2"><strong>No HP:</strong> {{ Auth::user()->nohp }}</p>
                 <p class="mb-0"><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
             </div>
-            
+
             </div>
             <div class="modal-footer">
                 <a href="{{ route('admin.profile.edit', Auth::user()->id) }}" class="btn btn-primary">Edit Profile</a>
@@ -173,7 +173,12 @@
             {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="fas fa-user"></i> Users</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/kelolastaff') }}"><i class="fas fa-user"></i>Kelola Staff</a></li> --}}
             <li class="nav-item"><a class="nav-link" href="/admin/siswa"><i class="fas fa-list"></i> Daftar Siswa</a></li>
-            <li class="nav-item"><a class="nav-link" href="/admin/users"><i class="fas fa-list"></i> Daftar Pengguna</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/users">
+                    <i class="fas fa-users"></i> Daftar Pengguna
+                </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/rekapSiswa"><i class="fas fa-clipboard-list"></i> Rekap Siswa</a></li>
             {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/pelanggaran') }}"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/laporan') }}"><i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li> --}}
             <li class="nav-item"><a class="nav-link" href="/admin/profile"><i class="fas fa-cog"></i> Pengaturan</a></li>

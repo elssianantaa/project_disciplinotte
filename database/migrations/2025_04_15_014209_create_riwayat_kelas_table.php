@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreign('kelas_lama_id')->references('id')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('kelas_id');
             $table->foreign('kelas_id')->references('id')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('periode');
+            $table->string('periode_baru');
+            $table->string('periode_lama');
             $table->timestamps();
         });
     }

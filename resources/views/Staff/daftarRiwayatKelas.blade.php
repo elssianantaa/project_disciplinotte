@@ -173,9 +173,10 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Siswa</th>
+                    <th>Periode Lama</th>
                     <th>Kelas Lama</th>
+                    <th>Periode Baru</th>
                     <th>Kelas Baru</th>
-                    <th>Periode</th>
                     <th>Tanggal Naik</th>
                 </tr>
             </thead>
@@ -184,15 +185,16 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $riwayat->student->name }}</td>
+                        <td>{{ $riwayat->periode_lama }}</td>
                         <td>{{ $riwayat->kelasLama->nama_kelas ?? '-' }}</td>
+                        <td>{{ $riwayat->periode_baru }}</td>
                         <td>{{ $riwayat->kelas->nama_kelas ?? '-' }}</td>
-                        <td>{{ $riwayat->periode }}</td>
                         <td>{{ $riwayat->created_at->format('d-m-Y') }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        
+
         {{-- @endif --}}
         </div>
 
