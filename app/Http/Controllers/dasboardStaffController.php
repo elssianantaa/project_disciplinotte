@@ -171,7 +171,7 @@ class dasboardStaffController extends Controller
 
 
         return view('Staff.daftarSkorsing', compact('students', 'kelasList', 'totalSkorsing'));
- 
+
     }
 
     //show siswa dikeluarkan
@@ -331,15 +331,17 @@ class dasboardStaffController extends Controller
         return view('Staff.daftarRiwayatKelas', $data);
     }
     public function showRiwayatKelas(){
+
         $daftarKelas = Kelas::all();
         $periodeList = [];
 
-        $startYear = 2018;
-        $endYear = 2030;
+        $endYear = 2024; // batas akhir tahun
+        $startYear = 2018; // batas awal tahun
 
-        for ($year = $startYear; $year < $endYear; $year++) {
+        for ($year = $endYear; $year >= $startYear; $year--) {
             $periodeList[] = $year . '/' . ($year + 1);
         }
+
 
         // hasilnya: ['2018/2019', '2019/2020', ..., '2029/2030']
         return view('Staff.kenaikanKelas', compact('daftarKelas', 'periodeList'));

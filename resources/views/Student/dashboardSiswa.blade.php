@@ -75,7 +75,7 @@
       }
     </style>
   </head>
-  
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
@@ -115,11 +115,11 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                  <a class="dropdown-item {{ request()->routeIs('Student.profile.show') ? 'active' : '' }}" 
+                  <a class="dropdown-item {{ request()->routeIs('Student.profile.show') ? 'active' : '' }}"
                     href="{{ route('Student.profile.show') }}">
                     <i class="fas fa-user me-2"></i>Profil
                  </a>
-              </li>              
+              </li>
                 <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Pengaturan</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
@@ -244,6 +244,12 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- letakkan ini sebelum tag </body> -->
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS (butuh untuk dropdown & collapse) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -352,40 +358,6 @@
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="gambar/Logosmk.gif" alt="Logo Sekolah" />
-        <span class="fw-bold text-black">DisipliNote</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="">Pelanggaran</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-              {{-- <img src="img/hd nya bund.jpeg" class="rounded-circle me-2" width="40" height="40" alt="User" /> --}}
-              {{-- <span class="fw-semibold">Vii</span> --}}
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="{{route('Student.profile.show')}}"><i class="fas fa-user me-2"></i>Profil</a></li>
-              <li>
-                <a class="dropdown-item" href="{{ route('updatePassword') }}">
-                    <i class="bi bi-key"></i> Ubah Password
-                </a>
-            </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
   <div class="container my-4">
     <div id="heroCarousel" class="carousel slide rounded-4 overflow-hidden shadow" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -428,7 +400,7 @@
             <br><br>
             Kami berharap kamu dapat menjadikan peringatan ini sebagai titik balik. Jadilah pribadi yang lebih sadar akan aturan, menghargai proses, dan memiliki komitmen untuk berubah ke arah yang lebih baik. Karena masa depanmu ditentukan oleh sikap yang kamu tanam hari ini.
             </p>
-           </div> 
+           </div>
         <div class="row justify-content-center mt-4">
           <div class="col-md-5 mb-3">
             <img src="gambar/bk3.jpg" alt="Pelanggaran" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
@@ -440,7 +412,7 @@
       </div>
     </div>
   </section>
-  
+
 <script>
   const quotes = [
     "Disiplin adalah jembatan antara tujuan dan pencapaian.",

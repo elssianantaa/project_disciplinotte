@@ -94,6 +94,7 @@
     <nav class="d-flex justify-content-between align-items-center px-4 py-2 shadow-sm bg-white" style="margin-left: 260px;">
         <h4 class="my-2">Tambah Pelanggaran Siswa</h4>
         <div class="dropdown">
+            
             <button class="btn btn-white d-flex align-items-center border-0" type="button" data-bs-toggle="dropdown">
                 {{-- <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Admin" class="rounded-circle me-2" width="40" height="40"> --}}
                 @if(Auth::user()->foto)
@@ -104,8 +105,8 @@
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
             @endif
-
             </button>
+
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                     <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profilModal">
@@ -114,6 +115,7 @@
                   </li>
                 <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
+
         </div>
     </nav>
 

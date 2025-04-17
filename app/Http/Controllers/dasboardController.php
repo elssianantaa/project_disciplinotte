@@ -40,7 +40,7 @@ class dasboardController extends Controller
             return redirect('/dashboard'); // Arahkan ke dashboard admin
         } elseif ($user->role === 'staff') {
             return redirect('/dashboardStaff'); // Arahkan ke dashboard staff
-        } 
+        }
     } else {
         // Jika login gagal
         return back()->withErrors(['loginSiswa' => 'Invalid credentials']);
@@ -52,28 +52,32 @@ class dasboardController extends Controller
     {
         // Ambil daftar kelas untuk dropdown
         $kelasList = Kelas::all();
-    
+
         // Ambil daftar periode
+        $daftarKelas = Kelas::all();
         $periodeList = [];
-        $startYear = 2018;
-        $endYear = 2031;
-        for ($year = $startYear; $year < $endYear; $year++) {
+
+        $endYear = 2024; // batas akhir tahun
+        $startYear = 2018; // batas awal tahun
+
+        for ($year = $endYear; $year >= $startYear; $year--) {
             $periodeList[] = $year . '/' . ($year + 1);
         }
-    
+
+
         // Query siswa dengan relasi yang dibutuhkan
         $query = Student::with(['riwayatkelas', 'catatan_pelanggarans']);
-    
+
         // Filter berdasarkan kelas jika ada
         if ($request->kelas_id) {
             $query->where('kelas_id', $request->kelas_id);
         }
-    
+
         // Filter berdasarkan nama jika ada
         if ($request->nama) {
             $query->where('name', 'like', '%' . $request->nama . '%');
         }
-    
+
         // Filter berdasarkan periode jika ada (periode lama atau periode baru)
         if ($request->periode) {
             $query->whereHas('riwayatkelas', function ($q) use ($request) {
@@ -82,16 +86,16 @@ class dasboardController extends Controller
                   ->orWhere('periode_baru', $request->periode);
             });
         }
-    
+
         // Ambil data siswa setelah filter
         $students = $query->get();
-    
+
         // Hitung total siswa
         $totalSiswa = $students->count();
-    
+
         return view('admin.rekapSiswa', compact('students', 'totalSiswa', 'request', 'kelasList', 'periodeList'));
     }
-    
+
 
     // public function showDb()
     // {
@@ -173,7 +177,7 @@ class dasboardController extends Controller
         $query->where('kelas_id', $request->kelas_id);
     }
 
-<<<<<<< HEAD
+
         $students = $query->get();
         $totalSiswa = $students->count();
         $totalSkorsing = $students->where('status', 'skorsing')->count(); // Tambahan ini
@@ -181,14 +185,13 @@ class dasboardController extends Controller
         $kelasList = Kelas::all();
 
         return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa','totalSkorsing'));
-=======
-    $students = $query->get();
-    $totalSiswa = $students->count();
-    $kelasList = Kelas::all();
 
-    return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
+    // $students = $query->get();
+    // $totalSiswa = $students->count();
+    // $kelasList = Kelas::all();
 
->>>>>>> 5453769cc96a9c9882e661190acee6a6259d23c6
+    // return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
+
     }
 
 

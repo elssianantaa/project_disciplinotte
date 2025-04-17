@@ -127,21 +127,27 @@
              height="100"
              style="object-fit: cover;">
     @else
-        @if(session('student') && session('student')->name)
+    @php
+    $student = auth('student')->user();
+@endphp
+
+@if($student && $student->name)
+    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
+         style="width: 100px; height: 100px; font-size: 40px;">
+        {{ strtoupper(substr($student->name, 0, 1)) }}
+    </div>
+@else
+    <p>Tidak ada siswa yang login</p>
+@endif
             <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
                  style="width: 100px; height: 100px; font-size: 40px;">
-                {{ strtoupper(substr(session('student')->name, 0, 1)) }}
+                
             </div>
-        @else
-            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
-                 style="width: 100px; height: 100px; font-size: 40px;">
-                S
-            </div>
-        @endif
+
     @endif
-    
-    
-    
+
+
+
       {{-- <h3 class="fw-semibold">{{ $student->name }}</h3> --}}
       <table class="table table-borderless text-start mt-3 mx-auto" style="max-width: 400px;">
         <tr>
@@ -173,7 +179,7 @@
 
   <footer>
     <p>&copy; 2025. Dashboard Siswa SMK - All Rights Reserved.</p>
-  
+
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
