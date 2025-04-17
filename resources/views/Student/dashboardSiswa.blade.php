@@ -53,9 +53,9 @@
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 } */
-/* 
+/*
 .navbar .dropdown-menu {
-  z-index: 1050; 
+  z-index: 1050;
 } */
 
 
@@ -152,7 +152,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Pelanggaran</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Tentang Kami</a></li>
                 <li class="nav-item d-flex align-items-center dropdown">
                   <!-- Foto Profil = Buka Modal -->
@@ -167,10 +167,10 @@
                           {{ strtoupper(substr(session('student')->name, 0, 1)) }}
                       </div>
                   @endif
-              
+
                   <!-- Panah untuk dropdown -->
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
-              
+
                   <!-- Dropdown Menu -->
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li class="nav-item dropdown">
@@ -178,7 +178,7 @@
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           {{-- <i class="fas fa-user-circle"></i> Akun Saya --}}
                       </a>
-                  
+
                       <!-- Isi dropdown -->
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li class="nav-item dropdown">
@@ -194,10 +194,10 @@
                               {{ strtoupper(substr(session('student')->name, 0, 1)) }}
                             </div>
                           @endif
-                        
+
                           <!-- Panah untuk dropdown -->
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                        
+
                           <!-- Dropdown Menu -->
                           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}">
@@ -218,10 +218,10 @@
                               </form>
                             </li>
                           </ul>
-                        </li>                                        
+                        </li>
                       </ul>
                   </li>
-                </li>        
+                </li>
             </ul>
         </div>
     </div>
@@ -258,6 +258,7 @@
 </div>
 
 <!-- Peringatan Pelanggaran -->
+@if ($totalPoin > 0)
 <section class="py-4">
     <div class="container">
         <div class="alert alert-info shadow rounded-4 animate_animated animate_fadeInUp">
@@ -266,7 +267,7 @@
                 Kamu tercatat telah melakukan pelanggaran terhadap peraturan sekolah. Hal ini sangat kami sayangkan, karena setiap siswa diharapkan mampu menunjukkan sikap disiplin, tanggung jawab, dan menjadi contoh yang baik bagi lingkungan sekitarnya...
                 Kami berharap kamu dapat menjadikan peringatan ini sebagai titik balik.
             </p>
-           </div>
+        </div>
         <div class="row justify-content-center mt-4">
           <div class="col-md-5 mb-3">
             <img src="gambar/bk3.jpg" alt="Pelanggaran" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
@@ -275,9 +276,24 @@
             <img src="gambar/bk4.jpg" alt="Pelanggaran" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
           </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
+@else
+<section class="py-4">
+    <div class="container">
+        <div class="alert alert-success shadow rounded-4 animate_animated animate_fadeInUp">
+            <h5 class="fw-bold">Tidak Ada Pelanggaran 🎉</h5>
+            <p>Selamat! Kamu belum tercatat melakukan pelanggaran apapun. Terus pertahankan sikap disiplin dan menjadi contoh yang baik untuk teman-temanmu ya 🙌</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+          <div class="col-md-6 mb-3">
+            <img src="gambar/sukses.jpg" alt="Disiplin" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
+          </div>
+        </div>
+    </div>
+</section>
+@endif
+
 
 <script>
   const quotes = [

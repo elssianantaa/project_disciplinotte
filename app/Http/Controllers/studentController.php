@@ -40,15 +40,23 @@ class StudentController extends Controller
 
 
     public function dashboard()
-    {
-        $student = session('student');
+{
+    $student = session('student');
 
-        if (!$student) {
-            return redirect('/loginSiswa')->with('error', 'Silakan login terlebih dahulu!');
-        }
-
-        return view('Student.dashboardSiswa', compact('student'));
+    if (!$student) {
+        return redirect('/loginSiswa')->with('error', 'Silakan login terlebih dahulu!');
     }
+
+    $siswa = $student; // Pake yang di session (Student)
+    $pelanggarans = $siswa->catatanPelanggarans()->with('pelanggaran')->get();
+
+    $totalPoin = $pelanggarans->sum(function ($catatan) {
+        return $catatan->pelanggaran->point ?? 0;
+    });
+
+    return view('Student.dashboardSiswa', compact('student', 'pelanggarans', 'totalPoin'));
+}
+
     public function logout(Request $request)
     {
         // Hapus session siswa
