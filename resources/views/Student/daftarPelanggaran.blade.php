@@ -165,9 +165,9 @@ footer {
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link fw-bold" href="/tampilans.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold" href="/tentangk.html">Tentang Kami</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold active" href="riwayat.html">Pelanggaran</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
                 <img src="img/hd nya bund.jpeg" class="rounded-circle me-2" width="40" height="40" alt="User" />
