@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -9,18 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> <!-- Gunakan hanya yang ini -->
   <style>
     body {
       margin: 0;
@@ -39,25 +27,14 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
+    .navbar .dropdown-menu {
+        z-index: 1050; /* pastikan lebih tinggi dari navbar */
+    }
+
     .navbar-brand img {
       height: 40px;
       margin-right: 10px;
     }
-    /* .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;  */
-  /* background-color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-} */
-/*
-.navbar .dropdown-menu {
-  z-index: 1050;
-} */
-
 
     .hero-section {
       position: relative;
@@ -133,99 +110,69 @@
       .table th, .table td {
         white-space: nowrap;
       }
-      /* .modal-dialog-centered {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    } */
     }
   </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
-            <span class="fw-bold text-black">DisipliNote</span>
-        </a>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Tentang Kami</a></li>
-                <li class="nav-item d-flex align-items-center dropdown">
-                  <!-- Foto Profil = Buka Modal -->
-                  @if(session('student') && session('student')->foto)
-                      <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil"
-                          class="rounded-circle me-2" width="40" height="40" style="cursor: pointer;"
-                          data-bs-toggle="modal" data-bs-target="#profileModal" />
-                  @else
-                      <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
-                          style="width: 40px; height: 40px; font-size: 18px; cursor: pointer;"
-                          data-bs-toggle="modal" data-bs-target="#profileModal">
-                          {{ strtoupper(substr(session('student')->name, 0, 1)) }}
-                      </div>
-                  @endif
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
+        <span class="fw-bold text-black">DisipliNote</span>
+      </a>
+  
+      <!-- Tombol Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
+  
+          <!-- Dropdown Akun -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                  <!-- Panah untuk dropdown -->
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
-
-                  <!-- Dropdown Menu -->
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li class="nav-item dropdown">
-                      <!-- Tombol dropdown -->
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          {{-- <i class="fas fa-user-circle"></i> Akun Saya --}}
-                      </a>
-
-                      <!-- Isi dropdown -->
-                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li class="nav-item dropdown">
-                          <!-- Foto Profil = Buka Modal -->
-                          @if(session('student') && session('student')->foto)
-                            <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil"
-                                 class="rounded-circle me-2" width="40" height="40" style="cursor: pointer;"
-                                 data-bs-toggle="dropdown" aria-expanded="false" />
-                          @else
-                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
-                                 style="width: 40px; height: 40px; font-size: 18px; cursor: pointer;"
-                                 data-bs-toggle="dropdown" aria-expanded="false">
-                              {{ strtoupper(substr(session('student')->name, 0, 1)) }}
-                            </div>
-                          @endif
-
-                          <!-- Panah untuk dropdown -->
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
-
-                          <!-- Dropdown Menu -->
-                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}">
-                                <i class="fas fa-user me-2"></i> Profil
-                              </a>
-                            </li>
-                            <li><a class="dropdown-item" href="{{ route('updatePassword') }}">
-                                <i class="bi bi-key me-2"></i> Ubah Password
-                              </a>
-                            </li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
-                              </a>
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                              </form>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                  </li>
-                </li>
+              {{-- DEBUG: Tampilkan isi session student --}}
+              @php
+              $student = session('student');
+              $fotoPath = $student && $student->foto ? 'storage/foto_profilesiswa/' . $student->foto : null;
+            @endphp
+            
+            @if($fotoPath && file_exists(public_path($fotoPath)))
+              <img src="{{ asset($fotoPath) }}" alt="Foto Profil" class="rounded-circle me-2" width="40" height="40" />
+            @else
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
+                style="width: 40px; height: 40px; font-size: 20px;">
+                {{ strtoupper(substr($student->name, 0, 1)) }}
+              </div>
+            @endif
+            
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="studentDropdown">
+              <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}"><i class="fas fa-user me-2"></i> Profil</a></li>
+              <li><a class="dropdown-item" href="{{ route('updatePassword') }}"><i class="bi bi-key me-2"></i> Ubah Password</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <i class="fas fa-sign-out-alt me-2"></i> Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              </li>
             </ul>
-        </div>
+          </li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
+  
 
 <!-- Hero Section (Carousel) -->
 <div class="container my-4">
@@ -312,5 +259,7 @@
   </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Tambahkan ini di paling bawah sebelum </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -110,18 +110,28 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link fw-bold active" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Pelanggaran</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Tentang Kami</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
           <li class="nav-item d-flex align-items-center">
-            <!-- Foto Profil atau Inisial -->
-            @if(session('student') && session('student')->foto)
-              <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil" class="rounded-circle" width="40" height="40" />
+            @php
+            $student = session('student');
+            $fotoPath = $student && $student->foto ? 'storage/foto_profilesiswa/' . $student->foto : null;
+          @endphp
+          
+          <li class="nav-item d-flex align-items-center me-2">
+            @if($fotoPath && file_exists(public_path($fotoPath)))
+              <img src="{{ asset($fotoPath) }}" alt="Foto Profil" class="rounded-circle me-2" width="40" height="40" />
             @else
-              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 5 0px; font-size: 18px;">
-                {{ strtoupper(substr(session('student')->name, 0, 1)) }}
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
+                style="width: 40px; height: 40px; font-size: 18px;">
+                {{ strtoupper(substr($student->name ?? 'S', 0, 1)) }}
               </div>
             @endif
+          </li>
+          
+            <!-- Foto Profil atau Inisial -->
+            
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
@@ -145,19 +155,18 @@
   <div class="container profile-wrapper">
     <div class="profile-title">Profil Siswa</div>
     <div class="profile-container">
-      @if(session('student') && session('student')->foto)
-        <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil" class="profile-img">
+      @php
+        $student = session('student');
+        $fotoPath = $student && $student->foto ? 'storage/foto_profilesiswa/' . $student->foto : null;
+      @endphp
+  
+      @if($fotoPath && file_exists(public_path($fotoPath)))
+        <img src="{{ asset($fotoPath) }}" alt="Foto Profil" class="profile-img">
       @else
-        @if(session('student') && session('student')->name)
-          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
-               style="width: 130px; height: 130px; font-size: 40px; margin: 0 auto 15px auto;">
-              {{ strtoupper(substr(session('student')->name, 0, 1)) }}
-          </div>
-        @else
-          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
-               style="width: 130px; height: 130px; font-size: 40px; margin: 0 auto 15px auto;">
-          </div>
-        @endif
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
+             style="width: 130px; height: 130px; font-size: 40px; margin: 0 auto 15px auto;">
+          {{ strtoupper(substr($student->name ?? 'S', 0, 1)) }}
+        </div>
       @endif
 
       <table class="table table-borderless profile-info-table">

@@ -124,19 +124,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link fw-bold" href="/tampilans.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold active" href="/tentangk.html">Tentang Kami</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold" href="/riwayat.html">Pelanggaran</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
                 {{-- <img src="img/hd nya bund.jpeg" class="rounded-circle me-2" width="40" height="40" alt="User" /> --}}
                 {{-- <span class="fw-semibold">Vii</span> --}}
               </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="profilesiswa.html"><i class="fas fa-user me-2"></i>Profil</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-              </ul>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="studentDropdown">
+                <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}"><i class="fas fa-user me-2"></i> Profil</a></li>
+                <li><a class="dropdown-item" href="{{ route('updatePassword') }}"><i class="bi bi-key me-2"></i> Ubah Password</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                       <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
             </li>
           </ul>
         </div>
