@@ -147,7 +147,7 @@
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#">
             <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
-            <span class="fw-bold text-black">DisipliNote</span>
+            <span class="fw-bold text-black">DiscipliNote</span>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto align-items-center">

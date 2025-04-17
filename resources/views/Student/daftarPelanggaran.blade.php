@@ -101,26 +101,26 @@ footer {
     }
 
     /* Animasi fade-in untuk setiap baris dengan durasi lebih lama */
-@keyframes fadeInRow {
+    @keyframes fadeInRow {
     from {
         opacity: 0;
+        transform: translateY(10px); /* Biar ada sedikit gerakan */
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Kelas untuk setiap baris tabel */
 .table-row {
     opacity: 0;
-    animation: fadeInRow 1s ease-out forwards; /* Durasi animasi 1 detik */
-    animation-delay: 0.2s;
+    animation: fadeInRow 0.6s ease-in forwards;
 }
 
-/* Untuk banyak baris, gunakan cara di bawah: */
 .table-row:nth-child(n) {
-    animation-delay: calc(0.2s * (var(--row-number) - 1));
+    animation-delay: calc(0.1s * (var(--row-number) - 1)); /* Jeda antar baris */
 }
+
 
 /* Highlight baris dengan poin tertinggi */
 .table-danger {
@@ -142,6 +142,14 @@ footer {
 .alert-warning strong {
     color: #dc3545; /* Menonjolkan pesan peringatan */
 }
+
+/* Hilangkan border garis pada table */
+.table,
+.table th,
+.table td {
+    border: none !important;
+}
+
 
 </style>
 </head>
@@ -201,48 +209,64 @@ footer {
                                 @endif
                                 {{ $loop->iteration }}
                             </td>
-
+                
                             {{-- Pengaburan NISN --}}
                             @php
-                                $nisn_anonim = substr($pelanggaranGroup->first()->student->nisn, 0, 4) . '****' . substr($pelanggaranGroup->first()->student->nisn, -2);
+                                $firstPelanggaran = $pelanggaranGroup->pelanggaranGroup->first(); // Ambil data pertama
+                                $nisn_anonim = substr($firstPelanggaran->student->nisn, 0, 4) . '****' . substr($firstPelanggaran->student->nisn, -2);
                             @endphp
                             <td>{{ $nisn_anonim }}</td>
-
+                
                             {{-- Nama Siswa --}}
-                            <td>{{ Str::limit($pelanggaranGroup->first()->student->name, 1, '**') }}</td>
-
+                            <td>{{ Str::limit($firstPelanggaran->student->name, 2, '**') }}</td>
+                
                             {{-- Total Poin Pelanggaran --}}
                             <td>{{ $pelanggaranGroup->total_poin }}</td>
-
+                
                             {{-- Tanggal Terakhir --}}
                             <td>{{ \Carbon\Carbon::parse($pelanggaranGroup->latest_pelanggaran->created_at)->format('d-m-Y') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
+                
             </table>
 
           </div>
         </div>
-       <!-- Tampilkan pesan peringatan hanya jika siswa memiliki pelanggaran -->
-    @foreach($pelanggarans as $pelanggaranGroup)
+        {{-- @foreach($pelanggarans as $pelanggaranGroup)
+        @php
+            // Ambil siswa pertama di grup pelanggaran
+        @endphp
+    
+        <!-- Tampilkan pesan hanya jika ID siswa yang login sesuai dan ada total poin pelanggaran -->
+        @if($students->id == $siswaId && $pelanggaranGroup['total_poin'] > 0)
+            @if($pelanggaranGroup['total_poin'] >= 30)
+                <div class="alert alert-warning mt-3 mb-5" role="alert">
+                    Kamu telah mencapai skor pelanggaran <strong>{{ $pelanggaranGroup['total_poin'] }}</strong> poin. Jika melanggar lagi, kamu akan mendapatkan sanksi lebih berat! Mohon untuk lebih disiplin.
+                </div>
+            @else
+                <div class="alert alert-info mt-3 mb-5" role="alert">
+                    Total poin pelanggaran kamu saat ini: <strong>{{ $pelanggaranGroup['total_poin'] }}</strong> poin. Tetap jaga perilaku, ya!
+                </div>
+            @endif
+        @endif
+    @endforeach --}}
+    
+    
+
+
+    </div>
+    {{-- @foreach($pelanggarans as $pelanggaranGroup)
     @if($pelanggaranGroup->total_poin >= 30)
         <div class="alert alert-warning mt-3 mb-5" role="alert">
             Kamu telah mencapai skor pelanggaran <strong>{{ $pelanggaranGroup->total_poin }}</strong> poin. Jika melanggar lagi, kamu akan mendapatkan sanksi lebih berat! Mohon untuk lebih disiplin.
         </div>
     @endif
-@endforeach
-        </div>
-        <!-- <div class="card mt-4 shadow-sm">
-          <div class="card-header bg-info text-white">Kotak Aspirasi</div>
-          <div class="card-body">
-            <p class="mb-2">Punya saran atau unek-unek soal peraturan sekolah?</p>
-            <textarea class="form-control mb-2" rows="3" placeholder="Tulis di sini..."></textarea>
-            <button class="btn btn-outline-primary btn-sm">Kirim</button>
-          </div>
-        </div> -->
-        <footer class="text-center py-5 border-top">
+@endforeach --}}
+
+    <footer class="text-center py-5 border-top">
             <small>&copy; 2025. Admin Staf SMK - All Rights Reserved. Hand-crafted with ❤</small>
-          </footer>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
