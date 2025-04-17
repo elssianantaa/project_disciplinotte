@@ -24,29 +24,29 @@ class StudentController extends Controller
             'nisn' => 'required',
             'password' => 'required',
         ]);
-    
+
         // Cari siswa berdasarkan NISN
         $student = Student::where('nisn', $request->nisn)->first();
-    
+
         if ($student && Hash::check($request->password, $student->password)) {
             // Simpan data siswa ke session
             session(['student' => $student]);
-    
+
             return redirect()->route('Student.dashboardSiswa');
         }
-    
+
         return back()->with('error', 'NISN atau Password salah!');
     }
-    
+
 
     public function dashboard()
     {
         $student = session('student');
-    
+
         if (!$student) {
             return redirect('/loginSiswa')->with('error', 'Silakan login terlebih dahulu!');
         }
-    
+
         return view('Student.dashboardSiswa', compact('student'));
     }
     public function logout(Request $request)
@@ -76,8 +76,9 @@ class StudentController extends Controller
             'new_password' => 'required|min:3|confirmed', // Minimal 3 karakter dan konfirmasi password
         ]);
 
-        // Ambil data siswa berdasarkan id yang ada di session
-        $student = Student::find(session('student')->id);
+        $sessionStudent = session('student');
+        $student = Student::find(is_array($sessionStudent) ? $sessionStudent['id'] : optional($sessionStudent)->id);
+
 
         // Periksa apakah password lama yang dimasukkan sudah benar
         if (!Hash::check($request->current_password, $student->password)) {
@@ -90,15 +91,5 @@ class StudentController extends Controller
 
         return back()->with('success', 'Password berhasil diubah!');
     }
-
-//     // Tidak perlu menggunakan guard jika kamu menggunakan session manual
-//     public function __construct()
-// {
-//     $this->middleware(function ($request, $next) {
-//         if (!session('student')) {
-//             return redirect('/loginSiswa')->with('error', 'Silakan login terlebih dahulu!');
-//         }
-//         return $next($request);
-//     });
-// }
 }
+

@@ -125,7 +125,7 @@ Route::middleware(['auth:web','admin'])->group(function () {
     // Route::post('/student/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
     // Route::get('/logoutSiswa', [studentController::class, 'logout'])->name('logout');
 
-    
+
 // });
 
 // Route::get('/dashboardSiswa', [StudentController::class, 'dashboard'])->name('Student.dashboardSiswa');
@@ -133,11 +133,8 @@ Route::middleware(['auth:web','admin'])->group(function () {
 // Route::get('/student/profile/edit/{id}', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
 // Route::post('/student/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
 
-// Route::get('/dashboardSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
-
-
-
-
+// DAFTAR PELANGGARAN DI DASHBOARD SISWA
+Route::get('/daftarPelanggaranSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
 Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
 Route::post('/kelas/import', [KelasController::class, 'import'])->name('kelas.import');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
@@ -148,8 +145,7 @@ Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas']);
 Route::get('/kenaikanKelas', [dasboardStaffController::class, 'showRiwayatKelas'])->name('form.naik.kelas');
 Route::post('/naikKelas', [dasboardStaffController::class, 'naikKelas'])->name('naik.kelas');
 
-
-
+// Login Admin
 
 
 

@@ -20,7 +20,7 @@ class PelanggaranImport implements ToModel, WithHeadingRow
     if (!isset($row['nama_pelanggaran']) || $row['nama_pelanggaran'] === null) {
         return null;
     }
-
+    
         return new Pelanggaran([
             'nama_pelanggaran' => $row['nama_pelanggaran'],
             'kategori' => $row['kategori'],

@@ -7,6 +7,19 @@
     {{-- Form Pencarian --}}
     <form action="{{ route('rekap.siswa') }}" method="GET" class="mb-4">
         <div class="row g-2 align-items-end">
+
+            <div class="col-md-3">
+                <label for="periode" class="form-label">Pilih Periode:</label>
+                <select name="periode" id="periode" class="form-select" onchange="this.form.submit()">
+                    <option value="">-- Semua Periode --</option>
+                    @foreach($periodeList as $periode)
+                    <option value="{{ $periode }}" {{ request('periode') == $periode ? 'selected' : '' }}>
+                        {{ $periode }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="col-md-3">
                 <label for="kelas_id" class="form-label">Pilih Kelas:</label>
                 <select name="kelas_id" id="kelas_id" class="form-select" onchange="this.form.submit()">
@@ -28,19 +41,6 @@
                 <button type="submit" class="btn btn-primary">Cari</button>
             </div>
             @endif
-
-            <div class="col-md-3">
-                <label for="periode" class="form-label">Pilih Periode:</label>
-                <select name="periode" id="periode" class="form-select" onchange="this.form.submit()">
-                    <option value="">-- Semua Periode --</option>
-                    @foreach($periodeList as $periode)
-                        <option value="{{ $periode }}" {{ request('periode') == $periode ? 'selected' : '' }}>
-                            {{ $periode }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
             <div class="col-md-2">
                 <div class="form-label d-block">
                     Jumlah Siswa: <span class="fw-bold">{{ $totalSiswa }}</span>
@@ -79,24 +79,24 @@
                     <img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="Foto Siswa" class="foto-siswa">
                 </td>
                 <td>{{ $siswa->nisn }}</td>
-                
+
                 <td>
-                    {{ $siswa->name }} 
+                    {{ $siswa->name }}
                     @php
                         $riwayatKelasLama = $siswa->riwayatkelas->firstWhere('periode_lama', request('periode'));
                         $riwayatKelasBaru = $siswa->riwayatkelas->firstWhere('periode_baru', request('periode'));
                     @endphp
-                    
+
                     @if ($riwayatKelasLama)
                         <br>Periode Lama ({{ $riwayatKelasLama->periode_lama }}): {{ $riwayatKelasLama->kelasLama?->nama_kelas ?? 'Kelas tidak ditemukan' }}
                     @endif
-                    
+
                     @if ($riwayatKelasBaru)
                         <br>Periode Baru ({{ $riwayatKelasBaru->periode_baru }}): {{ $riwayatKelasBaru->kelas?->nama_kelas ?? 'Kelas tidak ditemukan' }}
                     @endif
                 </td>
-                
-                
+
+
                 {{-- Menampilkan kelas berdasarkan periode --}}
                 <td>
                     @php
@@ -104,7 +104,7 @@
                         $riwayatKelas = $siswa->riwayatkelas->first(function($item) use ($request) {
                             return $item->periode_lama == $request->periode || $item->periode_baru == $request->periode;
                         });
-                
+
                     @endphp
                     @if($riwayatKelas)
                         {{-- Cek apakah ada kelas baru atau lama --}}
@@ -121,11 +121,11 @@
 
                     @endif
                 </td>
-                
-                
-                
-                
-        
+
+
+
+
+
                 <td>{{ $siswa->jenis_kelamin }}</td>
                 <td>{{ ucfirst($siswa->status) }}</td>
                 <td>
@@ -138,7 +138,7 @@
             </tr>
             @endforelse
         </tbody>
-        
+
     </table>
 </div>
 

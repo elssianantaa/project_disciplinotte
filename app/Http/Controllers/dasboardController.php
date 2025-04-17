@@ -49,10 +49,13 @@ class dasboardController extends Controller
         $kelasList = Kelas::all();
 
         // Ambil daftar periode
+        $daftarKelas = Kelas::all();
         $periodeList = [];
-        $startYear = 2018;
-        $endYear = 2031;
-        for ($year = $startYear; $year < $endYear; $year++) {
+
+        $endYear = 2024; // batas akhir tahun
+        $startYear = 2018; // batas awal tahun
+
+        for ($year = $endYear; $year >= $startYear; $year--) {
             $periodeList[] = $year . '/' . ($year + 1);
         }
 

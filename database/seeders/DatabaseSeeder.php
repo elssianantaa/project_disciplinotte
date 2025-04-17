@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Kelas::create([
-            'nama_kelas' => 'X TKR 1',
+            'nama_kelas' => 'XI DKV 1',
             'wali_kelas' => 'Ibu Dian',
             'Jurusan' => 'DKV'
         ]);
