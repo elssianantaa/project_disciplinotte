@@ -244,6 +244,12 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 
 
 
@@ -269,6 +275,21 @@
       height: 40px;
       margin-right: 10px;
     }
+    /* .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;  */
+  /* background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+} */
+/* 
+.navbar .dropdown-menu {
+  z-index: 1050; 
+} */
+
 
     .hero-section {
       position: relative;
@@ -285,10 +306,6 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       border-radius: 2rem;
-    }
-
-    .carousel-indicators [data-bs-target] {
-      background-color: #000;
     }
 
     .motivasi {
@@ -348,115 +365,154 @@
       .table th, .table td {
         white-space: nowrap;
       }
+      /* .modal-dialog-centered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    } */
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="gambar/Logosmk.gif" alt="Logo Sekolah" />
-        <span class="fw-bold text-black">DisipliNote</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="">Pelanggaran</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-              {{-- <img src="img/hd nya bund.jpeg" class="rounded-circle me-2" width="40" height="40" alt="User" /> --}}
-              {{-- <span class="fw-semibold">Vii</span> --}}
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="{{route('Student.profile.show')}}"><i class="fas fa-user me-2"></i>Profil</a></li>
-              <li>
-                <a class="dropdown-item" href="{{ route('updatePassword') }}">
-                    <i class="bi bi-key"></i> Ubah Password
-                </a>
-            </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
+            <span class="fw-bold text-black">DisipliNote</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Pelanggaran</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Tentang Kami</a></li>
+                <li class="nav-item d-flex align-items-center dropdown">
+                  <!-- Foto Profil = Buka Modal -->
+                  @if(session('student') && session('student')->foto)
+                      <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil"
+                          class="rounded-circle me-2" width="40" height="40" style="cursor: pointer;"
+                          data-bs-toggle="modal" data-bs-target="#profileModal" />
+                  @else
+                      <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
+                          style="width: 40px; height: 40px; font-size: 18px; cursor: pointer;"
+                          data-bs-toggle="modal" data-bs-target="#profileModal">
+                          {{ strtoupper(substr(session('student')->name, 0, 1)) }}
+                      </div>
+                  @endif
+              
+                  <!-- Panah untuk dropdown -->
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+              
+                  <!-- Dropdown Menu -->
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                      <!-- Tombol dropdown -->
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{-- <i class="fas fa-user-circle"></i> Akun Saya --}}
+                      </a>
+                  
+                      <!-- Isi dropdown -->
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li class="nav-item dropdown">
+                          <!-- Foto Profil = Buka Modal -->
+                          @if(session('student') && session('student')->foto)
+                            <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil"
+                                 class="rounded-circle me-2" width="40" height="40" style="cursor: pointer;"
+                                 data-bs-toggle="dropdown" aria-expanded="false" />
+                          @else
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
+                                 style="width: 40px; height: 40px; font-size: 18px; cursor: pointer;"
+                                 data-bs-toggle="dropdown" aria-expanded="false">
+                              {{ strtoupper(substr(session('student')->name, 0, 1)) }}
+                            </div>
+                          @endif
+                        
+                          <!-- Panah untuk dropdown -->
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                        
+                          <!-- Dropdown Menu -->
+                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}">
+                                <i class="fas fa-user me-2"></i> Profil
+                              </a>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('updatePassword') }}">
+                                <i class="bi bi-key me-2"></i> Ubah Password
+                              </a>
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                              </a>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                              </form>
+                            </li>
+                          </ul>
+                        </li>                                        
+                      </ul>
+                  </li>
+                </li>        
             </ul>
-          </li>
-        </ul>
-      </div>
+        </div>
     </div>
-  </nav>
-  <div class="container my-4">
+</nav>
+
+<!-- Hero Section (Carousel) -->
+<div class="container my-4">
     <div id="heroCarousel" class="carousel slide rounded-4 overflow-hidden shadow" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="hero-section" style="background: url('gambar/bk.jpg') no-repeat center center / cover;">
-            <div class="hero-overlay"></div>
-          </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-section" style="background: url('gambar/bk.jpg') no-repeat center center / cover;">
+                    <div class="hero-overlay"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-section" style="background: url('gambar/bk2.jpg') no-repeat center center / cover;">
+                    <div class="hero-overlay"></div>
+                </div>
+            </div>
         </div>
-        <div class="carousel-item">
-          <div class="hero-section" style="background: url('gambar/bk2.jpg') no-repeat center center / cover;">
-            <div class="hero-overlay"></div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-      </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
+
     <div class="motivasi">
-      <i class="fas me-2"></i>
-      -Mulailah hari dengan kebiasaan baik dengan datang tepat waktu-
+        <i class="fas me-2"></i>
+        -Mulailah hari dengan kebiasaan baik dengan datang tepat waktu-
     </div>
-  </div>
+</div>
 
-  <section class="py-4">
+<!-- Peringatan Pelanggaran -->
+<section class="py-4">
     <div class="container">
-      <div class="alert alert-info shadow rounded-4 animate_animated animate_fadeInUp">
-        <div class="alert alert-info shadow rounded-4">
-          <h5 class="fw-bold">Peringatan Untuk Siswa</h5>
-          <p><strong>Perhatian!</strong><br><br>
-            <br><br>Kamu tercatat telah melaukkan pelanggaran terhadap peraturan sekolah. Hal ini sangat kami sayangkan, karena setiap siswa diharapkan mampu menunjukkan sikap disiplin, tanggung jawab, dan menjadi contoh yang baik bagi lingkungan sekitarnya.
-            Sekolah tidak hanya menjadi tempat untuk meraih prestasi akademik, tetapi juga tempat untuk membentuk karakter yang kuat dan positif. Pelanggaran yang terjadi menunjukkan bahwa masih ada sikap yang perlu dibenahi demi kebaikan bersama.
-            <br><br>
-            Kami berharap kamu dapat menjadikan peringatan ini sebagai titik balik. Jadilah pribadi yang lebih sadar akan aturan, menghargai proses, dan memiliki komitmen untuk berubah ke arah yang lebih baik. Karena masa depanmu ditentukan oleh sikap yang kamu tanam hari ini.
+        <div class="alert alert-info shadow rounded-4 animate_animated animate_fadeInUp">
+            <h5 class="fw-bold">Peringatan Untuk Siswa</h5>
+            <p><strong>Perhatian!</strong><br><br>
+                Kamu tercatat telah melakukan pelanggaran terhadap peraturan sekolah. Hal ini sangat kami sayangkan, karena setiap siswa diharapkan mampu menunjukkan sikap disiplin, tanggung jawab, dan menjadi contoh yang baik bagi lingkungan sekitarnya...
+                Kami berharap kamu dapat menjadikan peringatan ini sebagai titik balik.
             </p>
-           </div> 
-        <div class="row justify-content-center mt-4">
-          <div class="col-md-5 mb-3">
-            <img src="gambar/bk3.jpg" alt="Pelanggaran" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
-          </div>
-          <div class="col-md-5 mb-3">
-            <img src="gambar/bk4.jpg" alt="Pelanggaran" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
-          </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-5 mb-3">
+                    <img src="gambar/bk3.jpg" alt="Pelanggaran" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
+                </div>
+                <div class="col-md-5 mb-3">
+                    <img src="gambar/bk4.jpg" alt="Pelanggaran" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  
-<script>
-  const quotes = [
-    "Disiplin adalah jembatan antara tujuan dan pencapaian.",
-    "Kedisiplinan hari ini, kesuksesan esok hari.",
-    "Tidak ada yang berhasil tanpa disiplin diri.",
-    "Orang sukses melakukan apa yang tidak ingin dilakukan orang lain."
-  ];
-  document.addEventListener("DOMContentLoaded", () => {
-    const motivasi = document.querySelector(".motivasi");
-    motivasi.innerHTML = ` <i class="fas fa-quote-left me-2"></i> ${quotes[Math.floor(Math.random() * quotes.length)]}`;
-  });
-</script>
-<footer class="text-center py-3 border-top">
-    <small>&copy; 2025. Admin Staf SMK - All Rights Reserved. Hand-crafted with </small>
-  </footer>
+</section>
+<footer>
+    <p>&copy; 2025. Dashboard Siswa SMK - All Rights Reserved.</p>
+</footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

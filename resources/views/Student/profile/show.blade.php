@@ -6,6 +6,7 @@
   <title>Dashboard Siswa</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  
 
   <style>
     body {
@@ -33,6 +34,7 @@
       background: #ffffff;
       border-radius: 12px;
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      text-align: center; /* Tambahkan text-align center ke container */
     }
 
     .profile-img {
@@ -42,6 +44,31 @@
       object-fit: cover;
       margin-bottom: 15px;
       border: 4px solid #dee2e6;
+    }
+
+    .profile-info-table {
+      width: 100%;
+      margin-top: 20px;
+      text-align: center; /* Memastikan tabel rata tengah */
+    }
+
+    .profile-info-table th, .profile-info-table td {
+      padding: 8px;
+      vertical-align: middle;
+    }
+
+    .profile-info-table th {
+      width: 120px;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .profile-info-table td {
+      text-align: center; /* Meratakan teks nilai ke tengah */
+    }
+
+    .btn-edit {
+      margin-top: 20px;
     }
 
     footer {
@@ -67,21 +94,6 @@
         width: 100px;
         height: 100px;
       }
-      /* .avatar-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #6c757d;
-  color: white;
-  font-weight: bold;
-  font-size: 40px;
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  margin: 0 auto 15px auto;
-  border: 4px solid #dee2e6;
-} */
-
     }
   </style>
 </head>
@@ -99,14 +111,28 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link fw-bold active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Pelanggaran</a></li>
           <li class="nav-item"><a class="nav-link fw-bold" href="#tentang">Tentang Kami</a></li>
+          <li class="nav-item d-flex align-items-center">
+            <!-- Foto Profil atau Inisial -->
+            @if(session('student') && session('student')->foto)
+              <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil" class="rounded-circle" width="40" height="40" />
+            @else
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 5 0px; font-size: 18px;">
+                {{ strtoupper(substr(session('student')->name, 0, 1)) }}
+              </div>
+            @endif
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-              {{-- <img src="img/hd nya bund.jpeg" class="rounded-circle me-2" width="40" height="40" alt="User" /> --}}
-              {{-- <span class="fw-semibold">Vii</span> --}}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="profilesiswa.html"><i class="fas fa-user me-2"></i>Profil</a></li>
+              <li><a class="dropdown-item" href=""><i class="fas fa-user me-2"></i>Profil</a></li>
+              <li>
+                <a class="dropdown-item" href="{{ route('updatePassword') }}">
+                    <i class="bi bi-key"></i> Ubah Password
+                </a>
+            </li>
               <li><hr class="dropdown-divider" /></li>
               <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
             </ul>
@@ -115,57 +141,40 @@
       </div>
     </div>
   </nav>
-
+  
   <div class="container profile-wrapper">
     <div class="profile-title">Profil Siswa</div>
     <div class="profile-container">
-        @if(session('student') && session('student')->foto)
-        <img src="{{ asset('storage/' . session('student')->foto) }}"
-             alt="Foto Profil"
-             class="rounded-circle shadow"
-             width="100"
-             height="100"
-             style="object-fit: cover;">
-    @else
+      @if(session('student') && session('student')->foto)
+        <img src="{{ asset('storage/foto_profilesiswa/' . session('student')->foto) }}" alt="Foto Profil" class="profile-img">
+      @else
         @if(session('student') && session('student')->name)
-            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
-                 style="width: 100px; height: 100px; font-size: 40px;">
-                {{ strtoupper(substr(session('student')->name, 0, 1)) }}
-            </div>
+          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
+               style="width: 130px; height: 130px; font-size: 40px; margin: 0 auto 15px auto;">
+              {{ strtoupper(substr(session('student')->name, 0, 1)) }}
+          </div>
         @else
-            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
-                 style="width: 100px; height: 100px; font-size: 40px;">
-                S
-            </div>
+          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
+               style="width: 130px; height: 130px; font-size: 40px; margin: 0 auto 15px auto;">
+          </div>
         @endif
-    @endif
-    
-    
-    
-      {{-- <h3 class="fw-semibold">{{ $student->name }}</h3> --}}
-      <table class="table table-borderless text-start mt-3 mx-auto" style="max-width: 400px;">
+      @endif
+
+      <table class="table table-borderless profile-info-table">
         <tr>
-            <th scope="row">Nama</th>
-            <td>{{ $student->name }}</td>
-          </tr>
-        <tr>
-          <th scope="row">NISN</th>
-          <td>{{ $student->nisn }}</td>
+          <td class="text-center"><strong>Nama:</strong> {{ session('student')->name }}</td>
         </tr>
         <tr>
-          <th scope="row">Kelas</th>
-          <td>{{ $student->kelas->nama_kelas }}</td>
+          <td class="text-center"><strong>NISN:</strong> {{ session('student')->nisn }}</td>
         </tr>
         <tr>
-          <th scope="row">Alamat</th>
-          <td>{{ $student->alamat ?? 'Belum diisi' }}</td>
-        </tr>
-        <tr>
-          <th scope="row">No HP</th>
-          <td>{{ $student->no_hp ?? 'Belum diisi' }}</td>
+          <td class="text-center"><strong>Kelas:</strong> {{ session('student')->kelas->nama_kelas }}</td>
         </tr>
       </table>
-      <a href="{{ route('Student.profile.edit', $student->id) }}" class="btn btn-primary mt-3">
+      
+      
+      
+      <a href="{{ route('Student.profile.edit', $student->id) }}" class="btn btn-primary btn-edit">
         <i class="fas fa-edit"></i> Edit Profil
       </a>
     </div>
@@ -173,7 +182,6 @@
 
   <footer>
     <p>&copy; 2025. Dashboard Siswa SMK - All Rights Reserved.</p>
-  
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

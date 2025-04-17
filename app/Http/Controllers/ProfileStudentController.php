@@ -22,17 +22,21 @@ class ProfileStudentController extends Controller
     public function edit()
     {
         $student = session('student');
-
+    
         if (!$student) {
             return redirect()->route('loginSiswa')->with('error', 'Anda harus login terlebih dahulu.');
         }
-
-        return view('Student.profile.edit', compact('student'));
+    
+        $kelasList = \App\Models\Kelas::all(); // ✅ Tambahkan ini
+    
+        return view('Student.profile.edit', compact('student', 'kelasList')); // ✅ Kirim ke view
     }
+    
 
     public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
+        
 
         if (!$student) {
             return redirect()->route('loginSiswa')->with('error', 'Data tidak ditemukan.');
@@ -40,14 +44,16 @@ class ProfileStudentController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'kelas' => 'required|string|max:100',
-            'alamat' => 'nullable|string|max:255',
+            'nisn' => 'required|string|max:20', // ✅ TAMBAHKAN
+            'kelas_id' => 'required|string|max:100',
+            // 'alamat' => 'nullable|string|max:255',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
+        
         $student->name = $request->name;
-        $student->kelas = $request->kelas;
-        $student->alamat = $request->alamat;
+        $student->nisn = $request->nisn;
+        $student->kelas_id = $request->kelas_id;
+        // $student->alamat = $request->alamat;
 
         // Proses upload foto
         if ($request->hasFile('foto')) {

@@ -38,7 +38,7 @@
                             Silakan masuk untuk memantau, memperbarui, dan mengelola data pelanggaran siswa
                         </p>
 
-                        <form action="{{ route('Student.login') }}" method="POST" class="pt-2">
+                        <form method="POST" action="{{ url('/loginSiswa') }}" class="pt-2"> {{-- ini udah cukup --}}
                             @csrf
                             {{-- @if (session('error'))
                                 <div class="alert alert-danger">

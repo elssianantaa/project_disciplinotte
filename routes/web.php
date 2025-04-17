@@ -29,30 +29,26 @@ use App\Http\Controllers\KelasController;
 // Route::get('/dasboard', [dasboardController::class, 'showDasboard']);
 Route::get('/', [dasboardController::class, 'login']);
 Route::post('/auth', [dasboardController::class, 'authentication']);
-Route::get('/login', [dasboardController::class, 'login'])->name('login');
+// Route::get('/login', [dasboardController::class, 'login'])->name('login');
 
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
-
-// halaman form login siswa
+Route::get('/login', [dasboardController::class, 'login'])->middleware('guest'); // ✅ BENAR
 Route::get('/loginSiswa', [studentController::class, 'showLoginForm'])->name('Student.login');
-
-// proses login siswa
 Route::post('/loginSiswa', [studentController::class, 'login']);
-
-// dashboard siswa (harus login dulu)
 Route::get('/dashboardSiswa', [studentController::class, 'dashboard'])->name('Student.dashboardSiswa');
 
-// logout siswa
 Route::post('/logoutSiswa', [studentController::class, 'logout'])->name('Student.logout');
 Route::get('/tentangkami', [studentController::class, 'tentangkami'])->name('Student.tentangkami');
 
-// update password siswa
 Route::get('/updatepassword', [studentController::class, 'showUpdatePasswordForm'])->name('updatePassword');
 Route::post('/updatepassword', [studentController::class, 'updatePassword'])->name('updatePassword.post');
-Route::get('/profile', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
-Route::get('/profile/edit', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
-Route::post('/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
+Route::get('/profile-siswa', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
+Route::get('/profile-siswa/edit', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
+Route::put('/profile-siswa/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
+// Route::get('/profile', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
+// Route::get('/profile/edit', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
+// Route::post('/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
 
 
 
@@ -140,12 +136,12 @@ Route::middleware(['auth:web','admin'])->group(function () {
 // Route::get('/dashboardSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
 
 
-<<<<<<< HEAD
-=======
+
+
 Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
 Route::post('/kelas/import', [KelasController::class, 'import'])->name('kelas.import');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
->>>>>>> 5453769cc96a9c9882e661190acee6a6259d23c6
+
 
 // naik kelas
 Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas']);

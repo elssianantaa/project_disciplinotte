@@ -41,17 +41,14 @@ class StudentController extends Controller
 
     public function dashboard()
     {
-        // Cek jika siswa sudah login berdasarkan session
         $student = session('student');
     
         if (!$student) {
-            // Jika tidak ada sesi, arahkan ke halaman login
             return redirect('/loginSiswa')->with('error', 'Silakan login terlebih dahulu!');
         }
     
         return view('Student.dashboardSiswa', compact('student'));
     }
-    
     public function logout(Request $request)
     {
         // Hapus session siswa
@@ -94,15 +91,14 @@ class StudentController extends Controller
         return back()->with('success', 'Password berhasil diubah!');
     }
 
-    // Tidak perlu menggunakan guard jika kamu menggunakan session manual
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            // Jika session student kosong, redirect ke halaman login
-            if (!session('student')) {
-                return redirect('/loginSiswa')->with('error', 'Silakan login terlebih dahulu!');
-            }
-            return $next($request);
-        });
-    }
+//     // Tidak perlu menggunakan guard jika kamu menggunakan session manual
+//     public function __construct()
+// {
+//     $this->middleware(function ($request, $next) {
+//         if (!session('student')) {
+//             return redirect('/loginSiswa')->with('error', 'Silakan login terlebih dahulu!');
+//         }
+//         return $next($request);
+//     });
+// }
 }

@@ -15,44 +15,39 @@ class dasboardController extends Controller
     {
         return view('Admin.login');
     }
-    // public function __construct()
-    // {
-    //     $this->middleware('login')->only(['showDb', 'showDbStaff']);  // hanya metode ini yang membutuhkan login
-    //     $this->middleware('staff')->only(['showDb', 'showDbStaff']); // pengecekan login
-    //     $this->middleware('admin')->only(['dashboard']); // hanya admin yang bisa akses
-    // }
+
 
     public function authentication(Request $request)
-{
-    // Validasi input
-    $credentials = $request->only('email', 'password');
+    {
+        // Validasi input
+        $credentials = $request->only('email', 'password');
 
-    // Validasi input
-    $request->validate([
-        'email' => ['required', 'email'],
-        'password' => 'required'
-    ]);
+        // Validasi input
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
+        ]);
 
-    // Coba login menggunakan guard yang sesuai
-    if (Auth::guard('web')->attempt($credentials)) {
-        $user = Auth::user();
-        if ($user->role === 'admin') {
-            return redirect('/dashboard'); // Arahkan ke dashboard admin
-        } elseif ($user->role === 'staff') {
-            return redirect('/dashboardStaff'); // Arahkan ke dashboard staff
-        } 
-    } else {
-        // Jika login gagal
-        return back()->withErrors(['loginSiswa' => 'Invalid credentials']);
+        // Coba login menggunakan guard yang sesuai
+        if (Auth::guard('web')->attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect('/dashboard');
+            } elseif ($user->role === 'staff') {
+                return redirect('/dashboardStaff');
+            } else {
+                Auth::logout(); // keluarin kalau rolenya gak valid
+                return redirect('/login')->withErrors(['loginSiswa' => 'Role tidak dikenali']);
+            }
+        }           
     }
-}
 
     // REKAP SISWA
     public function showRekap(Request $request)
     {
         // Ambil daftar kelas untuk dropdown
         $kelasList = Kelas::all();
-    
+
         // Ambil daftar periode
         $periodeList = [];
         $startYear = 2018;
@@ -60,38 +55,38 @@ class dasboardController extends Controller
         for ($year = $startYear; $year < $endYear; $year++) {
             $periodeList[] = $year . '/' . ($year + 1);
         }
-    
+
         // Query siswa dengan relasi yang dibutuhkan
         $query = Student::with(['riwayatkelas', 'catatan_pelanggarans']);
-    
+
         // Filter berdasarkan kelas jika ada
         if ($request->kelas_id) {
             $query->where('kelas_id', $request->kelas_id);
         }
-    
+
         // Filter berdasarkan nama jika ada
         if ($request->nama) {
             $query->where('name', 'like', '%' . $request->nama . '%');
         }
-    
+
         // Filter berdasarkan periode jika ada (periode lama atau periode baru)
         if ($request->periode) {
             $query->whereHas('riwayatkelas', function ($q) use ($request) {
                 // Cek apakah periode lama atau periode baru ada yang cocok
                 $q->where('periode_lama', $request->periode)
-                  ->orWhere('periode_baru', $request->periode);
+                    ->orWhere('periode_baru', $request->periode);
             });
         }
-    
+
         // Ambil data siswa setelah filter
         $students = $query->get();
-    
+
         // Hitung total siswa
         $totalSiswa = $students->count();
-    
+
         return view('admin.rekapSiswa', compact('students', 'totalSiswa', 'request', 'kelasList', 'periodeList'));
     }
-    
+
 
     // public function showDb()
     // {
@@ -154,7 +149,7 @@ class dasboardController extends Controller
         $totalSkorsing = $students->where('status', 'skorsing')->count();
 
 
-        return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList','totalSkorsing'));
+        return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList', 'totalSkorsing'));
     }
 
 
@@ -162,35 +157,24 @@ class dasboardController extends Controller
     public function show(Request $request)
     {
         $query = Student::with(['kelas', 'catatanpelanggarans.pelanggaran'])
-        ->where('status', '!=', 'dikeluarkan') // ⬅️ Tambahan ini
-        ->orderBy('name', 'asc'); // ⬅️ Urutkan berdasarkan nama A-Z
+            ->where('status', '!=', 'dikeluarkan') // ⬅️ Tambahan ini
+            ->orderBy('name', 'asc'); // ⬅️ Urutkan berdasarkan nama A-Z
 
-    if ($request->nama) {
-        $query->where('name', 'like', '%' . $request->nama . '%');
-    }
+        if ($request->nama) {
+            $query->where('name', 'like', '%' . $request->nama . '%');
+        }
 
-    if ($request->kelas_id) {
-        $query->where('kelas_id', $request->kelas_id);
-    }
-
-<<<<<<< HEAD
+        if ($request->kelas_id) {
+            $query->where('kelas_id', $request->kelas_id);
+        }
         $students = $query->get();
         $totalSiswa = $students->count();
         $totalSkorsing = $students->where('status', 'skorsing')->count(); // Tambahan ini
 
         $kelasList = Kelas::all();
 
-        return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa','totalSkorsing'));
-=======
-    $students = $query->get();
-    $totalSiswa = $students->count();
-    $kelasList = Kelas::all();
-
-    return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa'));
-
->>>>>>> 5453769cc96a9c9882e661190acee6a6259d23c6
+        return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa', 'totalSkorsing'));
     }
-
 
 
     public function create()
