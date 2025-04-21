@@ -153,7 +153,19 @@ footer {
 
 </style>
 </head>
+<audio id="bg-music" autoplay loop hidden>
+    <source src="{{ asset('audio/ssstik.io_1744887293402.mp3') }}" type="audio/mpeg">
+    Browser kamu tidak mendukung audio!
+  </audio>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const audio = document.getElementById("bg-music");
+      audio.volume = 0.15; // Volume 15% biar lembut
+    });
+  </script>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
 
@@ -212,7 +224,7 @@ footer {
           </div>
         </div>
       </nav>
-  
+
        <div class="container mb-4 py-5">
         <div class="card shadow-sm">
           <div class="card-header bg-primary text-white">
