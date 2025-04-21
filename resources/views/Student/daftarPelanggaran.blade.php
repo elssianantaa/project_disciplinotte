@@ -145,36 +145,76 @@ footer {
 
 </style>
 </head>
+<audio id="bg-music" autoplay loop hidden>
+    <source src="{{ asset('audio/backsound.mp3') }}" type="audio/mpeg">
+    Browser kamu tidak mendukung audio!
+  </audio>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const audio = document.getElementById("bg-music");
+      audio.volume = 0.15; // Volume 15% biar lembut
+    });
+  </script>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src="img/Logo smk-2.gif" alt="Logo Sekolah" />
-          <span class="fw-bold text-black">DisipliNote</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-                <img src="img/hd nya bund.jpeg" class="rounded-circle me-2" width="40" height="40" alt="User" />
-                <span class="fw-semibold">Vii</span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="profilesiswa.html"><i class="fas fa-user me-2"></i>Profil</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-              </ul>
-            </li>
-          </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
+            <span class="fw-bold text-black">DisipliNote</span>
+          </a>
+
+          <!-- Tombol Toggle -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto align-items-center">
+              <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
+
+              <!-- Dropdown Akun -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{-- DEBUG: Tampilkan isi session student --}}
+                  @php
+                  $student = session('student');
+                  $fotoPath = $student && $student->foto ? 'storage/foto_profilesiswa/' . $student->foto : null;
+                @endphp
+
+                @if($fotoPath && file_exists(public_path($fotoPath)))
+                  <img src="{{ asset($fotoPath) }}" alt="Foto Profil" class="rounded-circle me-2" width="40" height="40" />
+                @else
+                  <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
+                    style="width: 40px; height: 40px; font-size: 20px;">
+                    {{ strtoupper(substr($student->name, 0, 1)) }}
+                  </div>
+                @endif
+
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="studentDropdown">
+                  <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}"><i class="fas fa-user me-2"></i> Profil</a></li>
+                  <li><a class="dropdown-item" href="{{ route('updatePassword') }}"><i class="bi bi-key me-2"></i> Ubah Password</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
        <div class="container mb-4 py-5">
         <div class="card shadow-sm">
           <div class="card-header bg-primary text-white">
@@ -194,30 +234,33 @@ footer {
                 </thead>
                 <tbody>
                     @foreach($pelanggarans as $pelanggaranGroup)
-                        <tr class="table-row @if($loop->first) table-danger @endif">
-                            <td>
-                                @if ($loop->first)
-                                    <span class="ms-1 text-warning" title="Perlu Pendampingan">⚠️</span>
-                                @endif
-                                {{ $loop->iteration }}
-                            </td>
+                    @php
+                        $firstPelanggaran = $pelanggaranGroup->pelanggaranGroup->first();
+                        $nisn_anonim = substr($firstPelanggaran->student->nisn, 0, 4) . '****' . substr($firstPelanggaran->student->nisn, -2);
+                    @endphp
+                    <tr class="table-row @if($loop->first) table-danger @endif">
+                        <td>
+                            @if ($loop->first)
+                                <span class="ms-1 text-warning" title="Perlu Pendampingan">⚠️</span>
+                            @endif
+                            {{ $loop->iteration }}
+                        </td>
 
-                            {{-- Pengaburan NISN --}}
-                            @php
-                                $nisn_anonim = substr($pelanggaranGroup->first()->student->nisn, 0, 4) . '****' . substr($pelanggaranGroup->first()->student->nisn, -2);
-                            @endphp
-                            <td>{{ $nisn_anonim }}</td>
+                        {{-- Pengaburan NISN --}}
+                        <td>{{ $nisn_anonim }}</td>
 
-                            {{-- Nama Siswa --}}
-                            <td>{{ Str::limit($pelanggaranGroup->first()->student->name, 1, '**') }}</td>
+                        {{-- Nama Siswa --}}
+                        <td>{{ Str::limit($firstPelanggaran->student->name, 1, '**') }}</td>
 
-                            {{-- Total Poin Pelanggaran --}}
-                            <td>{{ $pelanggaranGroup->total_poin }}</td>
+                        {{-- Total Poin Pelanggaran --}}
+                        <td>{{ $pelanggaranGroup->total_poin }}</td>
 
-                            {{-- Tanggal Terakhir --}}
-                            <td>{{ \Carbon\Carbon::parse($pelanggaranGroup->latest_pelanggaran->created_at)->format('d-m-Y') }}</td>
-                        </tr>
-                    @endforeach
+                        {{-- Tanggal Terakhir --}}
+                        <td>{{ \Carbon\Carbon::parse($pelanggaranGroup->latest_pelanggaran->created_at)->format('d-m-Y') }}</td>
+                    </tr>
+                @endforeach
+
+
                 </tbody>
             </table>
 
