@@ -116,6 +116,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
+
       <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
         <span class="fw-bold text-black">DisipliNote</span>
@@ -136,7 +137,6 @@
           <!-- Dropdown Akun -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
               {{-- DEBUG: Tampilkan isi session student --}}
               @php
               $student = session('student');
