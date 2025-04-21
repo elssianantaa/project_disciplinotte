@@ -224,13 +224,13 @@ footer {
           </div>
         </div>
        <!-- Tampilkan pesan peringatan hanya jika siswa memiliki pelanggaran -->
-    @foreach($pelanggarans as $pelanggaranGroup)
+    {{-- @foreach($pelanggarans as $pelanggaranGroup)
     @if($pelanggaranGroup->total_poin >= 30)
         <div class="alert alert-warning mt-3 mb-5" role="alert">
             Kamu telah mencapai skor pelanggaran <strong>{{ $pelanggaranGroup->total_poin }}</strong> poin. Jika melanggar lagi, kamu akan mendapatkan sanksi lebih berat! Mohon untuk lebih disiplin.
         </div>
     @endif
-@endforeach
+@endforeach --}}
         </div>
         <!-- <div class="card mt-4 shadow-sm">
           <div class="card-header bg-info text-white">Kotak Aspirasi</div>
