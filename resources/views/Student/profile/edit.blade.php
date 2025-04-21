@@ -78,7 +78,6 @@
       margin-top: auto;
     }
 
-    /* Align label and input fields to the left */
     .form-label {
       text-align: left;
       font-weight: bold;

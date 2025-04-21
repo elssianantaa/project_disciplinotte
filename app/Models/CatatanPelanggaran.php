@@ -37,4 +37,6 @@ class CatatanPelanggaran extends Model
     public function students(){
         return $this->hasMany(Student::class, 'pelanggaran_id', 'id');
     }
+   
 }
+

@@ -94,6 +94,12 @@
         width: 100px;
         height: 100px;
       }
+      .card {
+  border-radius: 15px;
+}
+.card-title {
+  font-size: 1.2rem;
+}
     }
   </style>
 </head>
@@ -180,6 +186,31 @@
           <td class="text-center"><strong>Kelas:</strong> {{ session('student')->kelas->nama_kelas }}</td>
         </tr>
       </table>
+      <div class="row justify-content-center mt-3 mb-4">
+        <div class="col-12 col-md-5 mb-2">
+          <div class="card border-danger shadow-sm" style="height: 100px;">
+            <div class="card-body text-center d-flex flex-column justify-content-center p-1">
+              <h6 class="card-title text-danger mb-1" style="font-size: 0.8rem;">
+                <i class="fas fa-exclamation-triangle"></i> Total Pelanggaran
+              </h6>
+              <h5 class="fw-bold mb-0" style="font-size: 1.1rem;">{{ $totalPoin }}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-5 mb-2">
+          <div class="card border-success shadow-sm" style="height: 100px;">
+            <div class="card-body text-center d-flex flex-column justify-content-center p-1">
+              <h6 class="card-title text-success mb-1" style="font-size: 0.8rem;">
+                <i class="fas fa-check-circle"></i> Sisa Point
+              </h6>
+              <h5 class="fw-bold mb-0" style="font-size: 1.1rem;">{{ $sisaPoin }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      
       
       
       

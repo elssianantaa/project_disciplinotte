@@ -69,5 +69,11 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+    public function catatanPelanggaran()
+{
+    return $this->hasMany(CatatanPelanggaran::class, 'student_id'); // sesuaikan nama FK
+}
+
+    
 
 }

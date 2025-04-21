@@ -7,28 +7,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
 
-   <!-- Ganti bagian STYLE di atas head -->
-<style>
+    <!-- Ganti bagian STYLE di atas head -->
+    <style>
 
-html, body {
-  height: 100%;
-}
+    html, body {
+      height: 100%;
+    }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
+    body {
+      display: flex;
+      flex-direction: column;
+    }
 
-main {
-  flex: 1;
-}
+    main {
+      flex: 1;
+    }
 
-footer {
-  text-align: center;
-  padding: 10px;
-  background: none;
-  margin-top: auto;
-}
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: none;
+      margin-top: auto;
+    }
 
     body {
       margin: 0;
@@ -101,51 +101,161 @@ footer {
     }
 
     /* Animasi fade-in untuk setiap baris dengan durasi lebih lama */
-@keyframes fadeInRow {
-    from {
+    @keyframes fadeInRow {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Kelas untuk setiap baris tabel */
+    .table-row {
         opacity: 0;
+        animation: fadeInRow 1s ease-out forwards; /* Durasi animasi 1 detik */
+        animation-delay: 0.2s;
     }
-    to {
+
+    /* Untuk banyak baris, gunakan cara di bawah: */
+    .table-row:nth-child(n) {
+        animation-delay: calc(0.2s * (var(--row-number) - 1));
+    }
+
+    /* Highlight baris dengan poin tertinggi */
+    .table-danger {
+        background-color: #f8d7da !important;
+    }
+
+    /* Animasi peringatan untuk siswa dengan pelanggaran tinggi */
+    .table-danger .ms-1 {
+        color: #dc3545; /* Warna merah untuk menambah kesan peringatan */
+        font-weight: bold;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+    }
+
+    .alert-warning strong {
+        color: #dc3545; /* Menonjolkan pesan peringatan */
+    }
+
+    /* Naga Animasi */
+    .dragon-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 300px; /* Lebih tinggi agar api lebih brutal */
+      pointer-events: none; /* biar nggak ganggu klik */
+      z-index: 9999;
+    }
+
+    .dragon {
+      position: absolute;
+      left: 5%;
+      bottom: 0;
+      font-size: 6rem; /* Naga lebih besar */
+      animation: dragon-slide 5s linear infinite; /* Gerakan naga lebih lambat */
+    }
+
+    @keyframes dragon-slide {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(100%);
         opacity: 1;
+      }
     }
-}
 
-/* Kelas untuk setiap baris tabel */
-.table-row {
-    opacity: 0;
-    animation: fadeInRow 1s ease-out forwards; /* Durasi animasi 1 detik */
-    animation-delay: 0.2s;
-}
+    .fire-breath {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 150px; /* Lebih lebar */
+      height: 25px;
+      background: linear-gradient(to right, orange, red, darkred);
+      border-radius: 10px;
+      opacity: 0;
+      animation: fire-blast 1s ease-out 0.5s infinite forwards;
+    }
 
-/* Untuk banyak baris, gunakan cara di bawah: */
-.table-row:nth-child(n) {
-    animation-delay: calc(0.2s * (var(--row-number) - 1));
-}
+    @keyframes fire-blast {
+      0% {
+        width: 0;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+        width: 150px;
+      }
+      100% {
+        width: 0;
+        opacity: 0;
+      }
+    }
 
-/* Highlight baris dengan poin tertinggi */
-.table-danger {
-    background-color: #f8d7da !important;
-}
+    .fire-rain {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-/* Animasi peringatan untuk siswa dengan pelanggaran tinggi */
-.table-danger .ms-1 {
-    color: #dc3545; /* Warna merah untuk menambah kesan peringatan */
-    font-weight: bold;
-}
+    .fire-rain::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      width: 4px;
+      height: 150px; /* Hujan api lebih tinggi */
+      background: linear-gradient(to bottom, orange, red);
+      animation: rainFire 1s linear infinite;
+      opacity: 0.9; /* Lebih cerah */
+    }
 
-.alert-warning {
-    background-color: #fff3cd;
-    border-color: #ffeeba;
-    color: #856404;
-}
+    @keyframes rainFire {
+      0% {
+        transform: translateY(0) scaleX(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(300px) scaleX(1);
+        opacity: 0;
+      }
+    }
 
-.alert-warning strong {
-    color: #dc3545; /* Menonjolkan pesan peringatan */
-}
+    .fire-rain::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 70%;
+      width: 4px;
+      height: 120px; /* Hujan api lebih banyak */
+      background: linear-gradient(to bottom, orange, darkred);
+      animation: rainFire 0.8s linear infinite;
+      opacity: 0.7; /* Lebih cerah */
+    }
 
-</style>
-</head>
-<body>
+    </style>
+  </head>
+
+  <body>
+
+    <div class="dragon-container">
+      <div class="dragon">
+        🐉
+        <div class="fire-breath"></div>
+      </div>
+      <div class="fire-rain"></div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#">

@@ -226,21 +226,38 @@
     </div>
 </section>
 @else
-<section class="py-4">
-    <div class="container">
-        <div class="alert alert-success shadow rounded-4 animate_animated animate_fadeInUp">
-            <h5 class="fw-bold">Tidak Ada Pelanggaran 🎉</h5>
-            <p>Selamat! Kamu belum tercatat melakukan pelanggaran apapun. Terus pertahankan sikap disiplin dan menjadi contoh yang baik untuk teman-temanmu ya 🙌</p>
-        </div>
-        <div class="row justify-content-center mt-4">
-          <div class="col-md-6 mb-3">
-            <img src="gambar/sukses.jpg" alt="Disiplin" class="img-fluid shadow rounded-4 w-100" style="height: 250px; object-fit: cover;" />
-          </div>
-        </div>
+<section class="py-4 mb-5">
+  <div class="container">
+    <div class="alert alert-success shadow rounded-4">
+      <h5 class="fw-bold">Tidak Ada Pelanggaran 🎉</h5>
+      <p>Selamat! Kamu belum tercatat melakukan pelanggaran apapun. Terus pertahankan sikap disiplin dan menjadi contoh yang baik untuk teman-temanmu ya 🙌</p>
+    </div>  
+    <div class="row justify-content-center align-items-center mt-4">
+      <div class="col-md-4 mb-3 d-flex justify-content-center">
+        <img src="gambar/animasi1.jpg" alt="Disiplin"
+             class="img-fluid animate_animated animatefadeIn animatedelay-1s animate_slower"
+             style="height: 250px; object-fit: contain;" />
+      </div>
+      <div class="col-md-6 mb-3 text-center">
+        <h5 class="fw-bold">Terus Jaga Disiplinmu!</h5>
+        <p>Dengan tidak adanya pelanggaran, kamu sudah menunjukkan sikap yang patut dicontoh. Pertahankan terus semangat positif ini ya 💪</p>
+      </div>
     </div>
+    <div class="row justify-content-center align-items-center mt-4">
+      <div class="col-md-6 mb-3 text-center">
+        <h5 class="fw-bold">Kamu Inspirasi Teman-Temanmu ✨</h5>
+        <p>Sikap disiplin yang kamu tunjukkan bisa jadi contoh yang positif untuk lingkungan sekitarmu. Terus semangat dan tetap rendah hati ya 👏</p>
+      </div>
+
+      <div class="col-md-4 mb-3 d-flex justify-content-center">
+        <img src="gambar/animasi2.jpg" alt="Disiplin"
+             class="img-fluid animate_animated animatefadeIn animatedelay-1s animate_slower"
+             style="height: 250px; object-fit: contain;" />
+      </div>
+    </div>
+  </div>
 </section>
 @endif
-
 
 <script>
   const quotes = [
