@@ -38,7 +38,10 @@ Route::get('/loginSiswa', [studentController::class, 'showLoginForm'])->name('St
 Route::post('/loginSiswa', [studentController::class, 'login']);
 Route::get('/dashboardSiswa', [studentController::class, 'dashboard'])->name('Student.dashboardSiswa');
 
-Route::post('/logoutSiswa', [studentController::class, 'logout'])->name('Student.logout');
+Route::post('/logoutSiswa', [studentController::class, 'logoutSiswa'])->name('Student.logoutSiswa');
+// web.php
+Route::post('/logoutSiswa', [dasboardSiswaController::class, 'logout'])->name('logoutSiswa');
+Route::post('/logoutSiswa', [studentController::class, 'logoutSiswa'])->name('logoutSiswa');
 Route::get('/tentangkami', [studentController::class, 'tentangkami'])->name('Student.tentangkami');
 
 Route::get('/updatepassword', [studentController::class, 'showUpdatePasswordForm'])->name('updatePassword');
@@ -144,7 +147,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas']);
 Route::get('/kenaikanKelas', [dasboardStaffController::class, 'showRiwayatKelas'])->name('form.naik.kelas');
 Route::post('/naikKelas', [dasboardStaffController::class, 'naikKelas'])->name('naik.kelas');
-
+Route::post('/logoutSiswa', [dasboardSiswaController::class, 'logout'])->name('logout');
 // Login Admin
 
 

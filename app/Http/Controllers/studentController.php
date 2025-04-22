@@ -103,5 +103,14 @@ class StudentController extends Controller
 
         return back()->with('success', 'Password berhasil diubah!');
     }
+
+    public function logoutSiswa(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/loginSiswa');  // Ganti dengan halaman login yang sesuai
+    }
+    
 }
 

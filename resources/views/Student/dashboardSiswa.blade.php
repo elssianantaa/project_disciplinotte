@@ -113,6 +113,22 @@
     }
   </style>
 </head>
+<audio id="bg-music" loop hidden>
+  <source src="{{ asset('audio/backsound.mp3') }}" type="audio/mpeg">
+</audio>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const audio = document.getElementById("bg-music");
+      audio.volume = 0.15;
+
+      // Coba mainkan langsung
+      audio.play().catch(function (e) {
+          console.warn("Autoplay diblokir oleh browser: ", e);
+      });
+  });
+  
+</script>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
@@ -162,7 +178,7 @@
                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class="fas fa-sign-out-alt me-2"></i> Logout
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form id="logout-form" action="/logoutSiswa" method="POST" class="d-none">
                   @csrf
                 </form>
               </li>

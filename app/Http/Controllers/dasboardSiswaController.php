@@ -42,6 +42,16 @@ class dasboardSiswaController extends Controller
     
         return view('Student.daftarPelanggaran', compact('pelanggarans', 'siswaId'));
     }
+
+    public function logout(Request $request)
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/loginSiswa');
+}
+
+    
     
 
 // 

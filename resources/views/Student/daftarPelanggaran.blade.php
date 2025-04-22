@@ -145,7 +145,7 @@
 
     </style>
     </head>
-    <audio id="bg-music" loop hidden>
+    {{-- <audio id="bg-music" loop hidden>
         <source src="{{ asset('audio/backsound.mp3') }}" type="audio/mpeg">
     </audio>
 
@@ -159,7 +159,8 @@
                 console.warn("Autoplay diblokir oleh browser: ", e);
             });
         });
-    </script>
+        
+    </script> --}}
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
@@ -292,7 +293,7 @@
                 <small>&copy; 2025. Admin Staf SMK - All Rights Reserved. Hand-crafted with ❤</small>
             </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
         const rows = document.querySelectorAll('.table-row');
