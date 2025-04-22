@@ -113,13 +113,13 @@
     /* Kelas untuk setiap baris tabel */
     .table-row {
         opacity: 0;
-        animation: fadeInRow 1s ease-out forwards; /* Durasi animasi 1 detik */
-        animation-delay: 0.2s;
+        animation: fadeInRow 2s ease-out forwards; /* Durasi animasi 1 detik */
+        animation-delay: 0.8s;
     }
 
     /* Untuk banyak baris, gunakan cara di bawah: */
     .table-row:nth-child(n) {
-        animation-delay: calc(0.2s * (var(--row-number) - 1));
+        animation-delay: calc(0.4s * (var(--row-number) - 1));
     }
 
     /* Highlight baris dengan poin tertinggi */
@@ -145,21 +145,30 @@
 
     </style>
     </head>
-    <audio id="bg-music" loop hidden>
+    {{-- <audio id="bg-music" loop hidden>
         <source src="{{ asset('audio/backsound.mp3') }}" type="audio/mpeg">
     </audio>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const audio = document.getElementById("bg-music");
-            audio.volume = 0.15;
+    const audio = document.getElementById("bg-music");
+    audio.volume = 0.15;
 
-            // Coba mainkan langsung
-            audio.play().catch(function (e) {
-                console.warn("Autoplay diblokir oleh browser: ", e);
-            });
+    // Coba mainkan langsung saat halaman siap
+    audio.play().catch(function (e) {
+        console.warn("Autoplay diblokir oleh browser: ", e);
+    });
+
+    // Mulai animasi setelah musik diputar
+    audio.onplay = function() {
+        const rows = document.querySelectorAll('.table-row');
+        rows.forEach((row) => {
+            row.classList.add('fade-in');
         });
-    </script>
+    };
+});
+
+    </script> --}}
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
@@ -178,7 +187,7 @@
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa">Home</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
 
@@ -196,7 +205,7 @@
                     @else
                     <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
                         style="width: 40px; height: 40px; font-size: 20px;">
-                        {{ strtoupper(substr($student->name, 0, 1)) }}
+                        {{ strtoupper(substr(optional($student)->name, 0, 1)) }}
                     </div>
                     @endif
 

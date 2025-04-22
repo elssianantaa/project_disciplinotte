@@ -271,19 +271,19 @@
 
       <li class="nav-item">
 
-        <a class="nav-link" href="index.html"><I class="fas fa-home me-2"></I>Dashboard</a>
+        <a class="nav-link" href="/dashboardStaff"><I class="fas fa-home me-2"></I>Dashboard</a>
 
       </li>
 
       <li class="nav-item">
 
-        <a class="nav-link" href="daftarsiswa.html"><I class="fas fa-list me-2"></I>Daftar Siswa</a>
+        <a class="nav-link" href="/daftarSiswa"><I class="fas fa-list me-2"></I>Daftar Siswa</a>
 
       </li>
 
       <li class="nav-item">
 
-        <a class="nav-link" href="pelanggaran.html"><I class="fas fa-exclamation-circle me-2"></I>Pelanggaran</a>
+        <a class="nav-link" href="/daftarPelanggaran"><I class="fas fa-exclamation-circle me-2"></I>Pelanggaran</a>
 
       </li>
 

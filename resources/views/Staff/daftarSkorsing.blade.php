@@ -202,7 +202,6 @@
                     <th>Kelas</th>
                     <th>Status</th>
                     <th>Skorsing</th>
-                    <th>Durasi</th>
                     {{-- <th>Aksi</th> --}}
                 </tr>
             </thead>
@@ -217,8 +216,8 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->kelas->nama_kelas}}</td>
                     <td>
-                        <span class="badge 
-                          {{ $item->status == 'skorsing' ? 'bg-warning' : 
+                        <span class="badge
+                          {{ $item->status == 'skorsing' ? 'bg-warning' :
                              ($item->status == 'dikeluarkan' ? 'bg-danger' : 'bg-success') }}">
                           {{ ucfirst($item->status) }}
                         </span>
@@ -230,7 +229,7 @@
                         @php
                         $skorsingTerbaru = $item->skorsings->first();
                       @endphp
-                      
+
                       @if ($item->status == 'skorsing' && $skorsingTerbaru)
                         {{ \Carbon\Carbon::parse($skorsingTerbaru->mulai)->format('d M Y') }} -
                         {{ \Carbon\Carbon::parse($skorsingTerbaru->selesai)->format('d M Y') }}
@@ -241,7 +240,7 @@
 
                     {{-- <td>{{ $item->durasi}}</td> --}}
                 </tr>
-                @endforeach 
+                @endforeach
             </tbody>
         </table>
     </main>
