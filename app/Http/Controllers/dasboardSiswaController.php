@@ -49,6 +49,7 @@ class dasboardSiswaController extends Controller
 public function showDbStudent()
 {
     $siswaId = Auth::id();
+    // Controller method
 
     $pelanggarans = Cache::remember('pelanggarans_sorted', 86400, function () {
         return CatatanPelanggaran::with(['student', 'pelanggaran'])

@@ -144,7 +144,7 @@ audio.onplay = function() {
 
       <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
-        <span class="fw-bold text-black">DisipliNote</span>
+        <span class="fw-bold text-black">DiscipliNotes</span>
       </a>
 
       <!-- Tombol Toggle -->
@@ -234,10 +234,12 @@ audio.onplay = function() {
 <section class="py-4">
     <div class="container">
         <div class="alert alert-info shadow rounded-4 animate_animated animate_fadeInUp">
-            <h5 class="fw-bold">Peringatan Untuk Siswa</h5>
+            <h5 class="fw-bold">Peringatan untuk Siswa</h5>
             <p><strong>Perhatian!</strong><br><br>
-                Kamu tercatat telah melakukan pelanggaran terhadap peraturan sekolah. Hal ini sangat kami sayangkan, karena setiap siswa diharapkan mampu menunjukkan sikap disiplin, tanggung jawab, dan menjadi contoh yang baik bagi lingkungan sekitarnya...
-                Kami berharap kamu dapat menjadikan peringatan ini sebagai titik balik.
+                Kamu tercatat telah melakukan pelanggaran terhadap peraturan sekolah. Hal ini sangat kami sayangkan, karena setiap siswa diharapkan menunjukkan sikap disiplin, tanggung jawab, serta menjadi teladan yang baik bagi teman-teman lainnya.<br><br>
+                Jadikan peringatan ini sebagai titik balik untuk memperbaiki sikap dan menjauhi pelanggaran di masa mendatang.
+            </p>
+
             </p>
         </div>
         <div class="row justify-content-center mt-4">

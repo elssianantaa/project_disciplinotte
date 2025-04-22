@@ -176,7 +176,7 @@
 
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
-                <span class="fw-bold text-black">DisipliNote</span>
+                <span class="fw-bold text-black">DiscipliNotes</span>
             </a>
 
             <!-- Tombol Toggle -->

@@ -13,14 +13,14 @@
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@endif
+    @endif
 
-@if (session('error'))
+    @if (session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ session('error') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@endif
+    @endif
 
     <div style="background-color: rgb(255, 255, 255);">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="w-100">
@@ -35,17 +35,12 @@
                         <h2 class="text-center text-secondary" style="font-family: 'Trebuchet MS', sans-serif;">Sign Into Your Account</h2>
 
                         <p class="pt-3" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
-                            Silakan masuk untuk memantau, memperbarui, dan mengelola data pelanggaran siswa
+                            Masuk untuk melihat catatan pelanggaranmu dan berusaha lebih baik dalam disiplin.
                         </p>
 
-                        <form method="POST" action="{{ url('/loginSiswa') }}" class="pt-2"> {{-- ini udah cukup --}}
+                        <form method="POST" action="{{ url('/loginSiswa') }}" class="pt-2">
                             @csrf
-                            {{-- @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error')}}
-                                </div>
-                            @endif --}}
-                            
+
                             <div class="form-group py-3">
                                 <input type="text" name="nisn" class="form-control" placeholder="Enter your nisn" style="height: 50px; background-color: #F5F7FF;">
                             </div>
@@ -63,10 +58,10 @@
                                 </button>
                             </div>
 
-                            <div class="pt-4 text-center">
-                                <a href="#">Forgot your password?</a>
-                                <p>Don't have an account? <a href="/register">Register here</a></p>
-                            </div>
+                            <p class="pt-4 text-center" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                                Pastikan kamu sudah memiliki akun sebelum login. Hubungi admin jika ada masalah.
+                            </p>
+
                         </form>
                     </div>
                 </div>
@@ -77,7 +72,6 @@
             </div>
         </div>
     </div>
-    </div>a
 
     <script>
         function togglePassword() {
