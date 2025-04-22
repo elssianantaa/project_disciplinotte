@@ -327,6 +327,7 @@ class dasboardStaffController extends Controller
     //NAIK KELAS
 
     public function showKelas(){
+
         $data['kelas'] = RiwayatKelas::with(['kelasLama', 'kelas', 'student'])->get();
         return view('Staff.daftarRiwayatKelas', $data);
     }
@@ -349,6 +350,7 @@ class dasboardStaffController extends Controller
 
     public function naikKelas(Request $request)
     {
+
         $periode = $request->input('periode_baru'); // Periode baru (contoh: 2024/2025)
         $periodeLama = $request->input('periode_lama'); // Tambahan
         $kelasAsal = $request->input('kelas_lama_id');

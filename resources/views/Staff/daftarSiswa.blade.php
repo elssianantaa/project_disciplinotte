@@ -121,6 +121,37 @@
 </head>
 <body>
 
+    <div class="modal fade" id="profilModal" tabindex="-1" aria-labelledby="profilModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="background-color: #f4f6f8;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="profilModalLabel">Profil Pengguna</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body text-center">
+                @if(Auth::user()->foto)
+                {{-- <img src="{{ asset('storage/foto_user/' . Auth::user()->foto) }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;"> --}}
+                <img src="{{ Auth::user()->foto ? asset('storage/foto_user/' . Auth::user()->foto) : asset('img/profile-admin.png') }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100">
+                @else
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 100px; height: 100px; font-size: 40px;">
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                </div>
+            @endif
+              <h5>{{ Auth::user()->name }}</h5>
+              <p class="text-muted">{{ ucfirst(Auth::user()->role) }}</p>
+              <hr>
+              <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+              <p><strong>No HP:</strong> {{ Auth::user()->nohp }}</p>
+              <p><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('staff.profile.edit', Auth::user()->id) }}" class="btn btn-primary">Edit Profil</a>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
   <nav class="topbar d-flex justify-content-between align-items-center shadow-sm">
     <h4 class="mb-0 fw-semibold">Dashboard</h4>
     <div class="dropdown">
@@ -155,16 +186,16 @@
     </div>
     <ul class="nav flex-column" id="sidebar">
       <li class="nav-item">
-        <a class="nav-link" href="index.html"><i class="fas fa-home me-2"></i>Dashboard</a>
+        <a class="nav-link" href="/dashboardStaff"><i class="fas fa-home me-2"></i>Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="daftarsiswa.html"><i class="fas fa-list me-2"></i>Daftar Siswa</a>
+        <a class="nav-link" href="/daftarSiswa"><i class="fas fa-list me-2"></i>Daftar Siswa</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pelanggaran.html"><i class="fas fa-exclamation-circle me-2"></i>Pelanggaran</a>
+        <a class="nav-link" href="/daftarPelanggaran"><i class="fas fa-exclamation-circle me-2"></i>Pelanggaran</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="Pengaturan.html"><i class="fas fa-cog me-2"></i>Pengaturan</a>
+        <a class="nav-link" href="{{ route('staff.profile.edit', Auth::user()->id) }}"><i class="fas fa-cog me-2"></i>Pengaturan</a>
       </li>
     </ul>
   </nav>

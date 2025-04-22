@@ -6,7 +6,7 @@
   <title>Dashboard Siswa</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
-  
+
 
   <style>
     body {
@@ -116,7 +116,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa">Home</a></li>
           <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
           <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
           <li class="nav-item d-flex align-items-center">
@@ -124,20 +124,20 @@
             $student = session('student');
             $fotoPath = $student && $student->foto ? 'storage/foto_profilesiswa/' . $student->foto : null;
           @endphp
-          
+
           <li class="nav-item d-flex align-items-center me-2">
             @if($fotoPath && file_exists(public_path($fotoPath)))
               <img src="{{ asset($fotoPath) }}" alt="Foto Profil" class="rounded-circle me-2" width="40" height="40" />
             @else
               <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
                 style="width: 40px; height: 40px; font-size: 18px;">
-                {{ strtoupper(substr($student->name ?? 'S', 0, 1)) }}
-              </div>
+                {{ strtoupper(substr(optional($student)->name, 0, 1)) }}
+            </div>
             @endif
           </li>
-          
+
             <!-- Foto Profil atau Inisial -->
-            
+
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
@@ -157,7 +157,7 @@
       </div>
     </div>
   </nav>
-  
+
   <div class="container profile-wrapper">
     <div class="profile-title">Profil Siswa</div>
     <div class="profile-container">
@@ -165,19 +165,19 @@
         $student = session('student');
         $fotoPath = $student && $student->foto ? 'storage/foto_profilesiswa/' . $student->foto : null;
       @endphp
-  
+
       @if($fotoPath && file_exists(public_path($fotoPath)))
         <img src="{{ asset($fotoPath) }}" alt="Foto Profil" class="profile-img">
       @else
         <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow"
              style="width: 130px; height: 130px; font-size: 40px; margin: 0 auto 15px auto;">
-          {{ strtoupper(substr($student->name ?? 'S', 0, 1)) }}
-        </div>
+             {{ strtoupper(substr(optional($student)->name, 0, 1)) }}
+            </div>
       @endif
 
       <table class="table table-borderless profile-info-table">
         <tr>
-          <td class="text-center"><strong>Nama:</strong> {{ session('student')->name }}</td>
+            <td class="text-center"><strong>Nama:</strong> {{ optional(session('student'))->name }}</td>
         </tr>
         <tr>
           <td class="text-center"><strong>NISN:</strong> {{ session('student')->nisn }}</td>
@@ -208,13 +208,13 @@
           </div>
         </div>
       </div>
-      
-      
-      
-      
-      
-      
-      <a href="{{ route('Student.profile.edit', $student->id) }}" class="btn btn-primary btn-edit">
+
+
+
+
+
+
+      <a href="{{ route('Student.profile.edit', optional($student)->id) }}" class="btn btn-primary btn-edit">
         <i class="fas fa-edit"></i> Edit Profil
       </a>
     </div>

@@ -144,7 +144,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 // naik kelas
-Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas']);
+Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas'])->name('show');
 Route::get('/kenaikanKelas', [dasboardStaffController::class, 'showRiwayatKelas'])->name('form.naik.kelas');
 Route::post('/naikKelas', [dasboardStaffController::class, 'naikKelas'])->name('naik.kelas');
 Route::post('/logoutSiswa', [dasboardSiswaController::class, 'logout'])->name('logout');

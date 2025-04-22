@@ -113,6 +113,7 @@
     }
   </style>
 </head>
+
 <audio id="bg-music" loop hidden>
   <source src="{{ asset('audio/backsound.mp3') }}" type="audio/mpeg">
 </audio>
@@ -128,6 +129,31 @@
       });
   });
   
+
+<audio id="bg-music" loop hidden>
+    <source src="{{ asset('audio/backsound.mp3') }}" type="audio/mpeg">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+const audio = document.getElementById("bg-music");
+audio.volume = 0.15;
+
+// Coba mainkan langsung saat halaman siap
+audio.play().catch(function (e) {
+    console.warn("Autoplay diblokir oleh browser: ", e);
+});
+
+// Mulai animasi setelah musik diputar
+audio.onplay = function() {
+    const rows = document.querySelectorAll('.table-row');
+    rows.forEach((row) => {
+        row.classList.add('fade-in');
+    });
+};
+});
+
+>>>>>>> 03c8a63e03e5fa2a49bd521214f636409d57cbf2
 </script>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
@@ -135,21 +161,21 @@
 
       <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
-        <span class="fw-bold text-black">DisipliNote</span>
+        <span class="fw-bold text-black">DiscipliNotes</span>
       </a>
-  
+
       <!-- Tombol Toggle -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-  
+
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold active" href="/dashboardSiswa">Home</a></li>
           <li class="nav-item"><a class="nav-link fw-bold" href="/daftarPelanggaranSiswa">Pelanggaran</a></li>
           <li class="nav-item"><a class="nav-link fw-bold" href="/tentangkami">Tentang Kami</a></li>
-  
+
           <!-- Dropdown Akun -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -158,16 +184,16 @@
               $student = session('student');
               $fotoPath = $student && $student->foto ? 'storage/foto_profilesiswa/' . $student->foto : null;
             @endphp
-            
+
             @if($fotoPath && file_exists(public_path($fotoPath)))
               <img src="{{ asset($fotoPath) }}" alt="Foto Profil" class="rounded-circle me-2" width="40" height="40" />
             @else
               <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
                 style="width: 40px; height: 40px; font-size: 20px;">
-                {{ strtoupper(substr($student->name, 0, 1)) }}
-              </div>
+                {{ strtoupper(substr(optional($student)->name, 0, 1)) }}
+            </div>
             @endif
-            
+
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="studentDropdown">
               <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}"><i class="fas fa-user me-2"></i> Profil</a></li>
@@ -188,7 +214,7 @@
       </div>
     </div>
   </nav>
-  
+
 
 <!-- Hero Section (Carousel) -->
 <div class="container my-4">
@@ -225,10 +251,12 @@
 <section class="py-4">
     <div class="container">
         <div class="alert alert-info shadow rounded-4 animate_animated animate_fadeInUp">
-            <h5 class="fw-bold">Peringatan Untuk Siswa</h5>
+            <h5 class="fw-bold">Peringatan untuk Siswa</h5>
             <p><strong>Perhatian!</strong><br><br>
-                Kamu tercatat telah melakukan pelanggaran terhadap peraturan sekolah. Hal ini sangat kami sayangkan, karena setiap siswa diharapkan mampu menunjukkan sikap disiplin, tanggung jawab, dan menjadi contoh yang baik bagi lingkungan sekitarnya...
-                Kami berharap kamu dapat menjadikan peringatan ini sebagai titik balik.
+                Kamu tercatat telah melakukan pelanggaran terhadap peraturan sekolah. Hal ini sangat kami sayangkan, karena setiap siswa diharapkan menunjukkan sikap disiplin, tanggung jawab, serta menjadi teladan yang baik bagi teman-teman lainnya.<br><br>
+                Jadikan peringatan ini sebagai titik balik untuk memperbaiki sikap dan menjauhi pelanggaran di masa mendatang.
+            </p>
+
             </p>
         </div>
         <div class="row justify-content-center mt-4">
@@ -247,7 +275,7 @@
     <div class="alert alert-success shadow rounded-4">
       <h5 class="fw-bold">Tidak Ada Pelanggaran 🎉</h5>
       <p>Selamat! Kamu belum tercatat melakukan pelanggaran apapun. Terus pertahankan sikap disiplin dan menjadi contoh yang baik untuk teman-temanmu ya 🙌</p>
-    </div>  
+    </div>
     <div class="row justify-content-center align-items-center mt-4">
       <div class="col-md-4 mb-3 d-flex justify-content-center">
         <img src="gambar/animasi1.jpg" alt="Disiplin"
