@@ -13,6 +13,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('app:refresh-pelanggaran')->daily(); // jalan setiap 24 jam
+
         // $schedule->call(function () {
         //     Cache::forget('pelanggarans_sorted');
         // })->daily();

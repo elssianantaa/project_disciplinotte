@@ -81,18 +81,32 @@
         border-radius: 6px;
     }
 
-    /* .table-responsive {
-        max-height: 400px;
-        overflow-y: auto;
-        position: relative;
-    }
+    .pagination {
+    justify-content: center;
+    gap: 0.5rem;
+  }
 
-    thead th {
-        position: sticky;
-        top: 0;
-        background-color: #f8f9fa;
-        z-index: 10;
-    } */
+  .page-link {
+    border-radius: 0.5rem;
+    padding: 6px 12px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+    transition: 0.2s ease-in-out;
+  }
+
+  .page-link:hover {
+    background-color: #e5e7eb;
+    color: #1f2937;
+  }
+
+  .page-item.active .page-link {
+    background-color: #494949;
+    color: white;
+    border-color: #c4b5fd;
+  }
+
+
 
     </style>
 </head>

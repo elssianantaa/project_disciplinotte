@@ -117,6 +117,33 @@
         padding-bottom: 80px;
       }
     }
+    .pagination {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .page-link {
+    border-radius: 0.5rem;
+    padding: 6px 12px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+    transition: 0.2s ease-in-out;
+  }
+
+  .page-link:hover {
+    background-color: #e5e7eb;
+    color: #1f2937;
+  }
+
+  .page-item.active .page-link {
+    background-color: #494949;
+    color: white;
+    border-color: #c4b5fd;
+  }
+
+
+
   </style>
 </head>
 <body>
@@ -254,7 +281,7 @@
         <tbody>
           @foreach ($students as $key => $item)
           <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td>{{ $students->firstItem() + $key }}</td>
             <td><img src="{{ asset('storage/foto_siswa/'.$item->foto) }}" width="40" height="40" class="rounded-circle"></td>
             <td>{{ $item->nisn }}</td>
             <td>{{ $item->name }}</td>
@@ -269,7 +296,12 @@
         </tbody>
       </table>
     </div>
+      <div>
+        {{ $students->links('pagination::bootstrap-5') }}
+    </div>
+    </div>
   </main>
+
 
   <nav class="bottom-nav d-md-none">
     <a class="nav-link" href="index.html"><i class="fas fa-home"></i><br>Dashboard</a>

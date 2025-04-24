@@ -151,6 +151,11 @@ Route::post('/logoutSiswa', [dasboardSiswaController::class, 'logout'])->name('l
 // Login Admin
 
 
+// RIWAYAT PELANGGARAN
+Route::get('/siswa/riwayat-pelanggaran', [dasboardSiswaController::class, 'riwayat'])->name('siswa.riwayat');
+
+
+
 
 
 

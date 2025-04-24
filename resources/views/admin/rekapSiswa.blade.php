@@ -74,7 +74,10 @@
         <tbody>
             @forelse($students as $siswa)
             <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
+                <td class="text-center">
+                    {{ $students->perPage() * ($students->currentPage() - 1) + $loop->iteration }}
+
+                </td>
                 <td class="text-center">
                     <img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="Foto Siswa" class="foto-siswa">
                 </td>
@@ -140,6 +143,10 @@
         </tbody>
 
     </table>
+</div>
+
+<div>
+    {{ $students->links('pagination::bootstrap-5') }}
 </div>
 
 @endsection

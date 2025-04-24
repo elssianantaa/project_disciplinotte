@@ -39,7 +39,7 @@ class dasboardController extends Controller
                 Auth::logout(); // keluarin kalau rolenya gak valid
                 return redirect('/login')->withErrors(['loginSiswa' => 'Role tidak dikenali']);
             }
-        }           
+        }
     }
 
     // REKAP SISWA
@@ -82,10 +82,10 @@ class dasboardController extends Controller
         }
 
         // Ambil data siswa setelah filter
-        $students = $query->get();
+        $students = $query->paginate(10); // 10 siswa per halaman
 
         // Hitung total siswa
-        $totalSiswa = $students->count();
+        $totalSiswa = $students->total();
 
         return view('admin.rekapSiswa', compact('students', 'totalSiswa', 'request', 'kelasList', 'periodeList'));
     }
@@ -131,12 +131,10 @@ class dasboardController extends Controller
 
     //     return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList'));
     // }
-
     public function index(Request $request)
     {
-        $students = Student::with(['kelas', 'catatan_pelanggarans'])->get();
         $kelasList = Kelas::all(); // untuk dropdown
-        $query = Student::with('kelas');
+        $query = Student::with(['kelas', 'catatan_pelanggarans']);
 
         if ($request->kelas_id) {
             $query->where('kelas_id', $request->kelas_id);
@@ -146,11 +144,11 @@ class dasboardController extends Controller
             $query->where('name', 'like', '%' . $request->nama . '%');
         }
 
-        // Mengurutkan berdasarkan inisial nama (huruf pertama)
-        $students = $query->orderByRaw('UPPER(SUBSTRING(name, 1, 1))')->get();
-        $totalSiswa = $students->count();
-        $totalSkorsing = $students->where('status', 'skorsing')->count();
+        // Pagination
+        $students = $query->orderByRaw('UPPER(SUBSTRING(name, 1, 1))')->paginate(10);
 
+        $totalSiswa = $students->total(); // dari pagination, bukan ->count()
+        $totalSkorsing = $students->filter(fn($s) => $s->status == 'skorsing')->count();
 
         return view('admin.siswa.index', compact('students', 'totalSiswa', 'request', 'kelasList', 'totalSkorsing'));
     }
@@ -170,14 +168,17 @@ class dasboardController extends Controller
         if ($request->kelas_id) {
             $query->where('kelas_id', $request->kelas_id);
         }
-        $students = $query->get();
-        $totalSiswa = $students->count();
-        $totalSkorsing = $students->where('status', 'skorsing')->count(); // Tambahan ini
 
+        // Gantilah get() dengan paginate(10) untuk pagination, sesuaikan jumlah per halaman (10)
+        $students = $query->paginate(10); // Halaman per 10 siswa
+        $totalSiswa = $students->total(); // Total siswa (dari pagination)
+        $totalSkorsing = $students->where('status', 'skorsing')->count(); // Tambahan ini
+        
         $kelasList = Kelas::all();
 
         return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa', 'totalSkorsing'));
     }
+
 
 
     public function create()
