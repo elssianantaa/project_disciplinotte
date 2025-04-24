@@ -54,19 +54,19 @@ class dasboardSiswaController extends Controller
 
     public function riwayat()
     {
-        $siswa = auth()->user();
+    $siswa = session('student');
 
-        $riwayat = DB::table('catatan_pelanggarans')
-                ->join('pelanggarans', 'catatan_pelanggarans.pelanggaran_id', '=', 'pelanggarans.id')
-                ->where('catatan_pelanggarans.student_id', $siswa->id)
-                ->select(
-                    'catatan_pelanggarans.*',
-                    'pelanggarans.nama_pelanggaran',
-                    'pelanggarans.point'
-                )
-                ->get();
+    if (!$siswa) {
+        abort(403, 'Siswa belum login.');
+    }
 
-        return view('Student.riwayatPelanggaran', compact('riwayat'));
+    $riwayat = DB::table('catatan_pelanggarans')
+        ->join('pelanggarans', 'catatan_pelanggarans.pelanggaran_id', '=', 'pelanggarans.id')
+        ->where('catatan_pelanggarans.student_id', $siswa->id)
+        ->select('catatan_pelanggarans.*', 'pelanggarans.nama_pelanggaran', 'pelanggarans.point')
+        ->get();
+
+    return view('Student.riwayatPelanggaran', compact('riwayat'));
     }
 
     

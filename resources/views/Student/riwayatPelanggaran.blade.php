@@ -178,8 +178,8 @@
                     @foreach($riwayat as $index => $item)
                         <tr class="table-row" style="--row-number: {{ $index + 1 }}">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $item->nama_pelanggaran ?? '-' }}</td>
-                            <td>{{ $item->point ?? '0' }}</td>
+                            <td>{{ optional($item->pelanggaran)->nama_pelanggaran ?? '-' }}</td>
+                            <td class="text-center">{{ optional($item->pelanggaran)->point ?? '0' }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</td>
                         </tr>
                     @endforeach
