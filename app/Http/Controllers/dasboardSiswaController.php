@@ -69,6 +69,7 @@ class dasboardSiswaController extends Controller
         return view('Student.riwayatPelanggaran', compact('riwayat'));
     }
 
+
     
 
 

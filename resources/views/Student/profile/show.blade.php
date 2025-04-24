@@ -189,7 +189,7 @@
      
       <div class="row justify-content-center mt-3 mb-4">
         <div class="col-12 col-md-5 mb-2">
-            <a href="{{ route('siswa.riwayat') }}" class="text-decoration-none h-100 d-block">
+          <a href="{{ route('siswa.riwayat') }}" class="text-decoration-none h-100 d-block">
                 <div class="card border-danger shadow-sm h-100" style="cursor: pointer;">
                     <div class="card-body text-center d-flex flex-column justify-content-center p-1">
                         <h6 class="card-title text-danger mb-1" style="font-size: 0.8rem;">
