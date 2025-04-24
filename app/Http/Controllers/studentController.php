@@ -106,11 +106,17 @@ class StudentController extends Controller
 
     public function logoutSiswa(Request $request)
     {
+        // Logout pengguna
         Auth::logout();
+    
+        // Menghancurkan session dan token
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/loginSiswa');  // Ganti dengan halaman login yang sesuai
+    
+        // Redirect ke halaman yang diinginkan setelah logout, bisa ke halaman login atau landing page
+        return redirect('/'); // Ganti sesuai dengan route login yang diinginkan
     }
+    
     
 }
 

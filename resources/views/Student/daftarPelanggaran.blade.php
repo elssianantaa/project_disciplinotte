@@ -171,7 +171,7 @@ D
     };
 });
 
->>>>>>> 03c8a63e03e5fa2a49bd521214f636409d57cbf2
+
     </script> --}}
 
     <body>
@@ -219,7 +219,7 @@ D
                     <li><a class="dropdown-item" href="{{ route('updatePassword') }}"><i class="bi bi-key me-2"></i> Ubah Password</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                        <a class="dropdown-itemz text-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt me-2"></i> Logout
                         </a>

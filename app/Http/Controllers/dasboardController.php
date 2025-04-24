@@ -15,6 +15,16 @@ class dasboardController extends Controller
     {
         return view('Admin.login');
     }
+    public function landing()
+    {
+        // Misal nanti mau ambil data artikel, promo, dll
+        return view('landingpage');
+    }
+    public function contact()
+    {
+        // Misal nanti mau ambil data artikel, promo, dll
+        return view('contactlanding');
+    }
 
 
     public function authentication(Request $request)

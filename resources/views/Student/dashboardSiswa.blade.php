@@ -152,8 +152,6 @@ audio.onplay = function() {
     });
 };
 });
-
->>>>>>> 03c8a63e03e5fa2a49bd521214f636409d57cbf2
 </script>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
@@ -200,12 +198,12 @@ audio.onplay = function() {
               <li><a class="dropdown-item" href="{{ route('updatePassword') }}"><i class="bi bi-key me-2"></i> Ubah Password</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
-                <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                <a class="dropdown-item text-danger" href="{{ route('logoutSiswa') }}"
                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class="fas fa-sign-out-alt me-2"></i> Logout
                 </a>
-                <form id="logout-form" action="/logoutSiswa" method="POST" class="d-none">
-                  @csrf
+                <form id="logout-form" action="{{ route('logoutSiswa') }}" method="POST" style="display: none;">
+                @csrf
                 </form>
               </li>
             </ul>
@@ -302,6 +300,47 @@ audio.onplay = function() {
   </div>
 </section>
 @endif
+<section style="padding: 4rem 5%; background-color: #fef9ff;">
+    <h2 style="text-align: center; font-size: 2rem; color: #8e24aa; margin-bottom: 1rem;">
+      🤓 Tebak-Tebakan Seru!
+    </h2>
+    <p style="text-align: center; font-size: 1.1rem; color: #6b21a8;">
+      Ayo jawab dan buktikan kamu jago pantau siswa!
+    </p>
+  
+    <div style="max-width: 600px; margin: 2rem auto; background-color: #f3e8ff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.1);">
+      <h3 style="text-align: center; color: #6a1b9a;">📚 Apa pelanggaran yang paling sering ditemukan di sekolah?</h3>
+      
+      <div style="margin-top: 1.5rem;">
+        <button onclick="checkAnswer('A')" style="margin: 0.5rem 0; width: 100%; padding: 0.8rem; border: none; border-radius: 8px; background-color: #ede7f6; font-size: 1rem; cursor: pointer;">
+          A. Makan di kelas
+        </button>
+        <button onclick="checkAnswer('B')" style="margin: 0.5rem 0; width: 100%; padding: 0.8rem; border: none; border-radius: 8px; background-color: #ede7f6; font-size: 1rem; cursor: pointer;">
+          B. Datang terlambat
+        </button>
+        <button onclick="checkAnswer('C')" style="margin: 0.5rem 0; width: 100%; padding: 0.8rem; border: none; border-radius: 8px; background-color: #ede7f6; font-size: 1rem; cursor: pointer;">
+          C. Lupa bawa buku
+        </button>
+      </div>
+  
+      <p id="feedback" style="margin-top: 1rem; text-align: center; font-weight: bold; font-size: 1.1rem;"></p>
+    </div>
+  
+    <script>
+      function checkAnswer(option) {
+        const feedback = document.getElementById('feedback');
+        if (option === 'B') {
+          feedback.innerHTML = '🎉 Yay! Benar banget, datang terlambat tuh paling sering!';
+          feedback.style.color = '#2e7d32'; // hijau
+        } else {
+          feedback.innerHTML = '😅 Oops, belum tepat. Coba lagi yuk!';
+          feedback.style.color = '#c62828'; // merah
+        }
+      }
+    </script>
+  </section>
+  
+  
 
 <script>
   const quotes = [

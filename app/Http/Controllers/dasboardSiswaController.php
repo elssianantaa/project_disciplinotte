@@ -46,84 +46,47 @@ class dasboardSiswaController extends Controller
     // }
 
 
-public function showDbStudent()
-{
-    $siswaId = Auth::id();
-    // Controller method
+    public function showDbStudent()
+    {
+        $siswaId = Auth::id();
+        // Controller method
 
-    $pelanggarans = Cache::remember('pelanggarans_sorted', 86400, function () {
-        return CatatanPelanggaran::with(['student', 'pelanggaran'])
-            ->get()
-            ->groupBy('student_id')
-            ->map(function ($pelanggaranGroup) {
-                $totalPoin = $pelanggaranGroup->sum(function ($pelanggaran) {
-                    return $pelanggaran->pelanggaran->point;
+        $pelanggarans = Cache::remember('pelanggarans_sorted', 86400, function () {
+            return CatatanPelanggaran::with(['student', 'pelanggaran'])
+                ->get()
+                ->groupBy('student_id')
+                ->map(function ($pelanggaranGroup) {
+                    $totalPoin = $pelanggaranGroup->sum(function ($pelanggaran) {
+                        return $pelanggaran->pelanggaran->point;
+                    });
+
+                    $latestPelanggaran = $pelanggaranGroup->sortByDesc('created_at')->first();
+
+                    return (object) [
+                        'student_id' => $pelanggaranGroup->first()->student_id,
+                        'total_poin' => $totalPoin,
+                        'latest_pelanggaran' => $latestPelanggaran,
+                        'pelanggaranGroup' => $pelanggaranGroup,
+                    ];
+                })
+                ->sortByDesc(function ($pelanggaranGroup) {
+                    return $pelanggaranGroup->total_poin;
                 });
 
-                $latestPelanggaran = $pelanggaranGroup->sortByDesc('created_at')->first();
 
-                return (object) [
-                    'student_id' => $pelanggaranGroup->first()->student_id,
-                    'total_poin' => $totalPoin,
-                    'latest_pelanggaran' => $latestPelanggaran,
-                    'pelanggaranGroup' => $pelanggaranGroup,
-                ];
-            })
-            ->sortByDesc(function ($pelanggaranGroup) {
-                return $pelanggaranGroup->total_poin;
-            });
-
+            return view('Student.daftarPelanggaran', compact('pelanggarans', 'siswaId'));
+        });
+    }
+    public function logoutSiswa(Request $request)
+    {
+        // Logout pengguna
+        Auth::logout();
     
-        return view('Student.daftarPelanggaran', compact('pelanggarans', 'siswaId'));
-    });
-
-
-
-//     public function logout(Request $request)
-// {
-//     Auth::logout();
-//     $request->session()->invalidate();
-//     $request->session()->regenerateToken();
-//     return redirect('/loginSiswa');
-// }
-
+        // Menghancurkan session dan token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     
-    
-
+        // Redirect ke halaman yang diinginkan setelah logout, bisa ke halaman login atau landing page
+        return redirect('/landingpage'); // Ganti sesuai dengan route login yang diinginkan
+    }
 }
-
-}
-
-//
-
-    // public function showDbStudent()
-    // {
-    //     // Ambil ID siswa yang sedang login
-    //     $siswaId = Auth::id();
-
-    //     $pelanggarans = CatatanPelanggaran::with(['student', 'pelanggaran'])
-    //         ->get()
-    //         ->groupBy('student_id')
-    //         ->map(function ($group) {
-    //             $totalPoin = $group->sum(fn ($item) => $item->pelanggaran->point);
-    //             $latest = $group->sortByDesc('created_at')->first();
-
-    //             // Menggunakan head() untuk mendapatkan elemen pertama dari grup
-    //             return (object) [
-    //                 'student' => $group->first()->student,  // Ambil student pertama
-    //                 'total_poin' => $totalPoin,
-    //                 'latest_pelanggaran' => $latest,
-    //                 'riwayat' => $group,
-    //             ];
-    //         })
-    //         ->sortByDesc('total_poin');
-
-    //     return view('Student.daftarPelanggaran', compact('pelanggarans', 'siswaId'));
-    // }
-
-
-
-
-
-
-
