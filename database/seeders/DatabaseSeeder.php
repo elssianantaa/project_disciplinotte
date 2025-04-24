@@ -163,7 +163,7 @@ class DatabaseSeeder extends Seeder
             'Kategori' => 'Berat',
             'point' => '40'
         ]);
-
+        
         Pelanggaran::create([
             'nama_pelanggaran' => 'Bolos',
             'Kategori' => 'Ringan',

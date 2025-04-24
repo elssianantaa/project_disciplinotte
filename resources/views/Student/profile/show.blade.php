@@ -213,12 +213,6 @@
         </div>
     </div>
     
-
-
-
-
-
-
       <a href="{{ route('Student.profile.edit', optional($student)->id) }}" class="btn btn-primary btn-edit">
         <i class="fas fa-edit"></i> Edit Profil
       </a>
