@@ -363,7 +363,7 @@
         <h3 style="color: #0061f2; font-size: 1.2rem;">🤔 Pelanggaran paling sering di sekolah?</h3>
         <p id="a1" style="display: none; margin-top: 1rem; color: #1e3a8a;">👉 Datang terlambat ke sekolah!</p>
         <div id="fireworks1" class="fireworks" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">
-          <img src="https://img.icons8.com/ios/452/fireworks.png" style="width: 100px; animation: fireworksAnimation 1s infinite;">
+          <img src="" style="width: 100px; animation: fireworksAnimation 1s infinite;">
         </div>
       </div>
   
@@ -373,7 +373,7 @@
         <h3 style="color: #0061f2; font-size: 1.2rem;">🧐 Apa pelanggaran yang dianggap ringan di sekolah?</h3>
         <p id="a2" style="display: none; margin-top: 1rem; color: #1e3a8a;">👉 Tidak memakai seragam lengkap atau makan di dalam kelas.</p>
         <div id="fireworks2" class="fireworks" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">
-          <img src="https://img.icons8.com/ios/452/fireworks.png" style="width: 100px; animation: fireworksAnimation 1s infinite;">
+          <img src="" style="width: 100px; animation: fireworksAnimation 1s infinite;">
         </div>
       </div>
   

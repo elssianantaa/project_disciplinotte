@@ -214,7 +214,6 @@ audio.onplay = function() {
   </nav>
 
 
-<!-- Hero Section (Carousel) -->
 <div class="container my-4">
   <div class="container my-4">
     <div id="heroCarousel" class="carousel slide rounded-4 overflow-hidden shadow" data-bs-ride="carousel">

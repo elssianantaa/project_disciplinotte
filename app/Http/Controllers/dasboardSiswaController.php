@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CatatanPelanggaran;
 use App\Models\Pelanggaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -16,107 +17,33 @@ class dasboardSiswaController extends Controller
 
     public function showDbStudent()
     {
-        // Ambil ID siswa yang sedang login
-        $siswaId = Auth::id();
-
-<<<<<<< HEAD
-    //             // Ambil data pelanggaran terakhir (tanggal terbaru)
-    //             $latestPelanggaran = $pelanggaranGroup->sortByDesc('created_at')->first();
-
-    //             // Tambahkan total poin dan tanggal pelanggaran terakhir ke grup
-    //             return (object) [
-    //                 'student_id' => $pelanggaranGroup->first()->student_id,
-    //                 'total_poin' => $totalPoin,
-    //                 'latest_pelanggaran' => $latestPelanggaran,
-    //                 'pelanggaranGroup' => $pelanggaranGroup,
-    //             ];
-    //         })
-    //         ->sortByDesc(function ($pelanggaranGroup) {
-    //             // Urutkan berdasarkan total poin untuk setiap grup
-    //             return $pelanggaranGroup->total_poin;
-    //         });
-
-    //     return view('Student.daftarPelanggaran', compact('pelanggarans', 'siswaId'));
-    // }
-
-
-    public function showDbStudent()
-    {
-        $siswaId = Auth::id();
-        // Controller method
-
-        $pelanggarans = Cache::remember('pelanggarans_sorted', 86400, function () {
-            return CatatanPelanggaran::with(['student', 'pelanggaran'])
-                ->get()
-                ->groupBy('student_id')
-                ->map(function ($pelanggaranGroup) {
-                    $totalPoin = $pelanggaranGroup->sum(function ($pelanggaran) {
-                        return $pelanggaran->pelanggaran->point;
-                    });
-
-                    $latestPelanggaran = $pelanggaranGroup->sortByDesc('created_at')->first();
-
-                    return (object) [
-                        'student_id' => $pelanggaranGroup->first()->student_id,
-                        'total_poin' => $totalPoin,
-                        'latest_pelanggaran' => $latestPelanggaran,
-                        'pelanggaranGroup' => $pelanggaranGroup,
-                    ];
-                })
-                ->sortByDesc(function ($pelanggaranGroup) {
-                    return $pelanggaranGroup->total_poin;
-                });
-
-
-            return view('Student.daftarPelanggaran', compact('pelanggarans', 'siswaId'));
-        });
-    }
-    public function logoutSiswa(Request $request)
-    {
-        // Logout pengguna
-        Auth::logout();
-    
-        // Menghancurkan session dan token
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-    
-        // Redirect ke halaman yang diinginkan setelah logout, bisa ke halaman login atau landing page
-        return redirect('/landingpage'); // Ganti sesuai dengan route login yang diinginkan
-    }
-}
-=======
-        // Ambil semua catatan pelanggaran beserta data siswa dan jenis pelanggaran
+        // Ambil pelanggaran yang terjadi hari ini
         $pelanggarans = CatatanPelanggaran::with(['student', 'pelanggaran'])
+            ->whereDate('created_at', Carbon::today())  // Mengambil data yang hanya terjadi hari ini
             ->get()
             ->groupBy('student_id')  // Kelompokkan berdasarkan student_id
-            ->map(function ($pelanggaranGroup) {
-                // Hitung total poin untuk setiap siswa, pastikan mengakses poin dengan benar
-                $totalPoin = $pelanggaranGroup->sum(function ($pelanggaran) {
-                    return $pelanggaran->pelanggaran->point;  // Poin dihitung berdasarkan relasi pelanggaran
+            ->map(function ($group) {
+                // Hitung total poin untuk setiap siswa
+                $totalPoin = $group->sum(function ($catatan) {
+                    return $catatan->pelanggaran->point;
                 });
 
                 // Ambil data pelanggaran terakhir (tanggal terbaru)
-                $latestPelanggaran = $pelanggaranGroup->sortByDesc('created_at')->first();
+                $latestPelanggaran = $group->sortByDesc('created_at')->first();
 
-                // Tambahkan total poin dan tanggal pelanggaran terakhir ke grup
-                return (object) [
-                    'student_id' => $pelanggaranGroup->first()->student_id,
+                // Kembalikan data yang sudah diolah
+                return (object)[
+                    'student_id' => $group->first()->student_id,
+                    'student' => $group->first()->student,
                     'total_poin' => $totalPoin,
                     'latest_pelanggaran' => $latestPelanggaran,
-                    'pelanggaranGroup' => $pelanggaranGroup,
+                    'pelanggaranGroup' => $group,
                 ];
             })
-            ->sortByDesc(function ($pelanggaranGroup) {
-                // Urutkan berdasarkan total poin untuk setiap grup
-                return $pelanggaranGroup->total_poin;
+            ->sortByDesc(function ($group) {
+                return $group->total_poin;  // Urutkan berdasarkan total poin
             });
 
-        return view('Student.daftarPelanggaran', compact('pelanggarans', 'siswaId'));
+        return view('Student.daftarPelanggaran', compact('pelanggarans'));
     }
-
-
-
 }
-
-
->>>>>>> f357d5d1790f4a277e1d7fddb8bab885c9578cc6

@@ -127,45 +127,6 @@
     }
     </style>
 </head>
-
-<<<<<<< HEAD
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    const audio = document.getElementById("bg-music");
-    audio.volume = 0.15;
-
-    // Coba mainkan langsung saat halaman siap
-    audio.play().catch(function (e) {
-        console.warn("Autoplay diblokir oleh browser: ", e);
-    });
-
-    // Mulai animasi setelah musik diputar
-    audio.onplay = function() {
-        const rows = document.querySelectorAll('.table-row');
-        rows.forEach((row) => {
-            row.classList.add('fade-in');
-        });
-D
-        
-=======
-    };
-});
-
-
-    </script> --}}
-
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-            <div class="container">
-
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="gambar/Logosmk.gif" alt="Logo Sekolah" style="height: 40px; margin-right: 10px;" />
-                <span class="fw-bold text-black">DiscipliNotes</span>
-            </a>
-
-            <!-- Tombol Toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-=======
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
@@ -174,7 +135,6 @@ D
             <span class="fw-bold text-black">DiscipliNotes</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
->>>>>>> f357d5d1790f4a277e1d7fddb8bab885c9578cc6
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -201,20 +161,7 @@ D
                         @endif
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="studentDropdown">
-<<<<<<< HEAD
-                    <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}"><i class="fas fa-user me-2"></i> Profil</a></li>
-                    <li><a class="dropdown-item" href="{{ route('updatePassword') }}"><i class="bi bi-key me-2"></i> Ubah Password</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-itemz text-danger" href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fas fa-sign-out-alt me-2"></i> Logout
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                        </form>
-                    </li>
-=======
+
                         <li><a class="dropdown-item" href="{{ route('Student.profile.show') }}"><i class="fas fa-user me-2"></i> Profil</a></li>
                         <li><a class="dropdown-item" href="{{ route('updatePassword') }}"><i class="bi bi-key me-2"></i> Ubah Password</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -227,7 +174,6 @@ D
                                 @csrf
                             </form>
                         </li>
->>>>>>> f357d5d1790f4a277e1d7fddb8bab885c9578cc6
                     </ul>
                 </li>
             </ul>
