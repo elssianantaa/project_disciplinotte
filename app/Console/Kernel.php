@@ -13,9 +13,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(function () {
-            Cache::forget('pelanggarans_sorted');
-        })->daily();
+        // $schedule->call(function () {
+        //     Cache::forget('pelanggarans_sorted');
+        // })->daily();
         // $schedule->command('inspire')->hourly();
     }
 
