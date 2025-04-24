@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Student::create([
-            'nisn' => '0076346790',
+            'nisn' => 'da',
             'name' => 'Siti Aisyah',
             'kelas_id' => 2,
             'jenis_kelamin' => 'Perempuan',

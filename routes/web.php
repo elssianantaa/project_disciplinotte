@@ -26,21 +26,18 @@ use App\Http\Controllers\KelasController;
 
 
 //LOGIN
-// Route::get('/dasboard', [dasboardController::class, 'showDasboard']);
-Route::get('/', [dasboardController::class, 'login']);
+Route::get('/', [dasboardController::class, 'landing'])->name('landingpage');
+Route::get('/contactlanding', [dasboardController::class, 'contact'])->name('contactlanding');
+
 Route::post('/auth', [dasboardController::class, 'authentication']);
-// Route::get('/login', [dasboardController::class, 'login'])->name('login');
+Route::get('/login', [dasboardController::class, 'login'])->name('login');
 
 Route::get('/register', [userController::class, 'createRe']);
 Route::post('/register/create', [userController::class, 'addRe']);
-Route::get('/login', [dasboardController::class, 'login'])->middleware('guest'); // ✅ BENAR
+Route::get('/login', [DasboardController::class, 'login'])->name('Admin.login');
 Route::get('/loginSiswa', [studentController::class, 'showLoginForm'])->name('Student.login');
 Route::post('/loginSiswa', [studentController::class, 'login']);
 Route::get('/dashboardSiswa', [studentController::class, 'dashboard'])->name('Student.dashboardSiswa');
-
-Route::post('/logoutSiswa', [studentController::class, 'logoutSiswa'])->name('Student.logoutSiswa');
-// web.php
-Route::post('/logoutSiswa', [dasboardSiswaController::class, 'logout'])->name('logoutSiswa');
 Route::post('/logoutSiswa', [studentController::class, 'logoutSiswa'])->name('logoutSiswa');
 Route::get('/tentangkami', [studentController::class, 'tentangkami'])->name('Student.tentangkami');
 
@@ -49,9 +46,7 @@ Route::post('/updatepassword', [studentController::class, 'updatePassword'])->na
 Route::get('/profile-siswa', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
 Route::get('/profile-siswa/edit', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
 Route::put('/profile-siswa/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
-// Route::get('/profile', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
-// Route::get('/profile/edit', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
-// Route::post('/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
+
 
 
 
@@ -119,22 +114,7 @@ Route::middleware(['auth:web','admin'])->group(function () {
     Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
 
 });
-// Route::middleware(['auth:student', 'student'])->group(function () {
-    // Route::get('/dashboardSiswa', [studentController::class, 'dashboard'])->name('Student.dashboardSiswa');
-    // Route::post('/updatePassword', [studentController::class, 'updatePassword'])->name('updatePassword');
-    // Route::get('/updatePassword', [studentController::class, 'showUpdatePasswordForm'])->name('updatePasswordForm');
-    // Route::get('/student/profile', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
-    // Route::get('/student/profile/edit/{id}', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
-    // Route::post('/student/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
-    // Route::get('/logoutSiswa', [studentController::class, 'logout'])->name('logout');
 
-
-// });
-
-// Route::get('/dashboardSiswa', [StudentController::class, 'dashboard'])->name('Student.dashboardSiswa');
-// Route::get('/student/profile', [ProfileStudentController::class, 'show'])->name('Student.profile.show');
-// Route::get('/student/profile/edit/{id}', [ProfileStudentController::class, 'edit'])->name('Student.profile.edit');
-// Route::post('/student/profile/update/{id}', [ProfileStudentController::class, 'update'])->name('Student.profile.update');
 
 // DAFTAR PELANGGARAN DI DASHBOARD SISWA
 Route::get('/daftarPelanggaranSiswa', [dasboardSiswaController::class, 'showDbStudent'])->name('dashboardSiswa');
@@ -147,8 +127,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas'])->name('show');
 Route::get('/kenaikanKelas', [dasboardStaffController::class, 'showRiwayatKelas'])->name('form.naik.kelas');
 Route::post('/naikKelas', [dasboardStaffController::class, 'naikKelas'])->name('naik.kelas');
-Route::post('/logoutSiswa', [dasboardSiswaController::class, 'logout'])->name('logout');
-// Login Admin
+
+
 
 
 // RIWAYAT PELANGGARAN
