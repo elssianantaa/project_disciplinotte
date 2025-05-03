@@ -136,8 +136,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         Student::create([
-            'nisn' => '00737456',
-            'name' => 'Elssi',
+            'nisn' => '0073722407',
+            'name' => 'Elsi Ananta',
             'kelas_id' => 1,
             'jenis_kelamin' => 'Perempuan',
             'password' => bcrypt('12345'),
@@ -147,9 +147,29 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Student::create([
-            'nisn' => 'da',
-            'name' => 'Siti Aisyah',
-            'kelas_id' => 2,
+            'nisn' => '0076247016',
+            'name' => 'Oliviandra Safitri',
+            'kelas_id' => 1,
+            'jenis_kelamin' => 'Perempuan',
+            'password' => bcrypt('12345'),
+            'status' => 'aktif',
+            'point' => 0,
+            'foto'=> '-'
+        ]);
+        Student::create([
+            'nisn' => '0074186716',
+            'name' => 'Silvia Cintani Asri',
+            'kelas_id' => 1,
+            'jenis_kelamin' => 'Perempuan',
+            'password' => bcrypt('12345'),
+            'status' => 'aktif',
+            'point' => 0,
+            'foto'=> '-'
+        ]);
+        Student::create([
+            'nisn' => '3063590310',
+            'name' => 'Alya Devika Maharani',
+            'kelas_id' => 1,
             'jenis_kelamin' => 'Perempuan',
             'password' => bcrypt('12345'),
             'status' => 'aktif',

@@ -272,7 +272,7 @@
         <span>DiscipliNotes</span>
       </div>
       <nav class="nav-links" id="navLinks">
-        <a href="landingpage.html">Home</a>
+        <a href="/">Home</a>
         <a href="/contactlanding" class="active">Contact</a>
         <div class="dropdown">
           <div class="dropdown-btn">Login</div>
@@ -303,7 +303,7 @@
   </footer>
 
   <nav class="bottom-nav">
-    <a href="landingpage.html">
+    <a href="/">
       <i class="fas fa-home"></i>
       <span>Home</span>
     </a>

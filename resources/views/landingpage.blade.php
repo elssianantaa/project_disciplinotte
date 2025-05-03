@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DiscipliNotes</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  {{-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"> --}}
   <style>
     * {
       margin: 0;
@@ -51,7 +53,7 @@
     }
 
     .logo-brand span {
-      font-weight: 700;
+      font-weight: 700;           
       color: #2c3e50;
       font-size: 1.5rem;
     }
@@ -309,10 +311,10 @@
         <h3 style="color: #0061f2;">Catat Pelanggaran</h3>
         <p>Staff dapat mencatat pelanggaran siswa dengan cepat dan efisien melalui antarmuka sederhana.</p>
       </div>
-      <div style="background-color: #f3f4f6; padding: 1.5rem; border-radius: 10px;">
+      {{-- <div style="background-color: #f3f4f6; padding: 1.5rem; border-radius: 10px;">
         <h3 style="color: #0061f2;">Rekap Otomatis</h3>
         <p>Setiap pelanggaran akan otomatis terekam dan masuk dalam rekapitulasi bulanan siswa.</p>
-      </div>
+      </div> --}}
       <div style="background-color: #f3f4f6; padding: 1.5rem; border-radius: 10px;">
         <h3 style="color: #0061f2;">Login Admin,Staff dan Siswa</h3>
         <p>Tersedia akses login terpisah antara admin, staff dan siswa untuk memantau data masing-masing.</p>
@@ -383,9 +385,7 @@
         <h3 style="color: #0061f2; font-size: 1.2rem;">😅 Siapa yang bisa lihat laporan pelanggaran?</h3>
         <p id="a3" style="display: none; margin-top: 1rem; color: #1e3a8a;">👉 Admin, Staff, dan Siswa!</p>
         <div id="fireworks3" class="fireworks" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">
-            <img src="" alt="Fireworks" style="width: 100px; height: 100px;" />
-
-
+          <img src=""  style="width: 100px;" />
         </div>
       </div>
     </div>
@@ -434,10 +434,10 @@
       <span class="icon">🏠</span>
       <span class="text">Home</span>
     </a>
-    <a href="/contactlanding" class="nav-item">
-      <span class="icon">📋</span>
-      <span class="text">Contact</span>
-    </a>
+    <a href="/contactlanding" class="active">
+        <i class="fas fa-envelope"></i>
+        <span>Contact</span>
+      </a>
   </div>
 
 </body>
