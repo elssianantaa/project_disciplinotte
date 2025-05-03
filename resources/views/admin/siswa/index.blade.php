@@ -36,8 +36,6 @@
         </div>
     </form>
 
-
-
     <a href="{{ route('admin.siswa.create') }}" class="btn btn-primary mb-3">Tambah Siswa</a>
 
     @if(session('success'))
@@ -76,7 +74,7 @@
                 <td>
                     {{ $siswa->catatanpelanggarans->sum(fn($cp) => $cp->pelanggaran->point ?? 0) }}
                 </td>
-                                <td class="text-center">
+                <td class="text-center">
                     <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="btn btn-secondary btn-sm" style="width: 70px;">Edit</a>
                     <form action="{{ route('admin.siswa.destroy', $siswa->id) }}" method="POST" class="d-inline">
                         @csrf

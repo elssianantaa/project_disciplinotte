@@ -303,7 +303,7 @@
   </footer>
 
   <nav class="bottom-nav">
-    <a href="landingpage.html">
+    <a href="/">
       <i class="fas fa-home"></i>
       <span>Home</span>
     </a>
