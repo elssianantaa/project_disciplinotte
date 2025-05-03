@@ -272,7 +272,7 @@
         <span>DiscipliNotes</span>
       </div>
       <nav class="nav-links" id="navLinks">
-        <a href="landingpage.html">Home</a>
+        <a href="/">Home</a>
         <a href="/contactlanding" class="active">Contact</a>
         <div class="dropdown">
           <div class="dropdown-btn">Login</div>
@@ -292,8 +292,8 @@
       <p>Email: <a href="mailto:support@disciplinotes.com">support@disciplinotes.com</a></p>
       <p>Telepon: <a href="tel:+6282127849569">0821 2784 9569</a></p>
       <p>Atau Hubungi Instagram Kami:</p>
-      <p><a href="https://instagram.com/alyadvkamhrnii" target="_blank">@alyadvkamhrnii</a></p>
-      <p><a href="https://instagram.com/olvndraa" target="_blank">@olvndraa</a></p>
+      <p><a href="https://instagram.com/disciplinotes.id" target="_blank">@disciplinotes.id</a></p>
+      {{-- <p><a href="https://instagram.com/olvndraa" target="_blank">@olvndraa</a></p> --}}
 
     </div>
   </section>

@@ -224,7 +224,7 @@
 
 <footer class="text-center py-5 border-top">
     <small>&copy; 2025. Admin Staf SMK - All Rights Reserved. Hand-crafted with ❤</small>
-</footer>
+</footer>       
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>

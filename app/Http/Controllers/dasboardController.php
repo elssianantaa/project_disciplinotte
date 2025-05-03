@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Pelanggaran;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -183,7 +184,7 @@ class dasboardController extends Controller
         $students = $query->paginate(10); // Halaman per 10 siswa
         $totalSiswa = $students->total(); // Total siswa (dari pagination)
         $totalSkorsing = $students->where('status', 'skorsing')->count(); // Tambahan ini
-        
+
         $kelasList = Kelas::all();
 
         return view('Staff.daftarSiswa', compact('students', 'kelasList', 'totalSiswa', 'totalSkorsing'));
@@ -286,4 +287,50 @@ class dasboardController extends Controller
     {
         return view('admin.dashboard');
     }
+
+    public function showPelanggaran(){
+        $pelanggarans = Pelanggaran::all();
+        return view('admin.pelanggaran', compact('pelanggarans'));
+    }
+
+    public function createPelanggaran() {
+        return view('admin.pelanggaran-create');
+    }
+
+    public function storePelanggaran(Request $request) {
+        $request->validate([
+            'nama_pelanggaran' => 'required',
+            'Kategori' => 'required',
+            'point' => 'required',
+        ]);
+    
+        Pelanggaran::create($request->all());
+        return redirect()->route('admin.pelanggaran.index')->with('success', 'Data pelanggaran berhasil ditambahkan.');
+    }
+
+    public function editPelanggaran($id) {
+        $pelanggarans = Pelanggaran::findOrFail($id);
+        return view('admin.pelanggaran-edit', compact('pelanggarans'));
+    }
+    
+    public function updatePelanggaran(Request $request, $id) {
+    $pelanggarans = Pelanggaran::findOrFail($id);
+    $request->validate([
+        'nama_pelanggaran' => 'required',
+        'point' => 'required|numeric',
+        'kategori' => 'required',
+    ]);
+    $pelanggarans->update($request->all());
+    return redirect()->route('admin.pelanggaran.index')->with('success', 'Data pelanggaran berhasil diupdate.');
+}
+
+    
+    public function destroyPelanggaran($id) {
+        Pelanggaran::destroy($id);
+        return redirect()->route('admin.pelanggaran.index')->with('success', 'Data pelanggaran berhasil dihapus.');
+    }
+    
+
+
+
 }

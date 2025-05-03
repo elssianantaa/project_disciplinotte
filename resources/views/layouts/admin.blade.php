@@ -192,6 +192,11 @@
                     <i class="fas fa-users"></i> Daftar Pengguna
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/pelanggaran">
+                    <i class="fas fa-users"></i> Tambah Pelanggaran
+                </a>
+            </li>
             <li class="nav-item"><a class="nav-link" href="/rekapSiswa"><i class="fas fa-clipboard-list"></i> Rekap Siswa</a></li>
             {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/pelanggaran') }}"><i class="fas fa-exclamation-circle"></i> Pelanggaran</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/laporan') }}"><i class="fas fa-file-alt"></i> Laporan Pelanggaran</a></li> --}}

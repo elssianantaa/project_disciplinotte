@@ -128,12 +128,15 @@ Route::get('/riwayatKelas', [dasboardStaffController::class, 'showKelas'])->name
 Route::get('/kenaikanKelas', [dasboardStaffController::class, 'showRiwayatKelas'])->name('form.naik.kelas');
 Route::post('/naikKelas', [dasboardStaffController::class, 'naikKelas'])->name('naik.kelas');
 
-
-
-
 // RIWAYAT PELANGGARAN
 Route::get('/siswa/riwayat-pelanggaran', [dasboardSiswaController::class, 'riwayat'])->name('siswa.riwayat');
 
+Route::get('admin/pelanggaran', [dasboardController::class, 'showPelanggaran'])->name('admin.pelanggaran.index');
+Route::get('/admin/pelanggaran/create', [dasboardController::class, 'createPelanggaran'])->name('admin.pelanggaran.create');
+Route::post('/admin/pelanggaran', [dasboardController::class, 'storePelanggaran'])->name('admin.pelanggaran.store');
+Route::get('/admin/pelanggaran/{id}/edit', [dasboardController::class, 'editPe      langgaran'])->name('admin.pelanggaran.edit');
+Route::put('/admin/pelanggaran/{id}', [dasboardController::class, 'updatePelanggaran'])->name('admin.pelanggaran.update');
+Route::delete('/admin/pelanggaran/{id}', [dasboardController::class, 'destroyPelanggaran'])->name('admin.pelanggaran.destroy');
 
 
 

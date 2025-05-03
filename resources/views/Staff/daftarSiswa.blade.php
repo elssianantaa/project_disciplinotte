@@ -297,7 +297,7 @@
       </table>
     </div>
       <div>
-        {{ $students->links('pagination::bootstrap-5') }}
+        {{ $students->appends(request()->query())->links('pagination::bootstrap-5') }}
     </div>
     </div>
   </main>
