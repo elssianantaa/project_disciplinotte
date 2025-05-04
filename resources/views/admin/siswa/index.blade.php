@@ -64,7 +64,8 @@
                     {{ $students->perPage() * ($students->currentPage() - 1) + $loop->iteration }}
                 </td>
                 <td class="text-center">
-                    <img src="{{ asset('storage/foto_siswa/'.$siswa->foto) }}" alt="Foto Siswa" class="foto-siswa">
+                    <img src="{{ asset('storage/foto_siswa/' . ($siswa->foto ?? 'default.png')) }}" alt="Foto Siswa"  style="width: 60px; height: 60px; object-fit: cover;" class="img-thumbnail">
+
                 </td>
                 <td>{{ $siswa->nisn }}</td>
                 <td>{{ $siswa->name }}</td>

@@ -105,9 +105,6 @@
     color: white;
     border-color: #c4b5fd;
   }
-
-
-
     </style>
 </head>
 <body>

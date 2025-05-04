@@ -50,6 +50,8 @@ class dasboardController extends Controller
                 Auth::logout(); // keluarin kalau rolenya gak valid
                 return redirect('/login')->withErrors(['loginSiswa' => 'Role tidak dikenali']);
             }
+        } else {
+            return back()->withErrors(['login' => 'Email atau password salah.'])->withInput();
         }
     }
 
@@ -214,12 +216,13 @@ class dasboardController extends Controller
         // if ($request->hasFile('foto')) {
         //     $fotoPath = $request->file('foto')->store('foto', 'public');
         // }
-        $fileName = null;
+        $fileName = 'default.png';  // Set default terlebih dahulu
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/foto_siswa', $fileName);
         }
+        
 
         Student::create([
             'nisn' => $request->nisn,
@@ -252,6 +255,19 @@ class dasboardController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        // if ($request->hasFile('foto')) {
+        //     // Hapus foto lama
+        //     if ($siswa->foto && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
+        //         Storage::disk('public')->delete('foto_siswa/' . $siswa->foto);
+        //     }
+
+        //     $file = $request->file('foto');
+        //     $fileName = time() . '.' . $file->getClientOriginalExtension();
+        //     $file->storeAs('public/foto_siswa', $fileName);
+        // } else {
+        //     $fileName = $siswa->foto; // Tetap pakai yang lama
+        // }
+        $fileName = 'default.png';  // Set default terlebih dahulu
         if ($request->hasFile('foto')) {
             // Hapus foto lama
             if ($siswa->foto && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
@@ -262,8 +278,9 @@ class dasboardController extends Controller
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/foto_siswa', $fileName);
         } else {
-            $fileName = $siswa->foto; // Tetap pakai yang lama
+            $fileName = $siswa->foto ?? 'default.png';  // Jika tidak ada foto, pakai yang lama atau default
         }
+
 
 
         $siswa->update([
@@ -288,49 +305,51 @@ class dasboardController extends Controller
         return view('admin.dashboard');
     }
 
-    public function showPelanggaran(){
+    public function showPelanggaran()
+    {
         $pelanggarans = Pelanggaran::all();
         return view('admin.pelanggaran', compact('pelanggarans'));
     }
 
-    public function createPelanggaran() {
+    public function createPelanggaran()
+    {
         return view('admin.pelanggaran-create');
     }
 
-    public function storePelanggaran(Request $request) {
+    public function storePelanggaran(Request $request)
+    {
         $request->validate([
             'nama_pelanggaran' => 'required',
             'Kategori' => 'required',
             'point' => 'required',
         ]);
-    
+
         Pelanggaran::create($request->all());
         return redirect()->route('admin.pelanggaran.index')->with('success', 'Data pelanggaran berhasil ditambahkan.');
     }
 
-    public function editPelanggaran($id) {
+    public function editPelanggaran($id)
+    {
         $pelanggarans = Pelanggaran::findOrFail($id);
         return view('admin.pelanggaran-edit', compact('pelanggarans'));
     }
-    
-    public function updatePelanggaran(Request $request, $id) {
-    $pelanggarans = Pelanggaran::findOrFail($id);
-    $request->validate([
-        'nama_pelanggaran' => 'required',
-        'point' => 'required|numeric',
-        'kategori' => 'required',
-    ]);
-    $pelanggarans->update($request->all());
-    return redirect()->route('admin.pelanggaran.index')->with('success', 'Data pelanggaran berhasil diupdate.');
-}
 
-    
-    public function destroyPelanggaran($id) {
+    public function updatePelanggaran(Request $request, $id)
+    {
+        $pelanggarans = Pelanggaran::findOrFail($id);
+        $request->validate([
+            'nama_pelanggaran' => 'required',
+            'point' => 'required|numeric',
+            'kategori' => 'required',
+        ]);
+        $pelanggarans->update($request->all());
+        return redirect()->route('admin.pelanggaran.index')->with('success', 'Data pelanggaran berhasil diupdate.');
+    }
+
+
+    public function destroyPelanggaran($id)
+    {
         Pelanggaran::destroy($id);
         return redirect()->route('admin.pelanggaran.index')->with('success', 'Data pelanggaran berhasil dihapus.');
     }
-    
-
-
-
 }
