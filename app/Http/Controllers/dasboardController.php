@@ -216,13 +216,21 @@ class dasboardController extends Controller
         // if ($request->hasFile('foto')) {
         //     $fotoPath = $request->file('foto')->store('foto', 'public');
         // }
-        $fileName = 'default.png';  // Set default terlebih dahulu
+        // $fileName = 'default.png';  // Set default terlebih dahulu
+        // if ($request->hasFile('foto')) {
+        //     $file = $request->file('foto');
+        //     $fileName = time() . '.' . $file->getClientOriginalExtension();
+        //     $file->storeAs('public/foto_siswa', $fileName);
+        // }
+        $fileName = 'default.png'; // Default foto
+
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/foto_siswa', $fileName);
         }
-        
+
+
 
         Student::create([
             'nisn' => $request->nisn,
@@ -267,19 +275,33 @@ class dasboardController extends Controller
         // } else {
         //     $fileName = $siswa->foto; // Tetap pakai yang lama
         // }
-        $fileName = 'default.png';  // Set default terlebih dahulu
+
+        // $fileName = 'default.png';  // Set default terlebih dahulu
+        // if ($request->hasFile('foto')) {
+        //     // Hapus foto lama
+        //     if ($siswa->foto && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
+        //         Storage::disk('public')->delete('foto_siswa/' . $siswa->foto);
+        //     }
+
+        //     $file = $request->file('foto');
+        //     $fileName = time() . '.' . $file->getClientOriginalExtension();
+        //     $file->storeAs('public/foto_siswa', $fileName);
+        // } else {
+        //     $fileName = $siswa->foto ?? 'default.png';  // Jika tidak ada foto, pakai yang lama atau default
+        // }
+        $fileName = $siswa->foto ?? 'default.png'; // Ambil foto lama, kalau tidak ada pakai default
+
         if ($request->hasFile('foto')) {
-            // Hapus foto lama
-            if ($siswa->foto && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
+            // Hapus foto lama jika bukan default.png
+            if ($siswa->foto && $siswa->foto != 'default.png' && Storage::disk('public')->exists('foto_siswa/' . $siswa->foto)) {
                 Storage::disk('public')->delete('foto_siswa/' . $siswa->foto);
             }
 
             $file = $request->file('foto');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/foto_siswa', $fileName);
-        } else {
-            $fileName = $siswa->foto ?? 'default.png';  // Jika tidak ada foto, pakai yang lama atau default
         }
+
 
 
 

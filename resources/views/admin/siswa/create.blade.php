@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Foto Siswa</label>
-            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
+            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" >
         </div>
 
         <div class="mb-3">
